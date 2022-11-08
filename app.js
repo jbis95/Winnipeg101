@@ -41,7 +41,6 @@ const userRouter = require('./routes/user');
 const adminRouter = require('./routes/admin');
 const apiRouter = require('./routes/api');
 const boardRouter = require('./routes/board');
-const pluginRouter = require('./routes/plugin');
 
 const app = express();
 
@@ -279,7 +278,6 @@ app.use('/', userRouter);
 app.use('/admin', isAdmin, adminRouter);
 app.use('/api', apiRouter);
 app.use('/', boardRouter);
-app.use('/', pluginRouter);
 
 // Error Handling
 app.use('*', (req, res, next) => {

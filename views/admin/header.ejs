@@ -12,20 +12,6 @@
       <% if (setting.usePointWithdraw) { %>
       <li><a href="/admin/pointWithdraw"><%= __('admin_pointWithdraw') %></a></li>
       <% } %>
-      <% if (locals.plugin.filter(p => p.slug === 'cast' && p.status === 1).length) { %>
-        <li><a href="/admin/broadcast">방송</a></li>
-        <li><a href="/admin/powerball">파워볼</a></li>
-      <% } %>
-      <% if (locals.plugin.filter(p => p.slug === 'landing' && p.status === 1).length) { %>
-        <li><a href="/admin/landing">랜딩페이지</a></li>
-      <% } %>
-      <% if (locals.plugin.filter(p => p.slug === 'serverSchedule' && p.status === 1).length) { %>
-      <li><a href="/admin/serverSchedule">서버일정</a></li>
-      <% } %>
-      <% if (locals.plugin.filter(p => p.slug === 'domain' && p.status === 1).length) { %>
-        <li><a href="/admin/domain/sell">팝니다</a></li>
-        <li><a href="/admin/domain/buy">삽니다</a></li>
-      <% } %>
     </ul>
     <ul>
       <li><a href="/admin/menu"><%= __('admin_menu') %></a></li>

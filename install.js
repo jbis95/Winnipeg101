@@ -31,7 +31,6 @@ const main = async () => {
     await message();
     await page();
     await permission();
-    await plugin();
     await point();
     await pointWithdraw();
     await setting();
