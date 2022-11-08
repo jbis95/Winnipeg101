@@ -1,0 +1,252 @@
+/* New Comment */
+.commentsTitle {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.commentCount {
+  color: #EF5350;
+}
+
+.commentDot {
+  display: inline-block;
+  width: 3px;
+  height: 14px;
+  margin: 0 4px;
+  background-image: url('/theme/autoworld/assets/dot.svg');
+  background-size: 3px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.newComment {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: #f8f9fc;
+}
+
+.newComment .newCommentContent {
+  flex: 1;
+  display: flex;
+}
+
+.newComment textarea {
+  font-size: 1em;
+  width: 100%;
+  height: 80px;
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #37475A;
+  border-radius: 2px 2px 0 0;
+  background-color: transparent;
+}
+
+.newComment .button {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  background-color: #37475A;
+  border: 1px solid #232F3E;
+  box-sizing: border-box;
+  border-radius: 0 0 2px 2px;
+}
+
+.newComment button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #fff;
+  background-color: unset;
+  padding: 14px 20px;
+  border: 0;
+}
+
+/* Comments */
+.comments {
+  padding: 5px;
+  border: 1px solid rgba(0,0,0,0.1);
+  margin-bottom: 8px;
+}
+
+.comment {
+  display: flex;
+  /* margin-top: var(--gap);
+  margin-bottom: 15px; */
+}
+
+.comment .dot {
+  margin: 0 8px;
+}
+
+.comment .isReply {
+  width: 33px;
+  height: 33px;
+  background-image: url('/theme/autoworld/assets/isReply.svg');
+}
+
+.comment .main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment .main .info {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 10px;
+  margin-bottom: 10px;
+  background-color: #F1F1F1;
+}
+
+.comment .main .info .deleteComment {
+  font-size: 0.9em;
+}
+
+.comment .main .nickName {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.comment .main .permissionImage img {
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+}
+
+.comment .main .dear {
+  margin-left: 2px;
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #666;
+}
+
+.comment .main .datetime {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.comment .main .likeCount {
+  display: flex;
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 0.8em;
+  background-color: #EF5350;
+  padding: 2px 8px;
+  border-radius: 2px;
+  margin: 0 10px;
+  margin-bottom: 8px;
+}
+
+.comment .main .likeCount img {
+  width: 10px;
+  height: 10px;
+  background-image: url('/theme/autoworld/assets/thumbs-up-solid.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.comment .main .likeCount .text {
+  margin-left: 3px;
+}
+
+article .main .commentContent {
+  padding: 8px 10px;
+  padding-top: 0;
+}
+
+article .main .buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+article .main .buttons .right {
+  display: flex;
+}
+
+article .main .buttons .right div {
+  display: flex;
+}
+
+article .main .buttons button {
+  font-size: 0.8em;
+  color: #516B82;
+  background-color: #fff;
+  padding: 0px;
+  border: 0;
+  word-break: keep-all;
+}
+
+article .main .buttons .commentReply,
+article .main .buttons .commentLike,
+article .main .buttons .commentEdit {
+  margin-right: 10px;
+}
+
+/* Rewrite Comment */
+.commentEtc .etcCommentContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--gap);
+}
+
+.commentEtc .etcCommentContainer .etcCommentContent {
+  display: flex;
+  margin: 0;
+}
+
+.commentEtc textarea {
+  font-size: 1em;
+  width: 100%;
+  height: 60px;
+  flex: 1;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #37475A;
+  border-radius: 2px 2px 0 0;
+}
+
+.commentEtc .button {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  background-color: #37475A;
+  border: 1px solid #232F3E;
+  box-sizing: border-box;
+  border-radius: 0 0 2px 2px;
+}
+
+.commentEtc button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #fff;
+  background-color: unset;
+  padding: 14px 20px;
+  border: 0;
+}
+
+@media (max-width: 1130px) {
+  .comments {
+    padding: 0;
+    border: 0;
+    margin-bottom: 0;
+  }
+
+  .comment:first-child {
+    margin-top: 8px;
+  }
+}

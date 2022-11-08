@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/stylesheets/board/editor.css">
+    <script src="/javascripts/editor.js" defer></script>
+    <%- include('../editorHeader.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <article class="list" id="page" slug="<%= page.slug %>">
+            <h2><%= __('admin_editPage') %></h2>
+            <form name="frm" action="/admin/page/edit/<%= page.id %>/complete" method="POST">
+              <div>
+                <select name="type" id="type">
+                  <option value="editor" <% if (page.type === 'editor') { %> selected<% } %>>Editor</option>
+                  <option value="html" <% if (page.type === 'html') { %> selected<% } %>>HTML</option>
+                </select>
+              </div>
+              <h2><%= __('admin_title') %></h2>
+              <div><input type="text" name="title" id="title" value="<%= page.title %>" placeholder="<%= __('admin_title') %>"></div>
+              <h2><%= __('admin_slug') %></h2>
+              <div><input type="text" name="slug" id="slug" value="<%= page.slug %>" placeholder="<%= __('admin_slug') %>"></div>
+              <textarea name="content" id="editor"><%= page.content %></textarea>
+              <!-- <h2>HTML</h2>
+              <div><textarea name="html" id="html"><%= page.html %></textarea></div>
+              <h2>CSS</h2>
+              <div><textarea name="css" id="css"><%= page.css %></textarea></div>
+              <h2>Javascript</h2>
+              <div><textarea name="javascript" id="javascript"><%= page.js %></textarea></div> -->
+              <button id="submit"><%= __('admin_submit') %></button>
+            </form>
+          </article>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

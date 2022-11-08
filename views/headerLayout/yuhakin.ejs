@@ -1,0 +1,100 @@
+<script src="/theme/yuhakin/javascripts/yuhakin.js" defer></script>
+<style>
+  header {
+    color: <%= locals.setting.headerFontColor %>;
+    background-color: <%= locals.setting.headerBackgroundColor %>;
+  }
+  header .logo img {
+    max-width: <%= locals.setting.logoImageSize %>px;
+  }
+  header .userImage {
+    <% if (locals?.user?.image) { %>
+    background-image: url('<%= s3Host %>/userImage/<%= user.image %>');
+    <% } else { %>
+    background-image: url('/theme/yuhakin/assets/userImage.svg');
+    <% } %>
+  }
+  @media (min-width: 1131px) {
+    header .navbarMenu > li > a {
+      color: <%= locals.setting.headerFontColor %>;
+    }
+    header .navbarUser > li > a {
+      color: <%= locals.setting.headerFontColor %>;
+    }
+  }
+</style>
+<header>
+  <div class="wrap">
+    <div class="logoWrap">
+      <a href="#" class="toggleBtn"><img src="/svg/menu.svg" alt="메뉴"></a>
+      <div class="logo">
+        <a href="/"><img src="/theme/yuhakin/assets/logo.svg" alt="<%= locals.setting.siteName %>"></a>
+      </div>
+    </div>
+    <div class="navBarContainer">
+      <nav class="navbar">
+        <ul class="navbarMenu">
+          <% locals.topMenus.forEach(m => { %>
+            <% if (!m.parentId) { %>
+              <li>
+                <a href="/<%= m.target %>" class="mainMenu" menuId="<%= m.id %>"><%= m.title %><div class="down"><img src="/theme/yuhakin/assets/chevron-down-solid.svg"></div></a>
+                <% const subMenu = topMenus.filter(s => m.id === s.parentId) %>
+                <% if (subMenu.length) { %>
+                <ul class="sub">
+                  <div class="blank"></div>
+                  <div class="liContainer">
+                    <% for (let i = 0; i < subMenu.length; i ++) { %>
+                    <li><a href="/<%= subMenu[i].target %>"><%= subMenu[i].title %></a></li>
+                    <% if (i !== subMenu.length - 1) { %>
+                    <% } %>
+                    <% } %>
+                  </div>
+                </ul>
+                <% } %>
+            <% } else { %>
+              </li>
+            <% } %>
+          <% }) %>
+        </ul>
+        <div class="navbarUserContainer">
+          <div class="userImage"></div>
+          <ul class="navbarUser">
+          <% if (locals.user && locals.user.permission >= 10) { %>
+            <li><a href="/admin"><%= __('user_admin') %></a></li>
+            <li class="slash">/</li>
+          <% } %>
+          <% if (locals.user) { %>
+            <li><a href="/mypage"><%= __('user_mypage') %></a></li>
+            <li class="slash">/</li>
+            <li><a href="/logout"><%= __('user_logout') %></a></li>
+          <% } else { %>
+            <li><a href="/join"><%= __('user_join') %></a></li>
+            <li class="slash">/</li>
+            <li><a href="/login"><%= __('user_login') %></a></li>
+          <% } %>
+          </ul>
+          <div class="searchBox">
+            <form action="/search" method="GET">
+              <input type="hidden" name="searchType" value="titleAndContent">
+              <div><input type="text" name="keyword"></div>
+              <div><button>검색</button></div>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <div class="modalBackground"></div>
+    </div>
+  </div>
+</header>
+<script>
+  const logo = document.querySelector('.logo img');
+  const navbarMenus = document.querySelectorAll('.navbarMenu > li > a');
+  if (window.innerWidth <= 1280) {
+    logo.src = '/theme/yuhakin/assets/logo_mobile.svg';
+    navbarMenus.forEach(m => {
+      if (m.parentNode.querySelector('ul')) {
+        m.href = '#';
+      }
+    });
+  }
+</script>

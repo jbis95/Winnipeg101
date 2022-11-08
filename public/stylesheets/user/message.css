@@ -1,0 +1,50 @@
+article h1 {
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 30px 0 rgba(0,0,0,0.06);
+  box-sizing: border-box;
+}
+
+article .message {
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 30px 0 rgba(0,0,0,0.06);
+  box-sizing: border-box;
+  margin-bottom: var(--gap);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+article .message .info {
+  color: #9da5b6;
+  /* padding: 5px 0; */
+  font-size: 0.9em;
+  margin-bottom: var(--mobile-gap);
+}
+
+article .read {
+  color: #fff;
+  background-color: #cacfd8;
+  border-radius: 12px;
+  padding: 15px 20px;
+}
+
+article .status {
+  font-size: 0.9em;
+  margin-left: 20px;
+}
+
+@media (max-width: 1280px) {
+  article h1 {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  article .messages {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('../admin/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <div class="wrap">
+        <%- include('../admin/header.ejs') %>
+        <h2>일정 등록</h2>
+        <form action="/admin/serverSchedule/new" method="POST">
+          <table>
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>별점</th>
+                <th>타입</th>
+                <th>서버이름</th>
+                <th>코멘트</th>
+                <th>링크</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="date" name="openDate"></td>
+                <td>
+                  <div><label><input type="radio" name="score" id="5" value="5">5</label></div>
+                  <div><label><input type="radio" name="score" id="4" value="4">4</label></div>
+                  <div><label><input type="radio" name="score" id="3" value="3">3</label></div>
+                  <div><label><input type="radio" name="score" id="2" value="2">2</label></div>
+                  <div><label><input type="radio" name="score" id="1" value="1">1</label></div>
+                </td>
+                <td>
+                  <div><label><input type="radio" name="type" id="new" value="new">신버전</label></div>
+                  <div><label><input type="radio" name="type" id="old" value="old">구버전</label></div>
+                  <div><label><input type="radio" name="type" id="renewal" value="renewal">리뉴얼</label></div>
+                </td>
+                <td>
+                  <input type="text" name="serverName" placeholder="서버이름">
+                </td>
+                <td>
+                  <input type="text" name="comment" placeholder="코멘트">
+                </td>
+                <td>
+                  <input type="text" name="link" placeholder="링크">
+                </td>
+                <td><button>등록</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <h2>서버 일정</h2>
+        <table>
+          <thead>
+            <tr>
+              <td>날짜</td>
+              <td>별점</td>
+              <td>타입</td>
+              <td>서버이름</td>
+              <td>코멘트</td>
+              <td>링크</td>
+              <td>수정</td>
+              <td>삭제</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% serverSchedules.forEach(s => { %>
+            <form action="/admin/serverSchedule/edit" method="POST">
+              <tr>
+                <input type="hidden" name="id" value="<%= s.id %>">
+                <td><input type="date" name="openDate" value="<%= s.datetime %>"></td>
+                <td>
+                  <select name="score">
+                    <option value="5"<% if (s.score === 5) { %> selected<% } %>>5</option>
+                    <option value="4"<% if (s.score === 4) { %> selected<% } %>>4</option>
+                    <option value="3"<% if (s.score === 3) { %> selected<% } %>>3</option>
+                    <option value="2"<% if (s.score === 2) { %> selected<% } %>>2</option>
+                    <option value="1"<% if (s.score === 1) { %> selected<% } %>>1</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="type">
+                    <option value="new"<% if (s.type === 'new') { %> selected<% } %>>신버전</option>
+                    <option value="old"<% if (s.type === 'old') { %> selected<% } %>>구버전</option>
+                    <option value="renewal"<% if (s.type === 'renewal') { %> selected<% } %>>리뉴얼</option>
+                  </select>
+                </td>
+                <td><input type="text" name="serverName" value="<%= s.serverName %>" placeholder="서버이름"></td>
+                <td><input type="text" name="comment" value="<%= s.comment %>" placeholder="코멘트"></td>
+                <td><input type="text" name="link" value="<%= s.link %>" placeholder="링크"></td>
+                <td><button name="submit" value="edit">수정</button></td>
+                <td><button name="submit" value="delete">삭제</button></td>
+              </tr>
+            </form>
+            <% }) %>
+          </tbody>
+        </table>
+        <%- include('../pagination.ejs') %>
+      </div>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

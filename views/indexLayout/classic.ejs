@@ -1,0 +1,62 @@
+<style>
+  article .banner__box__articleTop {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleTop %>, 1fr);
+  }
+
+  article .banner__box__articleBottom {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleBottom %>, 1fr);
+  }
+</style>
+<article>
+  <% if (locals.setting.adsenseTop) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseTop %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'articleTop').length) { %>
+    <%- include('../banner', { position: 'articleTop' }); %>
+  <% } %>
+  <div class="list">
+    <div class="gridContainer">
+      <% if (boards) { %>
+      <% boards.forEach(b => { %>
+        <% if (b.id === 0) { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><%= b.title %></a></h2>
+              <!-- <div class="more"><a href="/<%= b.slug %>"><%= __('board_more') %></a></div> -->
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title"><a href="/<%= a.boardSlug %>/<%= a.id %>"><%= a.title %></a><% if (a.commentCount) { %><span class="commentCount"> <%= a.commentCount %></span><% } %></div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><a href="/<%= b.slug %>"><%= b.title %></a></h2>
+              <div class="more"><a href="/<%= b.slug %>"><%= __('board_more') %></a></div>
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title"><a href="/<%= b.slug %>/<%= a.id %>"><%= a.title %></a><% if (a.commentCount) { %><span class="commentCount"> <%= a.commentCount %></span><% } %></div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+      <% }) %>
+      <% } %>
+    </div>
+  </div>
+  <% if (locals.setting.adsenseBottom) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseBottom %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'articleBottom').length) { %>
+    <%- include('../banner', { position: 'articleBottom' }); %>
+  <% } %>
+</article>

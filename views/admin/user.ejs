@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <div class="list">
+            <h2><%= __('admin_memberList') %></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th><%= __('admin_number') %></th>
+                  <th><%= __('admin_id') %></th>
+                  <th><%= __('admin_password') %></th>
+                  <th><%= __('admin_nickName') %></th>
+                  <th><%= __('admin_email') %></th>
+                  <th><%= __('admin_permission') %></th>
+                  <th><%= __('admin_workingUser') %></th>
+                  <th><%= __('admin_edit') %></th>
+                  <th><%= __('admin_delete') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% users.forEach(u => { %>
+                  <form action="/admin/user/edit/<%= u.id %><% if (page) { %>?page=<%= page %><% } %>" method="POST">
+                    <tr>
+                      <td><%= u.id %></td>
+                      <td><input type="text" name="uId" value="<%= u.uId %>" placeholder="<%= __('admin_id') %>"></td>
+                      <td><input type="password" name="password" placeholder="<%= __('admin_changePassword') %>"></td>
+                      <td><input type="text" name="nickName" value="<%= u.nickName %>" placeholder="<%= __('admin_nickName') %>"></td>
+                      <td><input type="text" name="email" value="<%= u.email %>" placeholder="<%= __('admin_email') %>"></td>
+                      <td>
+                        <select name="permission">
+                          <option value="0"<% if (u.permission === 0) { %> selected<% } %>>차단</option>
+                          <option value="1"<% if (u.permission === 1) { %> selected<% } %>>1</option>
+                          <option value="2"<% if (u.permission === 2) { %> selected<% } %>>2</option>
+                          <option value="3"<% if (u.permission === 3) { %> selected<% } %>>3</option>
+                          <option value="4"<% if (u.permission === 4) { %> selected<% } %>>4</option>
+                          <option value="5"<% if (u.permission === 5) { %> selected<% } %>>5</option>
+                          <option value="6"<% if (u.permission === 6) { %> selected<% } %>>6</option>
+                          <option value="7"<% if (u.permission === 7) { %> selected<% } %>>7</option>
+                          <option value="8"<% if (u.permission === 8) { %> selected<% } %>>8</option>
+                          <option value="9"<% if (u.permission === 9) { %> selected<% } %>>9</option>
+                          <option value="10"<% if (u.permission === 10) { %> selected<% } %>>10</option>
+                        </select>
+                      </td>
+                      <td><input type="checkbox" name="workingUser" value="1"<% if (u.workingUser) { %> checked<% } %>></td>
+                      <td><button name="submit" value="edit">수정</button></td>
+                      <td><button name="submit" value="delete">삭제</button></td>
+                    </tr>
+                  </form>
+                <% }) %>
+              </tbody>
+            </table>
+            <%- include('../pagination.ejs') %>
+          </div>
+          <div class="new">
+            <h2><%= __('admin_new') %></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th><%= __('admin_id') %></th>
+                  <th><%= __('admin_password') %></th>
+                  <th><%= __('admin_nickName') %></th>
+                  <th><%= __('admin_email') %></th>
+                  <th><%= __('admin_permission') %></th>
+                  <th><%= __('admin_workingUser') %></th>
+                  <th><%= __('admin_submit') %></th>
+                  <th>랜덤회원 생성</th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/user/new" method="POST">
+                  <tr>
+                    <td><input type="text" name="uId" placeholder="<%= __('admin_id') %>"></td>
+                    <td><input type="password" name="password" placeholder="<%= __('admin_password') %>"></td>
+                    <td><input type="text" name="nickName" placeholder="<%= __('admin_nickName') %>"></td>
+                    <td><input type="text" name="email" placeholder="<%= __('admin_email') %>"></td>
+                    <td>
+                      <select name="permission">
+                        <option value="0">차단</option>
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+                    </td>
+                    <td><input type="checkbox" name="workingUser" value="1"></td>
+                    <td><button name="submit" value="new"><%= __('admin_submit') %></button></td>
+                    <td><button name="submit" value="random">생성</button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

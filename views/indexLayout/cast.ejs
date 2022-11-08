@@ -1,0 +1,80 @@
+<style>
+  article .banner__box__indexTop {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsIndexTop %>, 1fr);
+  }
+
+  article .banner__box__indexBottom {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsIndexBottom %>, 1fr);
+  }
+</style>
+<article>
+  <% if (locals.setting.adsenseTop) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseTop %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'indexTop' && b.status === 1).length) { %>
+    <%- include('../banner', { position: 'indexTop' }); %>
+  <% } %>
+  <% if (youtubeLive) { %>
+  <div class="youtubeContainer">
+    <div class="title"><span class="red">●</span>파워볼 청하 LIVE<span class="red">●</span></div>
+    <div class="youtube">
+      <!-- <iframe src="<%= youtubeLive %>" allow="fullscreen;autoplay"></iframe> -->
+      <iframe src="<%= youtubeLive %>?autoplay=1&mute=1" allow="fullscreen;autoplay"></iframe>
+    </div>
+  </div>
+  <% } %>
+  <div class="list">
+    <div class="gridContainer">
+      <% if (boards) { %>
+      <% boards.forEach(b => { %>
+        <% if (b.id === 0) { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><%= b.title %></a></h2>
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title">
+                  <% if (a.boardTitle) { %><span class="boardTitle"><%= a.boardTitle %></span><% } %>
+                  <a href="/<%= a.boardSlug %>/<%= a.id %>"><%= a.title %></a>
+                  <% if (a.image) { %><span class="image"><img src="/assets/empty.png"></span><% } %>
+                  <% if (a.commentCount) { %><span class="commentCount"><img src="/assets/empty.png"><%= a.commentCount %></span><% } %>
+                </div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><a href="/<%= b.slug %>"><%= b.title %></a></h2>
+              <div class="more"><a href="/<%= b.slug %>"><%= __('board_more') %></a></div>
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title">
+                  <% if (a.category) { %><span class="category" style="color: <%= a.categoryColor %>;"><%= a.category %></span><% } %>
+                  <a href="/<%= b.slug %>/<%= a.id %>"><%= a.title %></a>
+                  <% if (a.image) { %><span class="image"><img src="/assets/empty.png"></span><% } %>
+                  <% if (a.commentCount) { %><span class="commentCount"><img src="/assets/empty.png"><%= a.commentCount %></span><% } %>
+                </div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+      <% }) %>
+      <% } %>
+    </div>
+  </div>
+  <% if (locals.setting.adsenseBottom) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseBottom %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'indexBottom' && b.status === 1).length) { %>
+    <%- include('../banner', { position: 'indexBottom' }); %>
+  <% } %>
+</article>

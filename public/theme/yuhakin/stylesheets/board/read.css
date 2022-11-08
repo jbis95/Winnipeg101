@@ -1,0 +1,476 @@
+/* Modal */
+.modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.modal {
+  position: relative;
+  width: 480px;
+  background-color: white;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 5px;
+  padding: 30px;
+  z-index: 3;
+}
+
+.modal .top {
+  /* width: 100%; */
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal .top .close {
+  width: 16px;
+  cursor: pointer;
+}
+
+.modal .top .title {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.modal .main {
+  margin-top: 20px;
+}
+
+.modal .bottom {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  margin-top: 20px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 0 40px;
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.grid .image {
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.grid .image img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.grid .facebook {
+  border-radius: 100%;
+  background-color: #1A76F2;
+}
+
+.grid .twitter {
+  background-color: #1EA1F1;
+}
+
+.grid .google {
+  background-color: #DA4B3E;
+}
+
+.grid .naver {
+  background-color: #1EC800;
+}
+
+.grid .band {
+  background-color: #1EC800;
+}
+
+.grid .kakaostory {
+  background-color: #FFE003;
+}
+
+.grid .title {
+  display: flex;
+  justify-content: center;
+  color: #999;
+  margin-top: 10px;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.modal .bottom input {
+  padding: 20px;
+  flex: 1;
+  border: 1px solid #bbb;
+  background-color: #F8F8F8;
+  box-sizing: border-box;
+  margin: 0;
+  font-size: 1em;
+  border-radius: 8px 0 0 8px;
+}
+
+.modal .bottom button {
+  padding: 20px;
+  border: 1px solid #bbb;
+  background-color: #fff;
+  border-left: 0;
+  margin: 0;
+  font-size: 1em;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  align-items: center;
+  color: #666;
+}
+
+.modal .bottom button img {
+  width: 16px;
+  margin-right: 4px;
+}
+
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+#article > .sub .back {
+  display: flex;
+  margin-bottom: var(--gap);
+}
+
+#article > .sub .back a {
+  font-weight: bold;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 30px 0 rgba(0,0,0,0.06);
+}
+
+#article > .item {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  margin-bottom: var(--gap);
+  box-shadow: 0 2px 30px 0 rgba(0,0,0,0.06);
+}
+
+#article > .item > .sub {
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+#article > .item > .sub > .board {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+#article > .item > .info {
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+#article > .item > .info .etc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#article > .item > .info .etc .right {
+  position: relative;
+}
+
+#article > .item > .info .etc .right {
+  list-style: none;
+}
+
+#article > .item > .info .etc .right form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#article > .item > .info .etc .right button {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9em;
+  color: #9da5b6;
+  background-color: #fff;
+}
+
+#article > .item > .info .etc .right .slash {
+  margin: 0 6px;
+  font-size: 0.9em;
+}
+
+#article > .item > .info .etc .right .buttons img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('/assets/ellipsis-v-solid.svg');
+  cursor: pointer;
+}
+
+#article > .item > .info .etc .right .popUp {
+  display: none;
+  top: 30px;
+  right: 0;
+  position: absolute;
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1),0 0 2px 0 rgba(0,0,0,0.05);
+  word-break: keep-all;
+  z-index: 1;
+}
+
+#article > .item > .info .etc .right .popUp.active {
+  display: flex;
+}
+
+#article > .item > .info .etc .right .popUp button {
+  font-size: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 0;
+  border-radius: 8px;
+  color: #525662;
+}
+
+#article > .item > .info .etc .right .popUp li {
+  display: flex;
+  align-items: center;
+}
+
+#article > .item > .info .etc .right .popUp button:hover,
+#article > .item > .info .etc .right .popUp button:active {
+  background-color: #F7F8F9;
+}
+
+#article > .item > .info .etc .right .popUp img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#article > .item > .info .etc .right .popUp .edit img {
+  background-image: url('/assets/edit-regular.svg');
+}
+
+#article > .item > .info .etc .right .popUp .delete img {
+  background-image: url('/assets/trash-alt-regular.svg');
+}
+
+#article > .item > .info .titleContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#article > .item > .info .category {
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: #687182;
+  background-color: #f5f6f9;
+  margin-right: 10px;
+  word-break: keep-all;
+}
+
+#article > .item > .info h1 {
+  display: inline;
+}
+
+#article > .item > .info .etc {
+  color: #9da5b6;
+  padding: 5px 0;
+}
+
+#article > .item > .info .etc img {
+  width: 10px;
+  margin-right: 6px;
+}
+
+#article > .item > .info .etc img {
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#article > .item > .info .etc .viewCount img {
+  background-image: url('/assets/eye.svg');
+}
+
+#article > .item > .info .etc .likeCount img {
+  background-image: url('/assets/thumbs-up-regular.svg');
+}
+
+#article .articleUrl {
+  color: #9da5b6;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+#article > .content .image {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+#article > .content .media {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+#article > .item .listAndEdit .likeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#article > .item .listAndEdit {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--gap);
+}
+
+#article > .item .listAndEdit .likeContainer button,
+#article > .item .listAndEdit button {
+  font-size: 1em;
+  color: #697183;
+  background-color: #F5F6F9;
+  border-radius: 6px;
+  padding: 10px 20px;
+  border: 0;
+  word-break: keep-all;
+}
+
+#article > .item .listAndEdit .likeContainer .share img {
+  width: 14px;
+  height: 14px;
+}
+
+#article > .item .listAndEdit .likeContainer button:hover,
+#article > .item .listAndEdit .likeContainer button:active,
+#article > .item .listAndEdit button:hover,
+#article > .item .listAndEdit button:active {
+  background-color: #EEF0F4;
+}
+
+#article > .item .listAndEdit .articleButton form {
+  display: flex;
+}
+
+#article > .item .listAndEdit .articleButton .edit {
+  margin-right: 10px;
+}
+
+#list {
+  margin-bottom: var(--gap);
+}
+
+@media (max-width: 1280px) {
+  .modal {
+    margin: 0 10px;
+    font-size: 0.8em;
+  }
+
+  .modal .bottom input {
+    padding: 10px;
+  }
+  
+  .modal .bottom button {
+    padding: 10px;
+  }
+
+  .gridContainer {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 0;
+  }
+
+  #article > .item > .info {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  #article > .item > .info h1 {
+    font-size: 1.3em;
+  }
+
+  #article > .item > .info .category {
+    font-size: 0.8em;
+  }
+
+  #article .sub {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  #article > .item {
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 0;
+  }
+
+  #article > .item .listAndEdit {
+    font-size: 0.8em;
+  }
+
+  #article > .item > .info .etc .right .popUp button {
+    font-size: 0.8em;
+  }
+
+  #article .content {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #article .listAndEdit {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #article .articleUrl {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

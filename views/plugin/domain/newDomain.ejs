@@ -1,0 +1,102 @@
+<style>
+  article h1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  article form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  article .domainRegist {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 430px;
+  }
+
+  article .domainRegist input {
+    font-size: 1em;
+    flex: 1;
+    margin: 0;
+    padding: 20px;
+    border: 2px solid #538BF8;
+    border-right: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  article .domainRegist button {
+    font-size: 1em;
+    color: #fff;
+    background-color: #538BF8;
+    width: 80px;
+    border: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  article .comment {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  article .sell {
+    display: flex;
+    justify-content: center;
+  }
+
+  article .sell a {
+    font-size: 1em;
+    color: #fff;
+    background-color: #aaa;
+    width: 430px;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 60px;
+  }
+
+  article .sell a:hover,
+  article .sell a:active {
+    background-color: #999;
+  }
+
+  article .adsense {
+
+  }
+
+  @media (max-width: 1130px) {
+    article .domainRegist {
+      width: 95%;
+    }
+
+    article .sell a {
+      width: 95%;
+    }
+  }
+</style>
+<article>
+  <h1>도메인 신규등록</h1>
+  <form action="https://domain.gabia.com/api/You0828/regist_step1" target="_blank" method="POST">
+    <div class="domainRegist">
+      <input type="text" name="domainList" placeholder="예) 도메인.com">
+      <button>검색</button>
+    </div>
+    <div class="comment">원하는 도메인을 입력하세요.</div>
+  </form>
+  <div class="sell"><a href="/sell">내 도메인 매도 올리기</a></div>
+  <div class="adsense">
+    <%= setting.adsenseCustom %>
+  </div>
+</article>

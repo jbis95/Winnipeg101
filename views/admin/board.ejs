@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <div class="list">
+            <h2><%= __('admin_boards') %></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th rowspan="2"><%= __('admin_number') %></th>
+                  <th rowspan="2"><%= __('admin_boardName') %></th>
+                  <th rowspan="2"><%= __('admin_slug') %></th>
+                  <th rowspan="2"><%= __('admin_type') %></th>
+                  <th rowspan="2"><%= __('admin_listCount') %></th>
+                  <th colspan="4">등급</th>
+                  <th rowspan="2"><%= __('admin_edit') %></th>
+                  <th rowspan="2"><%= __('admin_delete') %></th>
+                  <th rowspan="2">상세</th>
+                </tr>
+                <tr>
+                  <th><%= __('admin_listPermission') %></th>
+                  <th><%= __('admin_readPermission') %></th>
+                  <th><%= __('admin_writePermission') %></th>
+                  <th><%= __('admin_commentPermission') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% boards.forEach(b => { %>
+                  <form action="/admin/board/edit/<%= b.id %><% if (page) { %>?page=<%= page %><% } %>" method="POST">
+                    <tr>
+                      <td><%= b.id %></td>
+                      <td><input type="text" name="title" value="<%= b.title %>" placeholder="<%= __('admin_boardName') %>"></td>
+                      <td><input type="text" name="slug" value="<%= b.slug %>" placeholder="<%= __('admin_slug') %>"></td>
+                      <td>
+                        <select name="type">
+                          <option value="board"<% if (b.type === 'board') { %> selected<% } %>><%= __('admin_board') %></option>
+                          <option value="gallery"<% if (b.type === 'gallery') { %> selected<% } %>><%= __('admin_gallery') %></option>
+                          <option value="feed"<% if (b.type === 'feed') { %> selected<% } %>><%= __('admin_feed') %></option>
+                          <option value="bookmark"<% if (b.type === 'bookmark') { %> selected<% } %>><%= __('admin_bookmark') %></option>
+                        </select>
+                      </td>
+                      <td><input type="text" name="listCount" value="<%= b.listCount %>" placeholder="<%= __('admin_listCount') %>"></td>
+                      <td>
+                        <select name="listPermission">
+                          <option value="0"<% if (b.listPermission === 0) { %> selected<% } %>><%= __('admin_nonMember') %></option>
+                          <option value="1"<% if (b.listPermission === 1) { %> selected<% } %>>1</option>
+                          <option value="2"<% if (b.listPermission === 2) { %> selected<% } %>>2</option>
+                          <option value="3"<% if (b.listPermission === 3) { %> selected<% } %>>3</option>
+                          <option value="4"<% if (b.listPermission === 4) { %> selected<% } %>>4</option>
+                          <option value="5"<% if (b.listPermission === 5) { %> selected<% } %>>5</option>
+                          <option value="6"<% if (b.listPermission === 6) { %> selected<% } %>>6</option>
+                          <option value="7"<% if (b.listPermission === 7) { %> selected<% } %>>7</option>
+                          <option value="8"<% if (b.listPermission === 8) { %> selected<% } %>>8</option>
+                          <option value="9"<% if (b.listPermission === 9) { %> selected<% } %>>9</option>
+                          <option value="10"<% if (b.listPermission === 10) { %> selected<% } %>>10</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select name="readPermission">
+                          <option value="0"<% if (b.readPermission === 0) { %> selected<% } %>><%= __('admin_nonMember') %></option>
+                          <option value="1"<% if (b.readPermission === 1) { %> selected<% } %>>1</option>
+                          <option value="2"<% if (b.readPermission === 2) { %> selected<% } %>>2</option>
+                          <option value="3"<% if (b.readPermission === 3) { %> selected<% } %>>3</option>
+                          <option value="4"<% if (b.readPermission === 4) { %> selected<% } %>>4</option>
+                          <option value="5"<% if (b.readPermission === 5) { %> selected<% } %>>5</option>
+                          <option value="6"<% if (b.readPermission === 6) { %> selected<% } %>>6</option>
+                          <option value="7"<% if (b.readPermission === 7) { %> selected<% } %>>7</option>
+                          <option value="8"<% if (b.readPermission === 8) { %> selected<% } %>>8</option>
+                          <option value="9"<% if (b.readPermission === 9) { %> selected<% } %>>9</option>
+                          <option value="10"<% if (b.readPermission === 10) { %> selected<% } %>>10</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select name="writePermission">
+                          <option value="1"<% if (b.writePermission === 1) { %> selected<% } %>>1</option>
+                          <option value="2"<% if (b.writePermission === 2) { %> selected<% } %>>2</option>
+                          <option value="3"<% if (b.writePermission === 3) { %> selected<% } %>>3</option>
+                          <option value="4"<% if (b.writePermission === 4) { %> selected<% } %>>4</option>
+                          <option value="5"<% if (b.writePermission === 5) { %> selected<% } %>>5</option>
+                          <option value="6"<% if (b.writePermission === 6) { %> selected<% } %>>6</option>
+                          <option value="7"<% if (b.writePermission === 7) { %> selected<% } %>>7</option>
+                          <option value="8"<% if (b.writePermission === 8) { %> selected<% } %>>8</option>
+                          <option value="9"<% if (b.writePermission === 9) { %> selected<% } %>>9</option>
+                          <option value="10"<% if (b.writePermission === 10) { %> selected<% } %>>10</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select name="commentPermission">
+                          <option value="1"<% if (b.commentPermission === 1) { %> selected<% } %>>1</option>
+                          <option value="2"<% if (b.commentPermission === 2) { %> selected<% } %>>2</option>
+                          <option value="3"<% if (b.commentPermission === 3) { %> selected<% } %>>3</option>
+                          <option value="4"<% if (b.commentPermission === 4) { %> selected<% } %>>4</option>
+                          <option value="5"<% if (b.commentPermission === 5) { %> selected<% } %>>5</option>
+                          <option value="6"<% if (b.commentPermission === 6) { %> selected<% } %>>6</option>
+                          <option value="7"<% if (b.commentPermission === 7) { %> selected<% } %>>7</option>
+                          <option value="8"<% if (b.commentPermission === 8) { %> selected<% } %>>8</option>
+                          <option value="9"<% if (b.commentPermission === 9) { %> selected<% } %>>9</option>
+                          <option value="10"<% if (b.commentPermission === 10) { %> selected<% } %>>10</option>
+                        </select>
+                      </td>
+                      <td><button name="submit" value="edit"><%= __('admin_edit') %></button></td>
+                      <td><button name="submit" value="delete"><%= __('admin_delete') %></button></td>
+                      <td><a href="/admin/board/detail/<%= b.id %>"><button type="button">상세설정</button></a></td>
+                    </tr>
+                  </form>
+                <% }) %>
+              </tbody>
+            </table>
+            <%- include('../pagination.ejs') %>
+          </div>
+          <div class="new">
+            <h2><%= __('admin_new') %></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th><%= __('admin_boardName') %></th>
+                  <th><%= __('admin_slug') %></th>
+                  <th><%= __('admin_type') %></th>
+                  <th><%= __('admin_submit') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/board/new" method="POST">
+                  <tr>
+                    <td><input type="text" name="title" placeholder="<%= __('admin_boardName') %>"></td>
+                    <td><input type="text" name="slug" placeholder="<%= __('admin_slug') %>"></td>
+                    <td>
+                      <select name="type">
+                        <option value="board"><%= __('admin_board') %></option>
+                        <option value="gallery"><%= __('admin_gallery') %></option>
+                        <option value="feed"><%= __('admin_feed') %></option>
+                        <option value="bookmark"><%= __('admin_bookmark') %></option>
+                      </select>
+                    </td>
+                    <td><button name="submit" value="new"><%= __('admin_submit') %></button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

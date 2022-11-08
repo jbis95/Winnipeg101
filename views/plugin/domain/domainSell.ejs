@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('../admin/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <div class="wrap">
+        <%- include('../admin/header.ejs') %>
+        <h2>팝니다 등록</h2>
+        <form action="/admin/domain/sell/new" method="POST">
+          <table>
+            <thead>
+              <tr>
+                <th>판매기간</th>
+                <th>타입</th>
+                <th>도메인명</th>
+                <th>도메인가격</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <select name="saleTerm">
+                    <option value="6">6개월</option>
+                    <option value="12">12개월</option>
+                    <option value="0">무제한</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="type">
+                    <option value="premium">프리미엄</option>
+                    <option value="paid">유료</option>
+                    <option value="free">무료</option>
+                  </select>
+                </td>
+                <td><input type="text" name="domainName" placeholder="도메인명"></td>
+                <td><input type="text" name="domainPrice" placeholder="도메인가격"></td>
+                <td><button>등록</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <h2>팝니다 목록</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>판매상태</th>
+              <th>판매기간</th>
+              <th>타입</th>
+              <th>도메인명</th>
+              <th>도메인가격</th>
+              <th>수정</th>
+              <th>삭제</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% domainSellList.forEach(d => { %>
+            <form action="/admin/domain/sell/edit/<%= d.id %>" method="POST">
+              <tr>
+                <td>
+                  <select name="status">
+                    <option value="1"<% if (d.status === 1) { %> selected<% } %>>판매중</option>
+                    <option value="2"<% if (d.status === 2) { %> selected<% } %>>입금대기중</option>
+                    <option value="0"<% if (d.status === 0) { %> selected<% } %>>판매완료</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="saleTerm">
+                    <option value="6"<% if (d.saleTerm === 6) { %> selected<% } %>>6개월</option>
+                    <option value="12"<% if (d.saleTerm === 12) { %> selected<% } %>>12개월</option>
+                    <option value="0"<% if (d.saleTerm === 0) { %> selected<% } %>>무제한</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="type">
+                    <option value="premium"<% if (d.type === 'premium') { %> selected<% } %>>프리미엄</option>
+                    <option value="paid"<% if (d.type === 'paid') { %> selected<% } %>>유료</option>
+                    <option value="free"<% if (d.type === 'free') { %> selected<% } %>>무료</option>
+                  </select>
+                </td>
+                <td><input type="text" name="domainName" value="<%= d.domainName %>" placeholder="도메인명"></td>
+                <td><input type="text" name="domainPrice" value="<%= d.domainPrice %>" placeholder="도메인가격"></td>
+                <td><button name="submit" value="edit">수정</button></td>
+                <td><button name="submit" value="delete">삭제</button></td>
+              </tr>
+            </form>
+            <% }) %>
+          </tbody>
+        </table>
+        <%- include('../pagination.ejs') %>
+      </div>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

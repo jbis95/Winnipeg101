@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <div class="list">
+            <h2><%= __('admin_update') %></h2>
+          </div>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

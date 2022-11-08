@@ -1,0 +1,232 @@
+header {
+  border-bottom: 1px solid #bbb;
+}
+
+header .wrap {
+  box-sizing: border-box;
+  display: flex;
+}
+
+header .logo {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+/* header .logo img {
+  max-width: 200px;
+} */
+
+@media (min-width: 1131px) {
+  header .toggleBtn {
+    display: none;
+  }
+
+  header .navbar {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  header .navbar .navbar__menu {
+    display: flex;
+    align-items: center;
+  }
+  
+  header .navbar .navbar__user {
+    display: none;
+    align-items: center;
+  }
+
+  header .navbar .navbar__menu > li {
+    height: 100%;
+  }
+
+  header .navbar .navbar__menu > li > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 10px;
+    margin-left: 10px;
+  }
+
+  header .navbar .navbar__menu > li > a:hover,
+  header .navbar .navbar__menu > li > a:active {
+    font-weight: bold;
+  }
+
+  header .navbar .navbar__user > li {
+    height: 100%;
+  }
+
+  header .navbar .navbar__user > li > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 10px;
+    margin-left: 10px;
+  }
+
+  header .navbar .navbar__user > li > a:hover,
+  header .navbar .navbar__user > li > a:active {
+    font-weight: bold;
+  }
+
+  header .sub__menu__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-top: 1px solid #bbb;
+  }
+
+  header .navbar .navbar__menu > li {
+    position: relative;
+  }
+
+  header .navbar .navbar__menu > li:hover > .sub {
+    display: flex;
+  }
+
+  header .navbar .navbar__menu > li > .sub {
+    position: absolute;
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    border: 1px solid #bbb;
+    border-bottom: 0;
+    background-color: #fff;
+    z-index: 2;
+  }
+
+  header .navbar .navbar__menu > li > .sub li {
+    width: 100%;
+    border-bottom: 1px solid #bbb;
+  }
+
+  header .navbar .navbar__menu > li > .sub li a {
+    color: #000;
+    display: flex;
+    width: 290px;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    padding-left: 10px;
+  }
+
+  header .navbar .navbar__menu > li > .sub li a:hover,
+  header .navbar .navbar__menu > li > .sub li a:active {
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 1130px) {
+  header .toggleBtn {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+  }
+
+  header .logo {
+    justify-content: center;
+    width: 100%;
+  }
+
+  header .navbar {
+    font-size: 1em;
+    display: none;
+    flex-direction: column;
+    background-color: #fff;
+    border-right: 1px solid #bbb;
+    box-sizing: border-box;
+    white-space: normal;
+  }
+
+  header .navbar.active {
+    display: flex;
+  }
+
+  header .navbar__user {
+    order: 1;
+    display: flex;
+    border-top: 1px solid #bbb;
+  }
+  
+  header .navbar__user > li {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  header .navbar__user > li > a {
+    color: #000;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #bbb;
+    padding: 10px 0;
+    margin: 10px 0;
+  }
+
+  header .navbar__user > li > a:hover,
+  header .navbar__user > li > a:active {
+    font-weight: bold;
+    background-color: #eee;
+  }
+
+  header .navbar__menu {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  header .navbar__menu > li {
+    width: 100%;
+  }
+  
+  header .navbar__menu > li > a {
+    color: #000;
+    display: flex;
+    padding: 10px 0 10px 10px;
+    background-color: #eee;
+    border-top: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    box-sizing: border-box;
+  }
+
+  header .navbar__menu > li > a:last-child {
+    border-bottom: 0;
+  }
+
+  header .navbar__menu > li > a:hover,
+  header .navbar__menu > li > a:active {
+    font-weight: bold;
+    background-color: #eee;
+  }
+
+  header .navbar__menu > li > .sub > li {
+    width: 100%;
+  }
+
+  header .navbar__menu > li > .sub > li > a {
+    display: flex;
+    padding: 10px 0 10px 30px;
+    box-sizing: border-box;
+  }
+
+  header .navbar__menu > li > .sub > li > a:hover,
+  header .navbar__menu > li > .sub > li > a:active {
+    font-weight: bold;
+    background-color: #eee;
+  }
+}

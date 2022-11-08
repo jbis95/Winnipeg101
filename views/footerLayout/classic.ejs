@@ -1,0 +1,12 @@
+<footer>
+  <div class="wrap">
+    <% if (locals.setting.license) { %>
+    <div class="license">Solution by<span class="bold"><a href="https://waffleboard.io" target="_blank">WaffleBoard</a></span></div>
+    <% } else { %>
+    <div class="license">Made by<span class="bold"><a href="<%= setting.siteDomain %>" target="_blank"><%= setting.siteName %></a></span></div>
+    <% } %>
+    <% if (locals.setting.copyright) { %>
+    <div class="copyright"><%- locals.setting.copyright %></div>
+    <% } %>
+  </div>
+</footer>

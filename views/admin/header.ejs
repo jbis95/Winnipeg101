@@ -1,0 +1,43 @@
+<div class="wrap">
+  <nav>
+    <ul>
+      <li><a href="/admin/log"><%= __('admin_log') %></a></li>
+      <li><a href="/admin/user"><%= __('admin_member') %></a></li>
+      <% if (setting.requestPermission) { %>
+      <li><a href="/admin/requestPermission"><%= __('admin_requestPermission') %></a></li>
+      <% } %>
+      <li><a href="/admin/article"><%= __('admin_article') %></a></li>
+      <li><a href="/admin/comment"><%= __('admin_comment') %></a></li>
+      <li><a href="/admin/chat"><%= __('admin_chat') %></a></li>
+      <% if (setting.usePointWithdraw) { %>
+      <li><a href="/admin/pointWithdraw"><%= __('admin_pointWithdraw') %></a></li>
+      <% } %>
+      <% if (locals.plugin.filter(p => p.slug === 'cast' && p.status === 1).length) { %>
+        <li><a href="/admin/broadcast">방송</a></li>
+        <li><a href="/admin/powerball">파워볼</a></li>
+      <% } %>
+      <% if (locals.plugin.filter(p => p.slug === 'landing' && p.status === 1).length) { %>
+        <li><a href="/admin/landing">랜딩페이지</a></li>
+      <% } %>
+      <% if (locals.plugin.filter(p => p.slug === 'serverSchedule' && p.status === 1).length) { %>
+      <li><a href="/admin/serverSchedule">서버일정</a></li>
+      <% } %>
+      <% if (locals.plugin.filter(p => p.slug === 'domain' && p.status === 1).length) { %>
+        <li><a href="/admin/domain/sell">팝니다</a></li>
+        <li><a href="/admin/domain/buy">삽니다</a></li>
+      <% } %>
+    </ul>
+    <ul>
+      <li><a href="/admin/menu"><%= __('admin_menu') %></a></li>
+      <li><a href="/admin/board"><%= __('admin_board') %></a></li>
+      <li><a href="/admin/page"><%= __('admin_page') %></a></li>
+      <li><a href="/admin/banner"><%= __('admin_banner') %></a></li>
+      <li><a href="/admin/message"><%= __('admin_totalMessage') %></a></li>
+      <li><a href="/admin/indexBoard"><%= __('admin_index') %></a></li>
+      <li><a href="/admin/permission"><%= __('admin_memberPermission') %></a></li>
+      <!-- <li><a href="/admin/plugin"><%= __('admin_plugin') %></a></li> -->
+      <!-- <li><a href="/admin/update"><%= __('admin_update') %></a></li> -->
+      <li><a href="/admin/setting"><%= __('admin_settings') %></a></li>
+    </ul>
+  </nav>
+</div>

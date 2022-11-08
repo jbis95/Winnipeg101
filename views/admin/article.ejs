@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <div class="list">
+            <h2><%= __('admin_article') %></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th><%= __('admin_number') %></th>
+                  <th><%= __('admin_datetime') %></th>
+                  <th><%= __('admin_board') %></th>
+                  <th><%= __('admin_category') %></th>
+                  <th><%= __('admin_title') %></th>
+                  <th><%= __('admin_user') %></th>
+                  <th><%= __('admin_viewCount') %></th>
+                  <th><%= __('admin_edit') %></th>
+                  <th><%= __('admin_delete') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% articles.forEach(a => { %>
+                <form action="/admin/article/edit/<%= a.id %><% if (page) { %>?page=<%= page %><% } %>" method="POST">
+                  <tr>
+                    <td><%= a.id %></td>
+                    <td><input type="datetime" name="datetime" value="<%= a.datetime %>"></td>
+                    <td class="wordBreakKeep">
+                      <select name="board">
+                        <% boards.forEach(b => { %>
+                        <option value="<%= b.id %>"<% if (b.id === a.article_board_ID) { %> selected<% } %>><%= b.title %></option>
+                        <% }) %>
+                      </select>
+                    </td>
+                    <td class="wordBreakKeep"><%= a.category %></td>
+                    <td><a href="/<%= a.slug %>/<%= a.id %>"><%= a.title %></a></td>
+                    <td class="wordBreakKeep">
+                      <div><input type="text" name="uId" value="<%= a.uId %>"></div>
+                      <div class="nickName"><%= a.nickName %></div>
+                    </td>
+                    <td><input type="text" name="viewCount" value="<%= a.viewCount %>" placeholder="<%= __('admin_viewCount') %>"></td>
+                    <td><button name="submit" value="edit"><%= __('admin_edit') %></button></td>
+                    <td><button name="submit" value="delete"><%= __('admin_delete') %></button></td>
+                  </tr>
+                </form>
+                <% }) %>
+              </tbody>
+            </table>
+            <%- include('../adminPagination.ejs') %>
+          </div>
+          <div class="searchAndNew">
+            <div class="left">
+              <!-- <a href="/admin/article/search">검색</a> -->
+            </div>
+            <!-- <div class="right">
+              <a href="/admin/article/new">글쓰기</a>
+            </div> -->
+          </div>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

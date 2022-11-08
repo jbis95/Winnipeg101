@@ -1,0 +1,9 @@
+<% if (typeof (flash) !== 'undefined' && typeof (flash) !== 'null' ) { %>
+<div class="flash">
+  <% if (flash.status === 200) { %>
+  <div class="flash__true"><%= flash.message %></div>
+  <% } else if (flash.status !== null) { %>
+  <div class="flash__false"><%= flash.message %></div>
+  <% } %>
+</div>
+<% } %>

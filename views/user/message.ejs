@@ -1,0 +1,24 @@
+<article>
+  <h1>메시지</h1>
+  <div class="messages">
+    <% messages.forEach(m => { %>
+      <% if (m.status === 1) { %>
+      <div class="message">
+        <div>
+          <div class="info"><%= m.sender %> / <%= m.datetime %></div>
+          <div><%- m.content %></div>
+        </div>
+        <div class="status">새 메시지</div>
+      </div>
+      <% } else if (m.status === 2) { %>
+      <div class="message read">
+        <div>
+          <div class="info"><%= m.sender %> / <%= m.datetime %></div>
+          <div><%- m.content %></div>
+        </div>
+        <div class="status">읽음</div>
+      </div>
+      <% } %>
+    <% }) %>
+  </div>
+</article>

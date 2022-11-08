@@ -1,0 +1,80 @@
+/* Article */
+.list {
+  margin-bottom: 30px;
+}
+
+.list .gridContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.list .gridItem {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-top: 0;
+  box-sizing: border-box;
+}
+
+.list .titleSpaceBetween {
+  display: flex;
+  justify-content: space-between;
+  /* margin-bottom: 10px; */
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.list .titleSpaceBetween h2 {
+  margin: 0;
+}
+
+.list .contentSpaceBetween {
+  display: flex;
+  justify-content: space-between;
+  /* margin-bottom: 10px; */
+  padding: 10px 20px;
+}
+
+.list .contentSpaceBetween a:hover,
+.list .contentSpaceBetween a:active {
+  text-decoration: underline;
+}
+
+.list .contentSpaceBetween .title {
+  width: 100px;
+  flex: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.list .contentSpaceBetween .datetime {
+  width: 50px;
+  display: flex;
+  justify-content: flex-end;
+  color: #bbb;
+  font-size: 0.9em;
+  margin-left: 20px;
+}
+
+.list .commentCount {
+  color: #bbb;
+  margin-left: 10px;
+}
+
+@media (max-width: 1130px) {
+  .list .gridContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  article {
+    order: 2;
+  }
+  
+  aside {
+    order: 1;
+  }
+}

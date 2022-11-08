@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <div class="list">
+            <h2><%= __('admin_page') %></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th><%= __('admin_number') %></th>
+                  <th><%= __('admin_title') %></th>
+                  <th><%= __('admin_slug') %></th>
+                  <th><%= __('admin_hide') %></th>
+                  <th><%= __('admin_edit') %></th>
+                  <th><%= __('admin_delete') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% pages.forEach(p => { %>
+                <form action="/admin/page/edit/<%= p.id %><% if (page) { %>?page=<%= page %><% } %>" method="POST">
+                  <tr>
+                    <td><%= p.id %></td>
+                    <td><%= p.title %></td>
+                    <td><%= p.slug %></td>
+                    <% if (p.status === 1) { %>
+                    <td><button name="submit" value="hide"><%= __('admin_hide') %></button></td>
+                    <% } else { %>
+                    <td><button name="submit" value="hide"><%= __('admin_unhide') %></button></td>
+                    <% } %>
+                    <td><button name="submit" value="edit"><%= __('admin_edit') %></button></td>
+                    <td><button name="submit" value="delete"><%= __('admin_delete') %></button></td>
+                  </tr>
+                </form>
+                <% }) %>
+              </tbody>
+            </table>
+            <%- include('../adminPagination.ejs') %>
+            <div class="button"><a href="/admin/page/new"><%= __('admin_makePage') %></a></div>
+          </div>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

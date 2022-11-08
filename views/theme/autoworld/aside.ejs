@@ -1,0 +1,170 @@
+<style>
+  @media (max-width: 1130px) {
+    aside .banner__box__sideTop {
+      grid-template-columns: repeat(<%= locals.setting.bannerRowsSideTop %>, 1fr);
+    }
+
+    aside .banner__box__sideBottom {
+      grid-template-columns: repeat(<%= locals.setting.bannerRowsSideBottom %>, 1fr);
+    }
+  }
+</style>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/chat.js" defer></script>
+<aside>
+  <div class="userBox">
+    <!-- <h2>로그인</h2> -->
+    <% if (locals.user) { %>
+    <div class="user">
+      <div class="info">
+        <div class="nickName">
+          <% if (locals.setting.usePermissionImage && locals.user.permission !== 0) { %>
+          <div><img src="<%= locals.user.permissionImage %>"></div>
+          <% } %>
+          <div><%= locals.user.nickName %></div>
+        </div>
+        <div class="permission"><%= __('user_memberGrade') %> : <span class="point"><%= locals.user.permission %></span> / 포인트 : <span class="point"><%= Number(locals.user.point).toLocaleString() %></span></div>
+      </div>
+      <div class="userMenu">
+        <div class="mypage"><a href="/mypage"><%= __('user_mypage') %></a></div>
+        <div class="logout"><a href="/logout"><%= __('user_logout') %></a></div>
+      </div>
+      <% const globalMessages = locals.messages.filter(m => m.status === 1) %>
+      <% if (globalMessages.length) { %>
+      <div class="message getMessage">
+        <a href="/message">
+          <span><img src="/assets/envelope-regular.svg"></span>
+          <span>새 메시지 도착</span>
+          <span class="messageCount"><%= messages.length %></span>
+        </a>
+      </div>
+      <% } else { %>
+      <div class="message">
+        <a href="/message">
+          <span><img src="/assets/envelope-open-regular.svg"></span><span>새 메시지 없음</span>
+        </a>
+      </div>
+      <% } %>
+      <% if (locals.user && locals.user.permission === 10) { %>
+      <div class="admin"><a href="/admin"><%= __('user_admin') %></a></div>
+      <% } %>
+    </div>
+    <% } else { %>
+    <div class="inputsAndButtons">
+      <form action="/login" method="POST">
+        <div class="inputs">
+          <input type="text" name="id" placeholder="<%= __('user_idOrEmail') %>">
+          <input type="password" name="password" placeholder="<%= __('user_password') %>">
+        </div>
+        <div class="buttons">
+          <button name="login" class="login"><%= __('user_login') %></button>
+        </div>
+      </form>
+    </div>
+    <div class="joinAndFindPassword">
+      <div class="join"><a href="/join"><%= __('user_join') %></a></div>
+      <div class="findPassword"><a href="/findId"><%= __('user_findIdMenu') %></a> / <a href="/findPassword"><%= __('user_findPasswordMenu') %></a></div>
+    </div>
+    <% } %>
+  </div>
+  <% if (locals.setting.testMode) { %>
+  <div class="testMode">
+    관리자 모드 체험하기<br>아이디는 test, 비밀번호 test 입니다.
+  </div>
+  <% } %>
+  <div class="sideMenu">
+  </div>
+  <% if (locals.setting.useChat) { %>
+  <div class="chatContainer">
+    <div class="chatBanner"><div><%= __('chat_realtimeChat') %></div><div id="userCount" class="userCount"></div></div>
+    <div class="chatBox" id="chatBox">
+      <iframe src="/theme/autoworld/chatWindow.html" id="chatWindow" class="chatWindow"></iframe>
+    </div>
+    <% if (locals.user) { %>
+    <div class="messageBox">
+      <input type="text" name="msg" id="msg" class="msg" onkeydown="moveFocus('send')" placeholder="<%= __('chat_typeChat') %>">
+      <button name="submit" id="send" class="send" onkeydown="moveFocus('msg')"><%= __('chat_send') %></button>
+    </div>
+    <% } else { %>
+    <div class="messageBox">
+      <input type="text" name="msg" id="msg" class="msg" onkeydown="moveFocus('send')" placeholder="<%= __('chat_needLogin') %>" disabled>
+      <button name="submit" id="send" class="send" onkeydown="moveFocus('msg')" disabled><%= __('chat_send') %></button>
+    </div>
+    <% } %>
+    <div class="chatExpand" id="chatExpand"><%= __('chat_chatOpen') %></div>
+  </div>
+  <% } %>
+  <% if (locals.setting.adsenseSide) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseSide %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'sideTop').length) { %>
+  <div class="banner__box__sideTop">
+    <% locals.banners.forEach(b => { %>
+    <% if (b.position === 'sideTop' && b.status === 1) { %>
+    <div class="banner"><a href="<%= b.link %>"<% if (b.newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% } %>
+    <% }) %>
+  </div>
+  <% } %>
+  <% if (locals.sideBoards && locals.sideBoards.length) { %>
+  <div class="list">
+    <div class="gridContainer">
+      <% locals.sideBoards.forEach(b => { %>
+        <% if (b.id === 0) { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><%= b.title %></a></h2>
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title">
+                  <% if (a.boardTitle) { %><span class="boardTitle"><%= a.boardTitle %></span><% } %>
+                  <a href="/<%= a.boardSlug %>/<%= a.id %>"><%= a.title %></a>
+                  <% if (a.image) { %><span class="image"><img src="/assets/empty.png"></span><% } %>
+                  <% if (a.commentCount) { %><span class="commentCount"><img src="/assets/empty.png"><%= a.commentCount %></span><% } %>
+                </div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><a href="/<%= b.slug %>"><%= b.title %></a></h2>
+              <div class="more"><a href="/<%= b.slug %>"><%= __('board_more') %></a></div>
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title">
+                  <% if (a.category) { %><span class="category"><%= a.category %></span><% } %>
+                  <a href="/<%= b.slug %>/<%= a.id %>"><%= a.title %></a>
+                  <% if (a.image) { %><span class="image"><img src="/assets/empty.png"></span><% } %>
+                  <% if (a.commentCount) { %><span class="commentCount"><img src="/assets/empty.png"><%= a.commentCount %></span><% } %>
+                </div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+      <% }) %>
+    </div>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'sideBottom').length) { %>
+  <div class="banner__box__sideBottom">
+    <% locals.banners.forEach(b => { %>
+    <% if (b.position === 'sideBottom' && b.status === 1) { %>
+    <div class="banner"><a href="<%= b.link %>"<% if (b.newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% } %>
+    <% }) %>
+  </div>
+  <% } %>
+</aside>
+<style>
+  .point {
+    color: <%= locals.setting.pointColor %>;
+    font-weight: bold;
+  }
+</style>

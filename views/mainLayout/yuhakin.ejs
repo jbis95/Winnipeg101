@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <style>
+      :root {
+        --gap: <%= locals.setting.bannerGapDesktop %>px;
+        --mobile-gap: <%= locals.setting.bannerGapMobile %>px;
+      }
+
+      body {
+        color: <%= locals.setting.bodyFontColor %>;
+        background-color: #ebedf3;
+      }
+    </style>
+    <!-- Meta Start -->
+    <% if (type === 'list' || type === 'gallery' || type === 'bookmark'|| type === 'feed') { %>
+      <meta name="description" content="<%= locals.setting.siteDescription %>">
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="<%= locals.setting.siteName %>">
+      <meta property="og:description" content="<%= locals.setting.siteDescription %>">
+      <meta property="og:image" content="/favicon/original.png">
+      <meta property="og:image:width" content="200">
+      <meta property="og:image:height" content="200">
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/<%= boardSlug %>">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/<%= boardSlug %>">
+      <link rel="stylesheet" href="/theme/yuhakin/stylesheets/board/common.css">
+    <% } else if (type === 'read') { %>
+      <meta name="description" content="<%= article.ogContent %>">
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="<%= article.title %>">
+      <meta property="og:description" content="<%= article.ogContent %>">
+      <meta property="og:image" content="<%= article.ogImage %>">
+      <meta property="og:image:width" content="200">
+      <meta property="og:image:height" content="200">
+      <meta property="og:url" content="<%= article.url %>">
+      <link rel="canonical" href="<%= article.url %>">
+      <link rel="stylesheet" href="/theme/yuhakin/stylesheets/board/common.css">
+    <% } else { %>
+      <meta name="description" content="<%= locals.setting.siteDescription %>">
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="<%= locals.setting.siteName %>">
+      <meta property="og:description" content="<%= locals.setting.siteDescription %>">
+      <meta property="og:image" content="/favicon/original.png">
+      <meta property="og:image:width" content="200">
+      <meta property="og:image:height" content="200">
+    <% } %>
+    <!-- Meta End -->
+    <!-- Meta Keyword Start -->
+    <% if (type === 'read') { %>
+      <% if (article.tags) { %>
+        <meta name="keywords" content="<%= article.tags %>">
+      <% } else { %>
+        <meta name="keywords" content="<%= locals.setting.metaTagKeyword %>">
+      <% } %>
+    <% } else { %>
+      <% if (locals.setting.metaTagKeyword) { %>
+        <meta name="keywords" content="<%= locals.setting.metaTagKeyword %>">
+      <% } %>
+    <% } %>
+    <!-- Meta Keyword End -->
+    <% if (type === 'index') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>">
+      <link rel="stylesheet" href="/stylesheets/indexLayout/<%= locals.setting.indexLayout %>.css">
+    <% } else if (type === 'search') { %>
+      <link rel="stylesheet" href="/theme/yuhakin/stylesheets/board/list.css">
+      <link rel="stylesheet" href="/theme/yuhakin/stylesheets/board/common.css">
+    <% } else if (type === 'list') { %>
+      <link rel="stylesheet" href="/theme/yuhakin/stylesheets/board/list.css">
+    <% } else if (type === 'gallery') { %>
+      <link rel="stylesheet" href="/theme/yuhakin/stylesheets/board/gallery.css">
+    <% } else if (type === 'feed') { %>
+        <link rel="stylesheet" href="/theme/yuhakin/stylesheets/board/feed.css">
+    <% } else if (type === 'bookmark') { %>
+      <link rel="stylesheet" href="/stylesheets/board/bookmark.css">
+    <% } else if (type === 'read') { %>
+      <script src="/theme/yuhakin/javascripts/read.js" defer></script>
+      <link rel="stylesheet" href="/theme/yuhakin/stylesheets/board/read.css">
+      <link rel="stylesheet" href="/theme/yuhakin/stylesheets/board/comments.css">
+      <link rel="stylesheet" href="/stylesheets/content.css">
+      <link rel="stylesheet" href="/stylesheets/board/list.css">
+      <style>
+        .content a {
+          color: <%= locals.setting.pointColor %>;
+        }
+      </style>
+    <% } else if (type === 'new') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/<%= board.slug %>/new">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/<%= board.slug %>/new">
+      <link rel="stylesheet" href="/stylesheets/board/editor.css">
+      <link rel="stylesheet" href="/stylesheets/content.css">
+      <%- include('../editorHeader.ejs') %>
+    <% } else if (type === 'edit') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/<%= board.slug %>/edit">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/<%= board.slug %>/edit">
+      <link rel="stylesheet" href="/stylesheets/board/editor.css">
+      <link rel="stylesheet" href="/stylesheets/content.css">
+      <%- include('../editorHeader.ejs') %>
+    <% } else if (type === 'page') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/<%= page.slug %>">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/<%= page.slug %>">
+      <link rel="stylesheet" href="/stylesheets/content.css">
+      <style>
+        .content a {
+          color: <%= locals.setting.pointColor %>;
+        }
+      </style>
+      <style>
+        <%- page.css %>
+      </style>
+      <script>
+        <%- page.js %>
+      </script>
+    <% } else if (type === 'login') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/login">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/login">
+      <link rel="stylesheet" href="/theme/yuhakin/stylesheets/login-and-join.css">
+    <% } else if (type === 'join') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/join">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/join">
+      <link rel="stylesheet" href="/theme/yuhakin/stylesheets/login-and-join.css">
+      <script src="/javascripts/login-and-join.js" defer></script>
+    <% } else if (type === 'mypage') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/mypage">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/mypage">
+      <link rel="stylesheet" href="/stylesheets/user.css">
+    <% } else if (type === 'pointWithdraw') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/mypage/pointWithdraw">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/mypage/pointWithdraw">
+      <link rel="stylesheet" href="/stylesheets/user.css">
+    <% } else if (type === 'findId' || type === 'findId-email' || type === 'findId-sms' || type === 'findId-sms-verify' || type === 'findId-sms-complete' || type === 'findPassword' || type === 'findPassword-email' || type === 'findPassword-sms' || type === 'findPassword-sms-verify' || type === 'newPassword') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/<%= url %>">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/<%= url %>">
+      <link rel="stylesheet" href="/stylesheets/certification.css">
+    <% } else if (type === 'visitPoint') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/visitPoint">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/visitPoint">
+      <link rel="stylesheet" href="/stylesheets/visitPoint.css">
+    <% } else if (type === 'permission') { %>
+    <% } %>
+  </head>
+  <body>
+    <% if (locals.setting.useWorkingUser && locals.user && locals.user.workingUser || locals.setting.useWorkingUser && locals.user && locals.user.permission === 10) { %>
+    <div class="changeUser">
+      <div><a href="/changeUser"><%= locals.user.nickName %></a></div>
+      <form action="/changeUser" method="POST">
+        <div><input type="text" name="user"></div>
+        <div><button hidden></button></div>
+        <div class="userInfo"></div>
+      </form>
+    </div>
+    <% } %>
+    <%- include('../header.ejs') %>
+    <main>
+      <div class="wrap">
+        <div class="fixedBannerContainer leftWing">
+          <div class="" id="fixedBanner">
+          <% if (locals.banners.filter(b => b.position === 'leftWing' && b.status === 1).length) { %>
+            <%- include('../banner', { position: 'leftWing' }); %>
+          <% } %>
+          </div>
+        </div>
+        <% if (type === 'index') { %>
+          <%- include('../index.ejs') %>
+        <% } else if (type === 'search') { %>
+          <%- include('../theme/yuhakin/search.ejs') %>
+        <% } else if (type === 'list') { %>
+          <%- include('../theme/yuhakin/board/list.ejs') %>
+        <% } else if (type === 'gallery') { %>
+          <%- include('../theme/yuhakin/board/gallery.ejs') %>
+        <% } else if (type === 'feed') { %>
+          <%- include('../theme/yuhakin/board/feed.ejs') %>
+        <% } else if (type === 'bookmark') { %>
+          <%- include('../board/bookmark.ejs') %>
+        <% } else if (type === 'read') { %>
+          <%- include('../theme/yuhakin/board/read.ejs') %>
+        <% } else if (type === 'new') { %>
+          <%- include('../board/new.ejs') %>
+        <% } else if (type === 'edit') { %>
+          <%- include('../board/edit.ejs') %>
+        <% } else if (type === 'page') { %>
+          <%- include('../page.ejs') %>
+        <% } else if (type === 'login') { %>
+          <%- include('../theme/yuhakin/login.ejs') %>
+        <% } else if (type === 'join') { %>
+          <%- include('../theme/yuhakin/join.ejs') %>
+        <% } else if (type === 'mypage') { %>
+          <%- include('../user/mypage.ejs') %>
+        <% } else if (type === 'pointWithdraw') { %>
+          <%- include('../user/pointWithdraw.ejs') %>
+        <% } else if (type === 'findId') { %>
+          <%- include('../findId.ejs') %>
+        <% } else if (type === 'findId-email') { %>
+          <%- include('../findId-email.ejs') %>
+        <% } else if (type === 'findId-sms') { %>
+          <%- include('../findId-sms.ejs') %>
+        <% } else if (type === 'findId-sms-verify') { %>
+          <%- include('../findId-sms-verify.ejs') %>
+        <% } else if (type === 'findId-sms-complete') { %>
+          <%- include('../findId-sms-complete.ejs') %>
+        <% } else if (type === 'findPassword') { %>
+          <%- include('../findPassword.ejs') %>
+        <% } else if (type === 'findPassword-email') { %>
+          <%- include('../findPassword-email.ejs') %>
+        <% } else if (type === 'findPassword-sms') { %>
+          <%- include('../findPassword-sms.ejs') %>
+        <% } else if (type === 'findPassword-sms-verify') { %>
+          <%- include('../findPassword-sms-verify.ejs') %>
+        <% } else if (type === 'newPassword') { %>
+          <%- include('../newPassword.ejs') %>
+        <% } else if (type === 'visitPoint') { %>
+          <%- include('../visitPoint.ejs') %>
+        <% } else if (type === 'permission') { %>
+          <%- include('../permission.ejs') %>
+        <% } else if (type === '404') { %>
+          <%- include('../404.ejs') %> 
+        <% } %>
+        <div class="fixedBannerContainer rightWing">
+          <div class="" id="fixedBanner">
+          <% if (locals.banners.filter(b => b.position === 'rightWing' && b.status === 1).length) { %>
+            <%- include('../banner', { position: 'rightWing' }); %>
+          <% } %>
+          </div>
+        </div>
+        <style>
+          .banner__box__leftWing {
+            margin-right: 20px;
+          }
+          .banner__box__rightWing {
+            margin-left: 20px;
+          }
+          .banner__box__leftWing .banner img,
+          .banner__box__rightWing .banner img {
+            width: 180px;
+          }
+          .fixedBannerContainer {
+            position: relative;
+            width: 200px;
+          }
+          /* .leftWing {
+            margin-right: 20px;
+          } */
+          .rightWing {
+            /* margin-left: 20px; */
+          }
+          .sticky {
+            position: fixed;
+            top: 30px;
+          }
+        </style>
+      </div>
+    </main>
+    <%- include('../footer.ejs') %>
+    <script>
+      // Banner Fixed
+      const sticky = 92;
+      const leftWing = document.querySelector(".leftWing #fixedBanner");
+      const rightWing = document.querySelector(".rightWing #fixedBanner");
+      window.onscroll = function () { myFunction() };
+      function myFunction () {
+        if (window.pageYOffset > sticky && window.innerWidth > 1280) {
+          leftWing.classList.add('sticky');
+          rightWing.classList.add('sticky');
+        } else {
+          leftWing.classList.remove('sticky');
+          rightWing.classList.remove('sticky');
+        }
+      }
+    </script>
+  </body>
+</html>

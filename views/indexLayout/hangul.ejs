@@ -1,0 +1,109 @@
+<style>
+  article .banner__box__articleTop {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleTop %>, 1fr);
+  }
+
+  article .banner__box__articleBottom {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleBottom %>, 1fr);
+  }
+</style>
+<article>
+  <% if (locals.setting.adsenseTop) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseTop %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'articleTop').length) { %>
+  <div class="banner__box__articleTop">
+    <% locals.banners.forEach(b => { %>
+    <% if (b.position === 'articleTop' && b.status === 1) { %>
+      <div class="banner"><a href="<%= b.link %>"<% if (b.newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% } %>
+    <% }) %>
+  </div>
+  <% } %>
+  <%- include(`../theme/hangul/domain.ejs`) %>
+  <div class="list">
+    <div class="gridContainer">
+      <% if (boards) { %>
+      <% boards.forEach(b => { %>
+        <% if (b.id === 0) { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><%= b.title %></a></h2>
+              <!-- <div class="more"><a href="/<%= b.slug %>"><%= __('board_more') %></a></div> -->
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title"><a href="/<%= a.boardSlug %>/<%= a.id %>"><%= a.title %></a><% if (a.commentCount) { %><span class="commentCount"> <%= a.commentCount %></span><% } %></div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><a href="/<%= b.slug %>"><%= b.title %></a></h2>
+              <div class="more"><a href="/<%= b.slug %>"><%= __('board_more') %></a></div>
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title"><a href="/<%= b.slug %>/<%= a.id %>"><%= a.title %></a><% if (a.commentCount) { %><span class="commentCount"> <%= a.commentCount %></span><% } %></div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+      <% }) %>
+      <% } %>
+    </div>
+  </div>
+  <% if (locals.setting.adsenseBottom) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseBottom %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'articleBottom').length) { %>
+  <div class="banner__box__articleBottom">
+    <% locals.banners.forEach(b => { %>
+    <% if (b.position === 'articleBottom' && b.status === 1) { %>
+      <div class="banner"><a href="<%= b.link %>"<% if (b.newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% } %>
+    <% }) %>
+  </div>
+  <% } %>
+  <div class="guide">
+    <div class="koreanDomain"><a href="https://terms.naver.com/entry.naver?docId=1224028&cid=40942&categoryId=32854" target="_blank">한글도메인이란?</a></div>
+    <div class="domainSubmit">
+      <h2>도메인 광고등록 비용</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td rowspan="2" class="title">유료등록</td>
+            <td>1만원 - 6개월까지 이용</td>
+            <td>도메인 5개 내</td>
+          </tr>
+          <tr>
+            <td>1.5천원 - 12개월</td>
+            <td>도메인 5개 내</td>
+          </tr>
+          <tr>
+            <td class="title">무료등록</td>
+            <td colspan="2">매매 금액의 20% 판매자 수수료 부과</td>
+          </tr>
+          <tr>
+            <td colspan="3" class="comment">* 유료등록은 기간 경과 후 재연장 없는 경우 무료등록으로 변경됨</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="purchase">
+      <h2>구매절차 안내</h2>
+      <div>도메인 구매신청, 입금-도메인 소유권 이전 확인 -한글.kr 에서 판매자에게 송금-구매완료</div>
+      <div>
+        <div>무료등록: 거래금액의 20%를 판매자 수수료 부담</div>
+        <div class="comment">* 도메인 소유자변경은 등록기관에 따라서  수일이 걸릴 수 있습니다</div>
+      </div>
+    </div>
+  </div>
+</article>

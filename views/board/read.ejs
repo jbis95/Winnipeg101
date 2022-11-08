@@ -1,0 +1,94 @@
+<style>
+  article .banner__box__articleTop {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleTop %>, 1fr);
+  }
+
+  article .banner__box__articleBottom {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleBottom %>, 1fr);
+  }
+</style>
+<article id="article" articleId="<%= article.id %>">
+  <% if (locals.setting.adsenseTop) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseTop %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'articleTop' && b.status === 1).length) { %>
+    <%- include('../banner', { position: 'articleTop' }); %>
+  <% } %>
+  <div class="sub">
+    <% if (page) { %>
+    <div class="back"><a href="/<%= boardSlug %>?page=<%= page %>">< 목록으로</a></div>
+    <% } else { %>
+      <div class="back"><a href="/<%= boardSlug %>">< 목록으로</a></div>
+    <% } %>
+  </div>
+  <div class="item">
+    <div class="info">
+      <div class="titleContainer">
+        <% if (article.category) { %><span class="category" style="color: <%= article.categoryColor %>;"><%= article.category %></span><% } %>
+        <span><h1><%= article.title %></h1></span>
+      </div>
+      <div class="etc">
+        <div class="left">
+          <span class="nickName"><%= article.nickName %></span>
+          <span class="dot"></span>
+          <span class="permissionName"><%= article.permissionName %></span>
+          <span class="dot"></span>
+          <span class="datetime"><%= article.datetime %></span>
+          <% if (locals.setting.useArticleViewCount) { %>
+          <span class="dot"></span>
+          <span class="viewCount"><img src="/assets/empty.png"><%= article.viewCount %></span>
+          <% } %>
+          <% if (article.likeCount) { %>
+          <span class="dot"></span>
+          <span class="likeCount"><img src="/assets/empty.png"><%= article.likeCount %></span>
+          <% } %>
+        </div>
+        <div class="right">
+          <% if (locals.user && locals.user.id === article.article_user_ID || locals.user && locals.user.permission === 10) { %>
+          <div class="buttons"><img src="/assets/empty.png"></div>
+          <ul class="popUp">
+            <form action="/<%= boardSlug %>/<%= article.id %>/edit" method="POST">
+              <li class="edit"><button name="submit" value="edit"><img src="/assets/empty.png">수정</button></li>
+              <li class="delete"><button name="submit" value="delete"><img src="/assets/empty.png">삭제</button></li>
+            </form>
+          </ul>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <div class="content"><%- article.content %></div>
+    <% if (article.tags) { %>
+    <div class="tags"><%= __('board_tags') %> : <%= article.tags %></div>
+    <% } %>
+    <div class="listAndEdit">
+      <div class="list">
+        <% if (page) { %>
+        <a href="/<%= boardSlug %>?page=<%= page %>"><button><%= __('board_list') %></button></a>
+        <% } else { %>
+        <a href="/<%= boardSlug %>"><button><%= __('board_list') %></button></a>
+        <% } %>
+      </div>
+      <% if (article.userLike) { %>
+      <div class="likeContainer"><button id="like" class="like like-full"><%= __('board_unlikeBtn') %></button></div>
+      <% } else { %>
+        <div class="likeContainer"><button id="like" class="like"><%= __('board_likeBtn') %></button></div>
+      <% } %>
+      <!-- <div class="articleButton">
+        <% if (locals.user && locals.user.id === article.article_user_ID || locals.user && locals.user.permission === 10) { %>
+          <div class="etc"><button>...</button></div>
+        <% } %>
+      </div> -->
+    </div>
+    <%- include('./comments.ejs') %>
+  </div>
+  <% if (locals.setting.adsenseBottom) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseBottom %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'articleBottom' && b.status === 1).length) { %>
+    <%- include('../banner', { position: 'articleBottom' }); %>
+  <% } %>
+</article>

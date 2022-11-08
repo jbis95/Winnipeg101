@@ -1,0 +1,7 @@
+<article>
+  <h1><%= __('user_findId') %></h1>
+  <% if (locals.setting.useSMS) { %>
+  <div class="button"><a href="/findId/sms"><%= __('user_findIdBySMS') %></a></div>
+  <% } %>
+  <div class="button"><a href="/findId/email"><%= __('user_findIdByEmail') %></a></div>
+</article>

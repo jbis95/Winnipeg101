@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="/theme/hangul/stylesheets/modal.css">
+<link rel="stylesheet" href="/theme/hangul/stylesheets/domain.css">
+<script src="/theme/hangul/javascripts/domain.js" defer></script>
+<div class="modalContainer">
+  <div class="modal">
+    <div class="close"><img src="/theme/hangul/assets/close.svg" alt="닫기"></div>
+    <div class="domainName">한글.kr</div>
+    <div class="domainPrice">판매가격 1,000,000원</div>
+    <div class="buyerInfo">
+      <input type="text" name="buyerName" class="buyerName" placeholder="신청자명">
+      <input type="text" name="buyerPhone" class="buyerPhone" placeholder="휴대폰번호">
+      <input type="text" name="buyerEmail" class="buyerEmail" placeholder="이메일">
+      <textarea name="content" class="content" placeholder="문의내용"></textarea>
+      <button>신청하기</button>
+      <div class="bankAccount"><span class="kakaoBank">카카오뱅크</span> 3333014553521 석희경</div>
+    </div>
+  </div>
+  <div class="modalBackground"></div>
+</div>
+<h2>프리미엄 도메인</h2>
+<div class="domainSellListContainer" id="premium">
+  <div class="domainSellList">
+    <% premiumDomain.forEach(d => { %>
+    <div class="domainInfo" id="<%= d.id %>" status="<%= d.status %>">
+      <div class="domainName"><%= d.domainName %></div>
+      <div class="domainPrice"><%= Number(d.domainPrice).toLocaleString() %>원</div>
+      <% if (d.status === 2) { %>
+        <div class="status blue"><입금대기중></div>
+      <% } else if (d.status === 0) { %>
+        <div class="status green"><판매완료></div>
+      <% } %>
+    </div>
+    <% }) %>
+  </div>
+  <div class="more" id="premium">더보기</div>
+</div>
+<h2>(유료등록) 도메인</h2>
+<div class="domainSellListContainer" id="paid">
+  <div class="domainSellList">
+    <% paidDomain.forEach(d => { %>
+    <div class="domainInfo" id="<%= d.id %>" status="<%= d.status %>">
+      <div class="domainName"><%= d.domainName %></div>
+      <div class="domainPrice"><%= Number(d.domainPrice).toLocaleString() %>원</div>
+      <% if (d.status === 2) { %>
+        <div class="status blue"><입금대기중></div>
+      <% } else if (d.status === 0) { %>
+        <div class="status green"><판매완료></div>
+      <% } %>
+    </div>
+    <% }) %>
+  </div>
+  <div class="more" id="paid">더보기</div>  
+</div>
+<h2>(무료등록) 도메인</h2>
+<div class="domainSellListContainer" id="free">
+  <div class="domainSellList">
+    <% freeDomain.forEach(d => { %>
+    <div class="domainInfo" id="<%= d.id %>" status="<%= d.status %>">
+      <div class="domainName"><%= d.domainName %></div>
+      <div class="domainPrice"><%= Number(d.domainPrice).toLocaleString() %>원</div>
+      <% if (d.status === 2) { %>
+        <div class="status blue"><입금대기중></div>
+      <% } else if (d.status === 0) { %>
+        <div class="status green"><판매완료></div>
+      <% } %>
+    </div>
+    <% }) %>
+  </div>
+  <div class="more" id="free">더보기</div>
+</div>

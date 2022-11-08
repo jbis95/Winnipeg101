@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <div class="wrap">
+        <%- include('./header.ejs') %>
+        <div class="list">
+          <h2><%= __('admin_memberList') %></h2>
+          <table>
+            <thead>
+              <tr>
+                <th><%= __('admin_id') %></th>
+                <th><%= __('admin_nickName') %></th>
+                <th><%= __('admin_requestPermission') %></th>
+                <th><%= __('admin_image') %></th>
+                <th><%= __('admin_approve') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% requestPermissions.forEach(r => { %>
+                <form action="/admin/requestPermission" method="POST">
+                  <input type="hidden" name="id" value="<%= r.id %>">
+                  <input type="hidden" name="userId" value="<%= r.requestPermission_user_ID %>">
+                  <input type="hidden" name="permission" value="<%= r.permission %>">
+                  <tr>
+                    <td><%= r.uId %></td>
+                    <td><%= r.nickName %></td>
+                    <td><%= r.permission %></td>
+                    <td><a href="<%= locals.s3Host %>/requestPermission/<%= r.image %>" target="_blank"><img src="<%= locals.s3Host %>/requestPermission/<%= r.image %>" alt="<%= r.image %>"></a></td>
+                    <td><button>승인</button></td>
+                  </tr>
+                </form>
+              <% }) %>
+            </tbody>
+          </table>
+          <%- include('../adminPagination.ejs') %>
+        </div>
+      </div>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/stylesheets/board/editor.css">
+    <script src="/javascripts/editor.js" defer></script>
+    <%- include('../editorHeader.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <h2><%= __('admin_editPage') %></h2>
+          <form name="frm" action="/admin/page/new" method="POST" style="margin-left: 0; margin-right: 0;">
+            <div>
+              <select name="type" id="type">
+                <option value="editor">Editor</option>
+                <option value="html">HTML</option>
+              </select>
+            </div>
+            <h2><%= __('admin_title') %></h2>
+            <div><input type="text" name="title" id="title" placeholder="<%= __('admin_title') %>"></div>
+            <h2><%= __('admin_slug') %></h2>
+            <div><input type="text" name="slug" id="slug" placeholder="<%= __('admin_slug') %>"></div>
+            <div class="content">
+              <div class="textareaContainer">
+                <textarea name="content" id="editor"></textarea>
+              </div>
+            </div>
+            <!-- <h2>HTML</h2>
+            <div><textarea name="html" id="html"></textarea></div>
+            <h2>CSS</h2>
+            <div><textarea name="css" id="css"></textarea></div>
+            <h2>Javascript</h2>
+            <div><textarea name="javascript" id="javascript"></textarea></div> -->
+            <div><button name="submit" id="submit" value="new"><%= __('admin_submit') %></button></div>
+          </form>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

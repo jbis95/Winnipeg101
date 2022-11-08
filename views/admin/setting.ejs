@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <div class="list">
+            <h2><%= __('admin_siteBasicSetting') %></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th><%= __('admin_siteName') %></th>
+                  <th><%= __('admin_siteDescription') %></th>
+                  <th><%= __('admin_siteDomain') %></th>
+                  <th><%= __('admin_setting') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/setting/basic" method="POST">
+                  <tr>
+                    <td><input type="text" name="site" value="<%= setting.siteName %>" placeholder="<%= __('admin_siteName') %>"></td>
+                    <td><input type="text" name="description" value="<%= setting.siteDescription %>" placeholder="<%= __('admin_siteDescription') %>"></td>
+                    <td><input type="text" name="domain" value="<%= setting.siteDomain %>" placeholder="<%= __('admin_siteDomain') %>"></td>
+                    <td><button><%= __('admin_submit') %></button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+            <h2><%= __('admin_emailSetting') %></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th><%= __('admin_service') %></th>
+                  <th><%= __('admin_email') %></th>
+                  <th><%= __('admin_password') %></th>
+                  <th><%= __('admin_setting') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/setting/email" method="POST">
+                  <tr>
+                    <td>
+                      <select name="emailService">
+                        <option value="gmail">gmail</option>
+                      </select>
+                    </td>
+                    <td><input type="text" name="emailUser" value="<%= setting.emailUser %>" placeholder="<%= __('admin_email') %>"></td>
+                    <td><input type="password" name="emailPassword" value="<%= setting.emailPassword %>" placeholder="<%= __('admin_password') %>"></td>
+                    <td><button><%= __('admin_submit') %></button></td>
+                  </tr>
+                  <tr>
+                    <td colspan="4"><%= __('admin_googleAccountSetting') %></td>
+                  </tr>
+                  <tr>
+                    <td colspan="4"><a href="https://accounts.google.com/DisplayUnlockCaptcha" target="_blank">이메일 발송이 되지 않을경우 클릭</a></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+            <h2><%= __('admin_designSetting') %></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th><%= __('admin_logoType') %></th>
+                  <th><%= __('admin_logoImage') %></th>
+                  <th><%= __('admin_logoImageSize') %></th>
+                  <th><%= __('admin_setting') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/setting/design" method="POST" enctype="multipart/form-data">
+                  <tr>
+                    <td>
+                      <select name="logoType">
+                        <option value="text" <% if (setting.logoType === 'text') { %> selected<% } %>><%= __('admin_useTextLogo') %></option>
+                        <option value="image" <% if (setting.logoType === 'image') { %> selected<% } %>><%= __('admin_useImageLogo') %></option>
+                      </select>
+                    </td>
+                    <td class="logoImage">
+                      <div><img src="/logo/<%= setting.logoImage %>" alt="logo"></div>
+                      <div><input type="file" name="logo"></div>
+                    </td>
+                    <td>
+                      <div><input type="text" name="logoImageSize" value="<%= setting.logoImageSize %>"></div>
+                    </td>
+                    <td><button><%= __('admin_submit') %></button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+            <h2><%= __('admin_etcDesignSetting') %></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th><%= __('admin_headerTextColor') %></th>
+                  <th><%= __('admin_headerBackgroundColor') %></th>
+                  <th><%= __('admin_mainTextColor') %></th>
+                  <th><%= __('admin_mainBackgroundColor') %></th>
+                  <th><%= __('admin_pointColor') %></th>
+                  <th><%= __('admin_pointBackgroundColor') %></th>
+                  <th>파비콘</th>
+                  <th><%= __('admin_setting') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/setting/etcdesign" method="POST" enctype="multipart/form-data">
+                  <tr>
+                    <td><input type="text" name="headerFontColor" value="<%= setting.headerFontColor %>" placeholder="<%= __('admin_headerTextColor') %>"></td>
+                    <td><input type="text" name="headerBackgroundColor" value="<%= setting.headerBackgroundColor %>" placeholder="<%= __('admin_headerBackgroundColor') %>"></td>
+                    <td><input type="text" name="bodyFontColor" value="<%= setting.bodyFontColor %>" placeholder="<%= __('admin_mainTextColor') %>"></td>
+                    <td><input type="text" name="bodyBackgroundColor" value="<%= setting.bodyBackgroundColor %>" placeholder="<%= __('admin_mainBackgroundColor') %>"></td>
+                    <td><input type="text" name="pointColor" value="<%= setting.pointColor %>" placeholder="<%= __('admin_pointColor') %>"></td>
+                    <td><input type="text" name="pointBackgroundColor" value="<%= setting.pointBackgroundColor %>" placeholder="<%= __('admin_pointBackgroundColor') %>"></td>
+                    <td class="favicon">
+                      <div><img src="/favicon/original.png" alt="favicon"></div>
+                      <div><input type="file" name="favicon"></div>
+                    </td>
+                    <td><button><%= __('admin_submit') %></button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+            <h2>배너설정</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="8">단수</th>
+                  <th rowspan="2">배너 라운딩</th>
+                  <th rowspan="2">데스크탑 간격</th>
+                  <th rowspan="2">모바일 간격</th>
+                  <th rowspan="2">설정</th>
+                </tr>
+                <tr>
+                  <th>헤더</th>
+                  <th>첫페이지 상단</th>
+                  <th>첫페이지 하단</th>
+                  <th>사이드 상단</th>
+                  <th>사이드 하단</th>
+                  <th>본문 상단</th>
+                  <th>본문 하단</th>
+                  <th>커스텀</th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/setting/banner" method="POST">
+                <tr>
+                  <td>
+                    <select name="bannerRowsHeader">
+                      <option value="1"<% if (setting.bannerRowsHeader === 1) { %> selected<% } %>>1단</option>
+                      <option value="2"<% if (setting.bannerRowsHeader === 2) { %> selected<% } %>>2단</option>
+                      <option value="3"<% if (setting.bannerRowsHeader === 3) { %> selected<% } %>>3단</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="bannerRowsIndexTop">
+                      <option value="1"<% if (setting.bannerRowsIndexTop === 1) { %> selected<% } %>>1단</option>
+                      <option value="2"<% if (setting.bannerRowsIndexTop === 2) { %> selected<% } %>>2단</option>
+                      <option value="3"<% if (setting.bannerRowsIndexTop === 3) { %> selected<% } %>>3단</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="bannerRowsIndexBottom">
+                      <option value="1"<% if (setting.bannerRowsIndexBottom === 1) { %> selected<% } %>>1단</option>
+                      <option value="2"<% if (setting.bannerRowsIndexBottom === 2) { %> selected<% } %>>2단</option>
+                      <option value="3"<% if (setting.bannerRowsIndexBottom === 3) { %> selected<% } %>>3단</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="bannerRowsSideTop">
+                      <option value="1"<% if (setting.bannerRowsSideTop === 1) { %> selected<% } %>>1단</option>
+                      <option value="2"<% if (setting.bannerRowsSideTop === 2) { %> selected<% } %>>2단</option>
+                      <option value="3"<% if (setting.bannerRowsSideTop === 3) { %> selected<% } %>>3단</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="bannerRowsSideBottom">
+                      <option value="1"<% if (setting.bannerRowsSideBottom === 1) { %> selected<% } %>>1단</option>
+                      <option value="2"<% if (setting.bannerRowsSideBottom === 2) { %> selected<% } %>>2단</option>
+                      <option value="3"<% if (setting.bannerRowsSideBottom === 3) { %> selected<% } %>>3단</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="bannerRowsArticleTop">
+                      <option value="1"<% if (setting.bannerRowsArticleTop === 1) { %> selected<% } %>>1단</option>
+                      <option value="2"<% if (setting.bannerRowsArticleTop === 2) { %> selected<% } %>>2단</option>
+                      <option value="3"<% if (setting.bannerRowsArticleTop === 3) { %> selected<% } %>>3단</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="bannerRowsArticleBottom">
+                      <option value="1"<% if (setting.bannerRowsArticleBottom === 1) { %> selected<% } %>>1단</option>
+                      <option value="2"<% if (setting.bannerRowsArticleBottom === 2) { %> selected<% } %>>2단</option>
+                      <option value="3"<% if (setting.bannerRowsArticleBottom === 3) { %> selected<% } %>>3단</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="bannerRowsCustom">
+                      <option value="1"<% if (setting.bannerRowsCustom === 1) { %> selected<% } %>>1단</option>
+                      <option value="2"<% if (setting.bannerRowsCustom === 2) { %> selected<% } %>>2단</option>
+                      <option value="3"<% if (setting.bannerRowsCustom === 3) { %> selected<% } %>>3단</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="bannerBorderRounding">
+                      <option value="1"<% if (setting.bannerBorderRounding) { %> selected<% } %>>라운딩 사용</option>
+                      <option value="0"<% if (!setting.bannerBorderRounding) { %> selected<% } %>>라운딩 사용안함</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="bannerGapDesktop" value="<%= setting.bannerGapDesktop %>"></td>
+                  <td><input type="text" name="bannerGapMobile" value="<%= setting.bannerGapMobile %>"></td>
+                  <td><button><%= __('admin_submit') %></button></td>
+                </tr>
+                </form>
+              </tbody>
+            </table>
+            <h2>SMS 설정 (NHN Cloud Platform) - <a href="https://www.ncloud.com/product/applicationService/sens" target="_blank">바로가기</a></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>발신번호</th>
+                  <th>Service ID</th>
+                  <th>Access Key ID</th>
+                  <th>Secret Key ID</th>
+                  <th>설정</th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/setting/sms" method="POST">
+                  <tr>
+                    <td><input type="text" name="smsCallerId" value="<%= setting.smsCallerId %>" placeholder="발신번호"></td>
+                    <td><input type="text" name="smsServiceId" value="<%= setting.smsServiceId %>" placeholder="Service ID"></td>
+                    <td><input type="text" name="smsAccessKeyId" value="<%= setting.smsAccessKeyId %>" placeholder="Access Key ID"></td>
+                    <td><input type="text" name="smsSecretKeyId" value="<%= setting.smsSecretKeyId %>" placeholder="Secret Key ID"></td>
+                    <td><button><%= __('admin_submit') %></button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+            <h2>SEO</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>네이버 검색등록</th>
+                  <th>키워드</th>
+                  <th>설정</th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/setting/seo" method="POST">
+                  <tr>
+                    <td><input type="text" name="naverSiteVerification" placeholder="meta 태그" value="<%= setting.naverSiteVerification %>"></td>
+                    <td><input type="text" name="metaTagKeyword" placeholder="예) 키워드1, 키워드2, 키워드3" value="<%= setting.metaTagKeyword %>"></td>
+                    <td><button><%= __('admin_submit') %></button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+            <h2>에드센스</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>사이드</th>
+                  <th>본문 상단</th>
+                  <th>본문 하단</th>
+                  <th>커스텀</th>
+                  <th>설정</th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/setting/adsense" method="POST">
+                  <tr>
+                    <td><textarea name="side"><%= setting.adsenseSide %></textarea></td>
+                    <td><textarea name="top"><%= setting.adsenseTop %></textarea></td>
+                    <td><textarea name="bottom"><%= setting.adsenseBottom %></textarea></td>
+                    <td><textarea name="custom"><%= setting.adsenseCustom %></textarea></td>
+                    <td><button>등록</button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+            <h2>기타 설정</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>게시글 조회수</th>
+                  <th>방문자 카운터</th>
+                  <th>채팅창</th>
+                  <th>SMS</th>
+                  <th>등급이미지</th>
+                  <th>포인트 출금신청</th>
+                  <th>포인트 출금신청 한도</th>
+                  <th>출석 포인트</th>
+                  <th>초대 포인트</th>
+                  <th>설정</th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/setting/etc" method="POST">
+                  <tr>
+                    <td>
+                      <select name="useArticleViewCount" id="useArticleViewCount">
+                        <option value="0"<% if (setting.useArticleViewCount === 0) { %> selected<% } %>>사용안함</option>
+                        <option value="1"<% if (setting.useArticleViewCount === 1) { %> selected<% } %>>사용함</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select name="useVisitCount" id="useVisitCount">
+                        <option value="0"<% if (setting.useVisitCount === 0) { %> selected<% } %>>사용안함</option>
+                        <option value="1"<% if (setting.useVisitCount === 1) { %> selected<% } %>>사용함</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select name="useChat" id="useChat">
+                        <option value="0"<% if (setting.useChat === 0) { %> selected<% } %>>사용안함</option>
+                        <option value="1"<% if (setting.useChat === 1) { %> selected<% } %>>사용함</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select name="useSMS" id="useSMS">
+                        <option value="0"<% if (setting.useSMS === 0) { %> selected<% } %>>사용안함</option>
+                        <option value="1"<% if (setting.useSMS === 1) { %> selected<% } %>>사용함</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select name="usePermissionImage" id="usePermissionImage">
+                        <option value="0"<% if (setting.usePermissionImage === 0) { %> selected<% } %>>사용안함</option>
+                        <option value="1"<% if (setting.usePermissionImage === 1) { %> selected<% } %>>사용함</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select name="usePointWithdraw">
+                        <option value="0"<% if (setting.usePointWithdraw === 0) { %> selected<% } %>>사용안함</option>
+                        <option value="1"<% if (setting.usePointWithdraw === 1) { %> selected<% } %>>사용함</option>
+                      </select>
+                    </td>
+                    <td><input type="text" name="pointWithdrawLimit" value="<%= setting.pointWithdrawLimit %>" placeholder="포인트 출금신청 한도"></td>
+                    <td><input type="text" name="visitPoint" value="<%= setting.visitPoint %>" placeholder="출석 포인트"></td>
+                    <td><input type="text" name="invitePoint" value="<%= setting.invitePoint %>" placeholder="초대 포인트"></td>
+                    <td><button><%= __('admin_submit') %></button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

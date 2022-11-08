@@ -1,0 +1,190 @@
+.list {
+  font-size: 0.95em;
+}
+
+.permissionImage img {
+  width: 20px;
+  margin-right: 2px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.item .title:hover,
+.item .title:active {
+  text-decoration: underline;
+}
+
+.title__and__category {
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  /* margin-bottom: 10px; */
+}
+
+.etc__info {
+  display: flex;
+}
+
+.commentCount {
+  color: #bbb;
+  margin-left: 10px;
+}
+
+.searchAndWrite {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.searchAndWrite .search {
+  display: flex;
+}
+
+.searchAndWrite .write a {
+  color: #fff;
+  background-color: #bbb;
+  padding: 10px 20px;
+}
+
+@media (min-width: 1131px) {
+  .item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #bbb;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .title__and__category {
+    width: 100%;
+  }
+
+  .item .span-category {
+    display: none;
+  }
+
+  .etc__info .view span,
+  .etc__info .like span {
+    display: none;
+  }
+
+  .item__head {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-top: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+  }
+
+  .list .number {
+    width: 60px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .category {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .item__head .title {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title__container {
+    flex: 1;
+  }
+
+  .author {
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .author div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .datetime {
+    width: 80px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .view {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .like {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1130px) {
+  .item__head {
+    display: none;
+  }
+
+  .item {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .title__and__category {
+    margin-bottom: 10px;
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+  }
+
+  .number {
+    display: none;
+  }
+
+  .category {
+    display: none;
+  }
+
+  .span-category {
+    margin-right: 10px;
+    color: #777;
+  }
+
+  .commentCount {
+    color: #bbb;
+  }
+  
+  .etc__info {
+    display: flex;
+    color: #bbb;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .etc__info > div {
+    margin-right: 10px;
+  }
+
+  .line {
+    width: 100%;
+    border-bottom: 1px solid #bbb;
+    box-sizing: border-box;
+  }
+}

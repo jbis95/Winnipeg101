@@ -1,0 +1,19 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+article {
+  flex: 1;
+}
+
+@media (max-width: 1280px) {
+  .wrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  article {
+    width: 100%;
+  }
+}

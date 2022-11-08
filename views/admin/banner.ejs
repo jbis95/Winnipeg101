@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <div class="list">
+            <h2><%= __('admin_banner') %></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th><%= __('admin_number') %></th>
+                  <th><%= __('admin_position') %></th>
+                  <th><%= __('admin_image') %></th>
+                  <th><%= __('admin_slug') %></th>
+                  <th><%= __('admin_displayOrder') %></th>
+                  <th>새창</th>
+                  <th>모바일 숨김</th>
+                  <th><%= __('admin_edit') %></th>
+                  <th><%= __('admin_delete') %></th>
+                  <th><%= __('admin_hide') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% banners.forEach(b => { %>
+                <form action="/admin/banner/edit/<%= b.id %><% if (page) { %>?page=<%= page %><% } %>" method="POST">
+                <tr>
+                  <td><%= b.id %></td>
+                  <td>
+                    <select name="position">
+                      <option value="header"<% if (b.position === 'header') { %> selected<% } %>><%= __('admin_header') %></option>
+                      <option value="indexTop"<% if (b.position === 'indexTop') { %> selected<% } %>><%= __('admin_indexTop') %></option>
+                      <option value="indexBottom"<% if (b.position === 'indexBottom') { %> selected<% } %>><%= __('admin_indexBottom') %></option>
+                      <option value="sideTop"<% if (b.position === 'sideTop') { %> selected<% } %>><%= __('admin_sideTop') %></option>
+                      <option value="sideBottom"<% if (b.position === 'sideBottom') { %> selected<% } %>><%= __('admin_sideBottom') %></option>
+                      <option value="articleTop"<% if (b.position === 'articleTop') { %> selected<% } %>><%= __('admin_mainTop') %></option>
+                      <option value="articleBottom"<% if (b.position === 'articleBottom') { %> selected<% } %>><%= __('admin_mainBottom') %></option>
+                      <option value="leftWing"<% if (b.position === 'leftWing') { %> selected<% } %>><%= __('admin_leftWing') %></option>
+                      <option value="rightWing"<% if (b.position === 'rightWing') { %> selected<% } %>><%= __('admin_rightWing') %></option>
+                      <option value="custom"<% if (b.position === 'custom') { %> selected<% } %>><%= __('admin_custom') %></option>
+                    </select>
+                  </td>
+                  <td class="bannerImage"><a href="<%= host %>/banner/<%= b.image %>" target="_blank"><img src="<%= host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></td>
+                  <td><input type="text" name="link" value="<%= b.link %>" placeholder="<%= __('admin_slug') %>"></td>
+                  <td><input type="text" name="viewOrder" value="<%= b.viewOrder %>" placeholder="<%= __('admin_displayOrder') %>"></td>
+                  <td>
+                    <input type="checkbox" name="newPage" value="1"<% if (b.newPage === 1) { %>checked<% } %>>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="mobileHide" value="1"<% if (b.mobileHide === 1) { %>checked<% } %>>
+                  </td>
+                  <td><button name="submit" value="edit"><%= __('admin_edit') %></button></td>
+                  <td><button name="submit" value="delete"><%= __('admin_delete') %></button></td>
+                  <% if (b.status === 1) { %>
+                  <td><button name="submit" value="hide"><%= __('admin_hide') %></button></td>
+                  <% } else if (b.status === 0) { %>
+                  <td><button name="submit" value="hide"><%= __('admin_unhide') %></button></td>
+                  <% } %>
+                </tr>
+                </form>
+                <% }) %>
+              </tbody>
+            </table>
+            <%- include('../pagination.ejs') %>
+          </div>
+          <div class="new">
+            <h2><%= __('admin_new') %></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th><%= __('admin_position') %></th>
+                  <th><%= __('admin_image') %></th>
+                  <th><%= __('admin_slug') %></th>
+                  <th><%= __('admin_displayOrder') %></th>
+                  <th><%= __('admin_newPage') %></th>
+                  <th><%= __('admin_submit') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/banner/new" method="POST" enctype="multipart/form-data">
+                  <tr>
+                    <td>
+                      <select name="position">
+                        <option value="header"><%= __('admin_header') %></option>
+                        <option value="indexTop"><%= __('admin_indexTop') %></option>
+                        <option value="indexBottom"><%= __('admin_indexBottom') %></option>
+                        <option value="sideTop"><%= __('admin_sideTop') %></option>
+                        <option value="sideBottom"><%= __('admin_sideBottom') %></option>
+                        <option value="articleTop"><%= __('admin_mainTop') %></option>
+                        <option value="articleBottom"><%= __('admin_mainBottom') %></option>
+                        <option value="leftWing"><%= __('admin_leftWing') %></option>
+                        <option value="rightWing"><%= __('admin_rightWing') %></option>
+                        <option value="custom"><%= __('admin_custom') %></option>
+                      </select>
+                    </td>
+                    <td><input type="file" name="image"></td>
+                    <td><input type="text" name="link" placeholder="<%= __('admin_slug') %>"></td>
+                    <td><input type="text" name="viewOrder" value="100"></td>
+                    <td><input type="checkbox" name="newPage" value="1"></td>
+                    <td><button><%= __('admin_submit') %></button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

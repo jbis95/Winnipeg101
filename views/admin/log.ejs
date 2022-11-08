@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <div class="list">
+            <div class="spaceBeetween">
+              <h2><%= __('admin_log') %></h2>
+              <div><%= __('admin_today') %> : <%= Number(locals.count.today).toLocaleString() %> / <%= __('admin_yesterday') %> : <%= Number(locals.count.yesterday).toLocaleString() %> / <%= __('admin_month') %> : <%= Number(locals.count.month).toLocaleString() %></div>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th><%= __('admin_number') %></th>
+                  <th><%= __('admin_datetime') %></th>
+                  <th><%= __('admin_location') %></th>
+                  <th><%= __('admin_article') %></th>
+                  <th><%= __('admin_ip') %></th>
+                  <th><%= __('admin_referer') %></th>
+                  <th><%= __('admin_userAgent') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% logs.forEach(l => { %>
+                <tr>
+                  <td><%= l.id %></td>
+                  <td><%= l.datetime %></td>
+                  <td class="location"><%= l.location %></td>
+                  <td class="article"><a href="/<%= l.boardSlug %>/<%= l.log_article_ID %>"><%= l.title %></a></td>
+                  <td><%= l.viewIp %></td>
+                  <td class="referer"><%= l.referer %></td>
+                  <td class="userAgent"><%= l.userAgent %></td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+          <%- include('../pagination.ejs') %>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

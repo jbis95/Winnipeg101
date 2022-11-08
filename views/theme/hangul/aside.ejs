@@ -1,0 +1,209 @@
+<style>
+  aside h1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  aside .domain__conatiner form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  aside .domainRegist {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  aside .domainRegist input {
+    font-size: 1em;
+    flex: 1;
+    margin: 0;
+    padding: 10px;
+    border: 2px solid #538BF8;
+    border-right: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  aside .domainRegist button {
+    font-size: 1em;
+    color: #fff;
+    background-color: #538BF8;
+    width: 80px;
+    border: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  aside .comment {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 1130px) {
+    aside .banner__box__sideTop {
+      grid-template-columns: repeat(<%= locals.setting.bannerRowsSideTop %>, 1fr);
+    }
+
+    aside .banner__box__sideBottom {
+      grid-template-columns: repeat(<%= locals.setting.bannerRowsSideBottom %>, 1fr);
+    }
+
+    aside .domainRegist {
+      width: 95%;
+    }
+  }
+</style>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/chat.js" defer></script>
+<aside>
+  <div class="user__box">
+    <!-- <h2>로그인</h2> -->
+    <% if (locals.user) { %>
+    <div class="user">
+      <div class="info">
+        <div class="nickName">
+          <% if (locals.setting.usePermissionImage) { %>
+          <div><img src="/permission/<%= locals.user.permission %>.svg"></div>
+          <% } %>
+          <div><%= locals.user.nickName %></div>
+        </div>
+        <div class="permission"><%= __('user_memberGrade') %> : <%= locals.user.permission %> / 포인트 : <%= locals.user.point %></div>
+      </div>
+      <div class="user__menu">
+        <div class="mypage"><a href="/mypage"><%= __('user_mypage') %></a></div>
+        <div class="logout"><a href="/logout"><%= __('user_logout') %></a></div>
+      </div>
+      <% if (locals.user && locals.user.permission === 10) { %>
+      <div class="admin"><a href="/admin"><%= __('user_admin') %></a></div>
+      <% } %>
+    </div>
+    <% } else { %>
+    <div class="inputs__and__buttons">
+      <form action="/login" method="POST">
+        <div class="inputs">
+          <input type="text" name="id" placeholder="<%= __('user_idOrEmail') %>">
+          <input type="password" name="password" placeholder="<%= __('user_password') %>">
+        </div>
+        <div class="buttons">
+          <button name="login" class="login"><%= __('user_login') %></button>
+        </div>
+      </form>
+    </div>
+    <div class="join__and__findPassword">
+      <div class="join"><a href="/join"><%= __('user_join') %></a></div>
+      <div class="findPassword"><a href="/findId"><%= __('user_findIdMenu') %></a> / <a href="/findPassword"><%= __('user_findPasswordMenu') %></a></div>
+    </div>
+    <% } %>
+  </div>
+  <% if (locals.setting.testMode) { %>
+  <div class="test__mode">
+    관리자 모드 체험하기<br>아이디는 test, 비밀번호 test 입니다.
+  </div>
+  <% } %>
+  <div class="side__menu">
+  </div>
+  <% if (locals.setting.useChat) { %>
+  <div class="chat__container">
+    <div class="chatBanner">실시간채팅<div id="userCount"></div></div>
+    <div class="chatBox" id="chatBox">
+      <iframe src="/chatWindow.html" id="chatWindow" class="chatWindow"></iframe>
+    </div>
+    <% if (locals.user) { %>
+    <div class="message__box">
+      <input type="text" name="msg" id="msg" class="msg" onkeydown="moveFocus('send')">
+      <button name="submit" id="send" class="send" onkeydown="moveFocus('msg')"><%= __('chat_send') %></button>
+    </div>
+    <% } else { %>
+    <div class="message__box">
+      <input type="text" name="msg" id="msg" class="msg" onkeydown="moveFocus('send')" placeholder="<%= __('chat_needLogin') %>" disabled>
+      <button name="submit" id="send" class="send" onkeydown="moveFocus('msg')" disabled><%= __('chat_send') %></button>
+    </div>
+    <% } %>
+    <div class="chatExpand" id="chatExpand"><%= __('chat_chatOpen') %></div>
+  </div>
+  <div class="domain__conatiner">
+    <h2>도메인 신규등록</h2>
+    <form action="https://domain.gabia.com/api/You0828/regist_step1" target="_blank" method="POST">
+      <div class="domainRegist">
+        <input type="text" name="domainList" placeholder="예) 도메인.com">
+        <button>검색</button>
+      </div>
+      <div class="comment">원하는 도메인을 입력하세요.</div>
+    </form>
+  </div>
+  <% } %>
+  <% if (locals.setting.adsenseSide) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseSide %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'sideTop').length) { %>
+  <div class="banner__box__sideTop">
+    <% locals.banners.forEach(b => { %>
+    <% if (b.position === 'sideTop' && b.status === 1) { %>
+    <div class="banner"><a href="<%= b.link %>"<% if (b.newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% } %>
+    <% }) %>
+  </div>
+  <% } %>
+  <% if (locals.sideBoards && locals.sideBoards.length) { %>
+  <div class="list">
+    <div class="gridContainer">
+      <% locals.sideBoards.forEach(b => { %>
+        <% if (b.id === 0) { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><%= b.title %></a></h2>
+              <!-- <div class="more"><a href="/<%= b.slug %>"><%= __('board_more') %></a></div> -->
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title"><a href="/<%= a.boardSlug %>/<%= a.id %>"><%= a.title %></a><% if (a.commentCount) { %><span class="commentCount"> <%= a.commentCount %></span><% } %></div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><a href="/<%= b.slug %>"><%= b.title %></a></h2>
+              <div class="more"><a href="/<%= b.slug %>"><%= __('board_more') %></a></div>
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title"><a href="/<%= b.slug %>/<%= a.id %>"><%= a.title %></a><% if (a.commentCount) { %><span class="commentCount"> <%= a.commentCount %></span><% } %></div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+      <% }) %>
+    </div>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'sideBottom').length) { %>
+  <div class="banner__box__sideBottom">
+    <% locals.banners.forEach(b => { %>
+    <% if (b.position === 'sideBottom' && b.status === 1) { %>
+    <div class="banner"><a href="<%= b.link %>"<% if (b.newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% } %>
+    <% }) %>
+  </div>
+  <% } %>
+</aside>
+<script>
+  const domainConatiner = document.querySelector('.domain__conatiner');
+  if (document.URL.match('newDomain')) {
+    domainConatiner.style = 'display: none';
+  }
+</script>

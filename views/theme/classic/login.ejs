@@ -1,0 +1,11 @@
+<article>
+  <div class="wrap">
+    <h1><%= __('user_login') %></h1>
+    <form action="/login" method="POST">
+      <div><input type="text" name="id" placeholder="<%= __('user_idOrEmail') %>"></div>
+      <div><input type="password" name="password" placeholder="<%= __('user_password') %>"></div>
+      <div><button><%= __('user_login') %></button></div>
+      <div class="etc"><%= __('user_notaMemberYet') %> <a href="/join"><%= __('user_join') %></a></div>
+    </form>
+  </div>
+</article>

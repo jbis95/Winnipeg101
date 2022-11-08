@@ -1,0 +1,119 @@
+/* Sites */
+.sites {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.site {
+  border: 1px solid #ddd;
+}
+
+.site .title {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.site img {
+  width: 100%;
+}
+
+.site .verify__and__code {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.site .buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.site .buttons div {
+}
+
+.site .buttons a {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  color: #fff;
+}
+
+.site .buttons .direct {
+  background-color: #bbb;
+  margin-right: 5px;
+}
+
+.site .buttons .info {
+  background-color: #555;
+}
+
+article .gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+article .gridItem {
+  margin-bottom: 20px;
+}
+
+article .gridItem .image {
+  width: 100%;
+}
+
+article .gridItem .image img {
+  width: 100%;
+  /* background-size: cover; */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+article .gridItem .title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+article .gridItem .info {
+  display: flex;
+  justify-content: space-between;
+  color: #bbb;
+  font-size: 0.9em;
+}
+
+article .gridItem .count {
+  display: flex;
+  justify-content: space-between;
+  color: #bbb;
+  font-size: 0.9em;
+}
+
+article .searchAndWrite {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+article .searchAndWrite .search {
+  display: flex;
+}
+
+article .searchAndWrite .write a {
+  color: #fff;
+  background-color: #bbb;
+  padding: 10px 20px;
+}
+
+@media (max-width: 1130px) {
+  .sites {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

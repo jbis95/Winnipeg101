@@ -1,0 +1,130 @@
+/* List */
+#list .articleListTitle {
+  display: flex;
+  border-top: 1.5px solid #B2B1B1;
+  border-bottom: 1.5px solid #B2B1B1;
+  padding: 10px 0;
+}
+
+#list .articleList {
+  display: flex;
+  flex-direction: column;
+}
+
+#list .articleList .item {
+}
+
+#list .titleContainer {
+  flex: 1;
+}
+
+#list .info {
+}
+
+#list .articleListTitle div,
+#list .articleList .item > div {
+  display: flex;
+  justify-content: center;
+}
+
+#list .articleListTitle .category,
+#list .articleList .item .category,
+#list .articleList .item .notice {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+}
+
+#list .articleListTitle .title,
+#list .articleList .item .title {
+  flex: 1;
+}
+
+#list .articleListTitle .author,
+#list .articleList .item .author {
+  width: 140px;
+  display: flex;
+  justify-content: center;
+}
+
+#list .articleListTitle .datetime,
+#list .articleList .item .datetime {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+}
+
+#list .articleList .item {
+  padding: 10px 0;
+  display: flex;
+  border-bottom: 1.5px solid #DADADA;
+}
+
+#list .noticeList {
+  background-color: #F6F6F6;
+}
+
+#list .articleList .item .title {
+  justify-content: flex-start;
+  padding-left: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#list .articleList .notice {
+  color: red;
+  font-weight: bold;
+}
+
+@media (min-width: 1281px) {
+  #list .slash {
+    display: none;
+  }
+
+  #list .viewCount {
+    display: none;
+  }
+}
+
+@media (max-width: 1280px) {
+  #list .articleListTitle {
+    display: none;
+  }
+
+  #list .articleList {
+    border-top: 1.5px solid #DADADA;
+  }
+
+  #list .articleList .item {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  #list .articleList .item .titleContainer {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+  }
+
+  #list .articleList .item .titleContainer div {
+    width: unset;
+  }
+
+  #list .articleList .item .titleContainer .title {
+    font-weight: bold;
+  }
+
+  #list .articleList .item .info {
+    justify-content: flex-start;
+    color: #A6A6A6;
+  }
+
+  #list .articleList .item .info div {
+    width: unset;
+  }
+
+  #list .slash {
+    font-size: 0.9em;
+    margin: 0 8px;
+  }
+}

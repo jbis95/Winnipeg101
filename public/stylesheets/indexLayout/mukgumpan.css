@@ -1,0 +1,142 @@
+.comment {
+  padding: 30px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.comment .line {
+  display: flex;
+  justify-content: center;
+  width: 20%;
+  height: 2px;
+  margin: 20px 0;
+}
+
+.comment h2 {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.comment div {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.guide {
+  color: #fff;
+  background-color: #555;
+  padding: 14px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.guide .yellow {
+  display: inline;
+  color: yellow;
+  font-weight: bold;
+}
+
+.guide .pointColor {
+  display: inline;
+  font-weight: bold;
+}
+
+
+/* Sites */
+.sites {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.site {
+  border: 1px solid #ddd;
+}
+
+.site .title {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.site img {
+  width: 100%;
+}
+
+.site .verify__and__code {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.site .buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.site .buttons div {
+}
+
+.site .buttons a {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  color: #fff;
+}
+
+.site .buttons .direct {
+  background-color: #bbb;
+  margin-right: 5px;
+}
+
+.site .buttons .info {
+  background-color: #555;
+}
+
+@media (max-width: 1130px) {
+  article .gridContainer {
+    width: 100%;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  article .more {
+    margin-right: 10px;
+  }
+
+  article .contentSpaceBetween {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .sites {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 414px) {
+  article {
+    font-size: 0.9em;
+  }
+
+  article .contentSpaceBetween .title {
+    width: 230px;
+    flex: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .sites {
+    font-size: 0.8em;
+  }
+}

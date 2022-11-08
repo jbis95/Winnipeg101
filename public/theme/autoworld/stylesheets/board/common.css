@@ -1,0 +1,129 @@
+/* searchAndWrite */
+#list .searchAndWrite {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#list .searchAndWrite > div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#list .searchAndWrite form {
+  width: 440px;
+  height: 40px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#list .searchAndWrite .search {
+  flex: 1;
+  display: flex;
+}
+
+#list .searchAndWrite .search select {
+  height: 40px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 8px;
+  padding: 0 20px;
+  color: #fff;
+  background-color: #CACFD8;
+  /* border: 1px solid red; */
+  border: 0;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+#list .searchAndWrite .search input {
+  flex: 1;
+  height: 40px;
+  box-sizing: border-box;
+  margin: 0;
+  border-radius: 8px;
+  border: 0;
+  margin: 0 14px;
+  padding: 0 16px;
+  font-size: 1em;
+}
+
+#list .searchAndWrite .search button {
+  height: 40px;
+  box-sizing: border-box;
+  color: #fff;
+  background-color: #CACFD8;
+  border: 0;
+  margin: 0;
+  padding: 0 20px;
+  font-size: 1em; 
+  border-radius: 8px;
+}
+
+#list .searchAndWrite .search button:hover,
+#list .searchAndWrite .search button:hover {
+  background-color: #B5B9C1;
+}
+
+#list .searchAndWrite .write {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#list .searchAndWrite .write a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  color: #fff;
+  background-color: #434B57;
+  padding: 0 20px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+#list .searchAndWrite .write a:hover,
+#list .searchAndWrite .write a:active {
+  background-color: #353C45;
+}
+
+@media (max-width: 1280px) {
+  #list .articleList {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #list .articleList .item .title {
+    font-size: 1em;
+  }
+
+  #list .searchAndWrite {
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 0.9em;
+  }
+
+  #list .searchAndWrite div {
+    width: 100%;
+  }
+
+  #list .searchAndWrite form {
+    width: 100%;
+  }
+
+  #list .searchAndWrite .search input {
+    width: 100%;
+  }
+
+  #list .searchAndWrite .write {
+    justify-content: center;
+    margin-top: 14px;
+  }
+}

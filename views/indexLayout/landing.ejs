@@ -1,0 +1,63 @@
+<style>
+  html, body, main, main .wrap {
+    height: 100%;
+  }
+  .main {
+    width: <%= landing.mainWidth %>px;
+  }
+  .logo img {
+    width: <%= landing.logoSize %>px;
+  }
+  .banners {
+    width: <%= landing.mainWidth %>px;
+  }
+
+  @media (max-width: <%= landing.mainWidth %>px) {
+    html, body, main, main .wrap {
+      height: unset;
+    }
+    .main {
+      width: 95%;
+    }
+    .banners {
+      width: 95%;
+    }
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+<% if (landing.backgroundVideo) { %>
+<video autoplay muted loop id="myVideo">
+  <source src="<%= locals.s3Host %>/landing/<%= landing.backgroundVideo %>" type="video/mp4">
+</video>
+<% } %>
+<article>
+  <div class="main">
+    <div class="subTitle"><%= landing.subTitle %></div>
+    <div class="logo"><img src="<%= locals.s3Host %>/landing/<%= landing.logoImage %>" alt="logo"></div>
+    <div class="content"><%- landing.content %></div>
+    <div class="twitterComment">최신주소는 아래 트위터를 참조해주세요</div>
+    <div class="tags"><%= landing.tags %></div>
+    <div class="url">
+      <a href="<%= landing.targetUrl %>" target="_blank" class="targetUrl">현재주소 <%= landing.targetUrlRaw %> 바로가기</a>
+      <a href="<%= landing.twitterUrl %>" target="_blank" class="twitterUrl"><%= locals.setting.siteName %> 최신주소</a>
+    </div>
+  </div>
+  <div class="banners">
+    <% landingBanners.forEach(b => { %>
+      <div class="banner"><a href="<%= b.targetUrl %>" target="_blank"><img src="<%= s3Host %>/landingBanner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% }) %>
+  </div>
+</article>
+<script>
+  const article = document.querySelector('article');
+  if (article.scrollHeight <= window.innerHeight) {
+    article.style.justifyContent = 'center';
+  }
+  window.addEventListener('resize', () => {
+    if (article.scrollHeight === window.innerHeight) {
+      article.style.justifyContent = 'center';
+    } else {
+      article.style.justifyContent = 'unset';
+    }
+  });
+</script>

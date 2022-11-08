@@ -1,0 +1,114 @@
+footer {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+}
+
+footer .withShare {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+footer .share {
+  margin-top: 30px;
+}
+
+footer .license {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #bbb;
+}
+
+footer .license a {
+  color: #bbb;
+}
+
+footer .copyright {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bbb;
+  text-align: center;
+  flex-direction: column;
+  margin-top: 60px;
+}
+
+b,
+footer .bold {
+  display: inline-block;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.share {
+  display: flex;
+  margin-bottom: 60px;
+}
+
+.share a {
+  margin-right: 5px;
+}
+
+.share a:last-child {
+  margin-right: 0;
+}
+
+.facebook {
+  background-color: #1A76F2;
+  padding: 22px;
+  background-image: url("/theme/hangul/assets/facebook.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.twitter {
+  background-color: #1EA1F1;
+  padding: 22px;
+  background-image: url("/theme/hangul/assets/twitter.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.naver {
+  background-color: #1EC800;
+  padding: 22px;
+  background-image: url("/theme/hangul/assets/naver.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.kakaotalk {
+  background-color: #FFE003;
+  padding: 22px;
+  background-image: url("/theme/hangul/assets/kakaotalk.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px;
+  cursor: pointer;
+}
+
+.kakaostory {
+  background-color: #FFE003;
+  padding: 22px;
+  background-image: url("/theme/hangul/assets/kakaostory.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+@media (max-width: 1130) {
+  
+}

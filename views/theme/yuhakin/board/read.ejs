@@ -1,0 +1,213 @@
+<style>
+  article .banner__box__articleTop {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleTop %>, 1fr);
+  }
+
+  article .banner__box__articleBottom {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleBottom %>, 1fr);
+  }
+</style>
+<script>
+  function CopyUrlToClipboard () {
+    var dummy = document.createElement('input');
+    var text = '<%= locals.setting.siteDomain %>/<%= boardSlug %>/<%= article.id %>';
+
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand("copy");
+    alert('URL이 클립보드에 복사 되었습니다.');
+    document.body.removeChild(dummy);
+  }
+</script>
+<div class="modalContainer">
+  <div class="modal">
+    <div class="top">
+      <div class="title">공유하기</div>
+      <div class="close"><img src="/theme/yuhakin/assets/times-solid.svg"></div>
+    </div>
+    <div class="main">
+      <div class="gridContainer">
+        <a class="grid" href="https://facebook.com/share.php?u=<%= locals.setting.siteDomain %>/<%= boardSlug %>/<%= article.id %>">
+          <div class="image facebook"><img src="/theme/yuhakin/assets/sns/facebook.svg"></div>
+          <div class="title">페이스북</div>
+        </a>
+        <a class="grid" href="https://twitter.com/share?url=<%= locals.setting.siteDomain %>/<%= boardSlug %>/<%= article.id %>&text=<%= article.title %>%20-%20<%= locals.setting.siteName %>">
+          <div class="image twitter"><img src="/theme/yuhakin/assets/sns/twitter.svg"></div>
+          <div class="title">트위터</div>
+        </a>
+        <a class="grid" href="https://share.naver.com/web/shareView?url=<%= locals.setting.siteDomain %>/<%= boardSlug %>/<%= article.id %>&title=<%= article.title %>">
+          <div class="image naver"><img src="/theme/yuhakin/assets/sns/naver.svg"></div>
+          <div class="title">네이버</div>
+        </a>
+        <a class="grid" href="https://band.us/plugin/share?body=<%= article.title %>&route=<%= locals.setting.siteDomain %>/<%= boardSlug %>/<%= article.id %>">
+          <div class="image band"><img src="/theme/yuhakin/assets/sns/band.svg"></div>
+          <div class="title">밴드</div>
+        </a>
+        <a class="grid" href="https://story.kakao.com/share?url=<%= locals.setting.siteDomain %>/<%= boardSlug %>/<%= article.id %>">
+          <div class="image kakaostory"><img src="/theme/yuhakin/assets/sns/kakaostory.svg"></div>
+          <div class="title">카카오스토리</div>
+        </a>
+      </div>
+    </div>
+    <div class="bottom">
+      <input type="text" value="<%= locals.setting.siteDomain %>/<%= boardSlug %>/<%= article.id %>" disabled>
+      <button onclick="CopyUrlToClipboard();">
+        <div><img src="/theme/yuhakin/assets/link-solid.svg"></div>
+        <div>URL 복사</div>
+      </button>
+    </div>
+  </div>
+  <div class="modalBackground"></div>
+</div>
+<article id="article" articleId="<%= article.id %>">
+  <% if (locals.setting.adsenseTop) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseTop %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'articleTop' && b.status === 1).length) { %>
+    <%- include('../../../banner', { position: 'articleTop' }); %>
+  <% } %>
+  <!-- <div class="sub">
+    <% if (page) { %>
+    <div class="back"><a href="/<%= boardSlug %>?page=<%= page %>">< 목록으로</a></div>
+    <% } else { %>
+      <div class="back"><a href="/<%= boardSlug %>">< 목록으로</a></div>
+    <% } %>
+  </div> -->
+  <div class="item">
+    <div class="sub">
+      <div class="board">
+        <% if (page) { %>
+          <a href="/<%= boardSlug %>?page=<%= page %>"><%= boardName %></a>
+        <% } else { %>
+          <a href="/<%= boardSlug %>"><%= boardName %></a>
+        <% } %>
+      </div>
+    </div>
+    <div class="info">
+      <div class="titleContainer">
+        <% if (article.category) { %><span class="category" style="color: <%= article.categoryColor %>;"><%= article.category %></span><% } %>
+        <span><h1><%= article.title %></h1></span>
+      </div>
+      <div class="etc">
+        <div class="left">
+          <span class="nickName"><%= article.nickName %></span>
+          <span class="dot"></span>
+          <span class="datetime"><%= article.datetime %></span>
+          <% if (locals.setting.useArticleViewCount) { %>
+          <span class="dot"></span>
+          <span class="viewCount"><img src="/assets/empty.png"><%= article.viewCount %></span>
+          <% } %>
+          <% if (article.likeCount) { %>
+          <span class="dot"></span>
+          <span class="likeCount"><img src="/assets/empty.png"><%= article.likeCount %></span>
+          <% } %>
+        </div>
+        <div class="right">
+          <% if (locals.user && locals.user.id === article.article_user_ID || locals.user && locals.user.permission === 10) { %>
+            <form action="/<%= boardSlug %>/<%= article.id %>/edit" method="POST">
+              <li class="edit"><button name="submit" value="edit">수정</button></li>
+              <li class="slash">/</li>
+              <li class="delete"><button name="submit" value="delete">삭제</button></li>
+            </form>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <div class="articleUrl"><%= locals.setting.siteDomain %>/<%= boardSlug %>/<%= article.id %></div>
+    <div class="content"><%- article.content %></div>
+    <% if (article.tags) { %>
+    <div class="tags"><%= __('board_tags') %> : <%= article.tags %></div>
+    <% } %>
+    <div class="listAndEdit">
+      <div class="list">
+        <% if (page) { %>
+        <a href="/<%= boardSlug %>?page=<%= page %>"><button><%= __('board_list') %></button></a>
+        <% } else { %>
+        <a href="/<%= boardSlug %>"><button><%= __('board_list') %></button></a>
+        <% } %>
+      </div>
+      <% if (article.userLike) { %>
+      <div class="likeContainer"><button id="like" class="like like-full"><%= __('board_unlikeBtn') %></button><button id="share" class="share"><img src="/theme/yuhakin/assets/share-alt-solid.svg"></button></div>
+      <% } else { %>
+        <div class="likeContainer"><button id="like" class="like"><%= __('board_likeBtn') %></button><button id="share" class="share"><img src="/theme/yuhakin/assets/share-alt-solid.svg"></button></div>
+      <% } %>
+    </div>
+    <% if (locals.banners.filter(b => b.position === 'articleTop' && b.status === 1).length) { %>
+      <%- include('../../../banner', { position: 'articleTop' }); %>
+    <% } %>
+    <%- include('../../../theme/yuhakin/board/comments.ejs') %>
+  </div>
+  <% if (locals.setting.adsenseBottom) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseBottom %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'articleBottom' && b.status === 1).length) { %>
+    <%- include('../../../banner', { position: 'articleBottom' }); %>
+  <% } %>
+  <% if (articles.length) { %>
+  <div id="list">
+    <div class="articleList">
+      <% articles.forEach(a => { %>
+        <a class="item" href="<%= a.url %>">
+          <div class="info">
+            <div class="titleContainer">
+              <% if (a.category) { %><span class="category" style="color: <%= a.categoryColor %>;"><%= a.category %></span><% } %>
+              <span class="title"><%= a.title %></span>
+              <% if (a.commentCount) { %><span class="commentCount"><img src="/assets/empty.png"><%= a.commentCount %></span><% } %>
+            </div>
+            <div class="etc">
+              <span class="nickName"><%= a.nickName %></span>
+              <span class="dot"></span>
+              <span class="datetime"><%= a.datetime %></span>
+              <% if (locals.setting.useArticleViewCount) { %>
+                <span class="dot"></span>
+                <span class="viewCount"><img src="/assets/empty.png"><%= a.viewCount %></span>
+              <% } %>
+              <% if (a.likeCount) { %>
+              <span class="dot"></span>
+              <span class="likeCount"><img src="/assets/empty.png"><%= a.likeCount %></span>
+              <% } %>
+            </div>
+          </div>
+          <div class="image">
+            <% if (a.image) { %>
+              <img src="/assets/empty.png" alt="<%= a.image %>" style="background-image: url('<%= locals.s3Host %>/thumb/<%= a.image %>');">
+              <% if (a.imageCount >= 2) { %>
+                <div class="count"><%= a.imageCount %></div>
+              <% } %>
+            <% } else if (a.youtube) { %>
+              <img src="/assets/empty.png" alt="<%= a.youtube %>" style="background-image: url('<%= a.youtube %>');">
+            <% } %>
+          </div>
+        </a>
+        <div class="line"></div>
+      <% }) %>
+    </div>
+    <div class="searchAndWrite">
+      <div></div>
+      <div>
+        <form action="/<%= boardSlug %>">
+          <div class="search">
+            <select name="searchType">
+              <option value="title"><%= __('board_title') %></option>
+              <option value="titleAndContent"><%= __('board_titleAndContent') %></option>
+              <option value="name"><%= __('board_user') %></option>
+            </select>
+            <input type="text" name="keyword">
+            <button><%= __('board_search') %></button>
+          </div>
+        </form>
+      </div>
+      <div></div>
+    </div>
+    <%- include('../../../paginationRead.ejs') %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'articleBottom' && b.status === 1).length) { %>
+    <%- include('../../../banner', { position: 'articleBottom' }); %>
+  <% } %>
+</article>

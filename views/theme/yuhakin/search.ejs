@@ -1,0 +1,78 @@
+<style>
+  article .banner__box__articleTop {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleTop %>, 1fr);
+  }
+
+  article .banner__box__articleBottom {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleBottom %>, 1fr);
+  }
+</style>
+<article id="list">
+  <% if (locals.setting.adsenseTop) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseTop %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'articleTop' && b.status === 1).length) { %>
+    <%- include('../../banner', { position: 'articleTop' }); %>
+  <% } %>
+  <div class="listWrap">
+    <h1>"<%= keyword %>" 검색결과</h1>
+    <div class="articleListTitle">
+      <div class="category">탭</div>
+      <div class="title">제목</div>
+      <div class="author">글쓴이</div>
+      <div class="datetime">날짜</div>
+    </div>
+    <div class="articleList">
+      <% if (articles && articles.length) { %>
+        <% articles.forEach(a => { %>
+          <a href="/<%= a.boardSlug %>/<%= a.id %>" class="item<% if (a.notice) { %> noticeList<% } %>">
+            <div class="titleContainer">
+              <% if (a.notice) { %>
+                <div class="notice">공지</div>
+              <% } else { %>
+                <div class="category" style="color: <%= a.categoryColor %>"><%= a.category %></div>
+              <% } %>
+              <div class="title"><%= a.title %></div>
+            </div>
+            <div class="info">
+              <div class="author"><%= a.nickName %></div>
+              <div class="slash">|</div>
+              <div class="datetime"><%= a.datetime %></div>
+              <div class="slash">|</div>
+              <div class="viewCount"><%= a.viewCount %></div>
+            </div>
+          </a>
+        <% }) %>
+      <% } %>
+    </div>
+    <div class="searchAndWrite">
+      <div></div>
+      <div>
+        <form action="/search">
+          <div class="search">
+            <select name="searchType">
+              <option value="titleAndContent"><%= __('board_titleAndContent') %></option>
+              <option value="title"><%= __('board_title') %></option>
+              <option value="name"><%= __('board_user') %></option>
+            </select>
+            <input type="text" name="keyword">
+            <button><%= __('board_search') %></button>
+          </div>
+        </form>
+      </div>
+      <div class="write">
+      </div>
+    </div>
+    <%- include('../../pagination.ejs') %>
+  </div>
+  <% if (locals.setting.adsenseBottom) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseBottom %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'articleBottom' && b.status === 1).length) { %>
+    <%- include('../../banner', { position: 'articleBottom' }); %>
+  <% } %>
+</article>

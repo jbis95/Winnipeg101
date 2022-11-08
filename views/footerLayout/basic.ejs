@@ -1,0 +1,17 @@
+<footer>
+  <div class="wrap">
+    <% if (locals.setting.license) { %>
+    <div class="license">Solution by<span class="bold"><a href="https://waffleboard.io" target="_blank">WaffleBoard</a></span></div>
+    <% } %>
+    <% if (locals.setting.copyright) { %>
+    <div class="copyright"><%- locals.setting.copyright %></div>
+    <% } %>
+    <% if (locals.setting.useVisitCount) { %>
+    <div class="count">
+      <div class="today"><%= __('main_today') %> <%= Number(locals.count.today).toLocaleString() %></div>
+      <div class="yesterday"><%= __('main_yesterday') %> <%= Number(locals.count.yesterday).toLocaleString() %></div>
+      <div class="month"><%= __('main_month') %> <%= Number(locals.count.month).toLocaleString() %></div>
+    </div>
+    <% } %>
+  </div>
+</footer>

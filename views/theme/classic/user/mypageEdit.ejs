@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <link rel="stylesheet" href="/stylesheets/user.css">
+    <script src="/javascripts/user.js" defer></script>
+    <style>
+      h1, h2 {
+        color: <%= locals.setting.pointColor %>;
+      }
+      button {
+        background-color: <%= locals.setting.pointColor %>;
+      }
+      .permission {
+        color: <%= locals.setting.pointColor %>;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <div class="wrap">
+        <article id="mypageEdit">
+          <h1>회원 정보 수정</h1>
+          <div class="items">
+            <h2>기본정보</h2>
+            <div class="item">
+              <label>아이디</label>
+              <div><%= user.uId %></div>
+            </div>
+            <form action="/mypage/nickName" method="POST">
+              <div class="item">
+                <label>닉네임</label>
+                <div class="item__inputs">
+                  <input type="text" name="nickName" value="<%= user.nickName %>" placeholder="닉네임">
+                  <button>변경</button>
+                </div>
+              </div>
+            </form>
+            <form action="/mypage/password" method="GET">
+              <div class="item">
+                <label>비밀번호</label>
+                <div class="item__inputs"><button class="password">비밀번호 변경</button></div>
+              </div>
+            </form>
+            <h2>추가정보</h2>
+            <form action="/mypage/phone" method="GET">
+              <div class="item">
+                <label>휴대폰</label>
+                <div class="item__inputs">
+                  <div class="phone"><%= user.phone %></div>
+                  <button>변경</button>
+                </div>
+              </div>
+            </form>
+            <form action="/mypage/email" method="POST">
+              <div class="item">
+                <label>이메일</label>
+                <div class="item__inputs">
+                  <input type="text" name="email" value="<%= user.email %>" placeholder="이메일">
+                  <button>변경</button>
+                </div>
+              </div>
+            </form>
+            <div class="item">
+              <label class="permission">회원상태</label>
+              <div><%= user.title %> 회원</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

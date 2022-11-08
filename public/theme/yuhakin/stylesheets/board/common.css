@@ -1,0 +1,193 @@
+#list .listWrap {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+#list h1 {
+  background-color: #fff;
+  border-radius: 12px;
+  /* box-shadow: 0 2px 30px 0 rgba(0,0,0,0.06); */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 20px;
+}
+
+/* Categories */
+#list .categories {
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(8, 1fr);
+  gap: var(--mobile-gap);
+  margin-bottom: 20px;
+}
+
+#list .categories .category {
+  font-size: 0.9em;
+  /* box-shadow: 0 2px 30px 0 rgba(0,0,0,0.06); */
+  word-break: keep-all;
+}
+
+#list .categories .category a {
+  /* background-color: #CACFD8; */
+  border-radius: 8px;
+  /* color: #fff; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 12px;
+}
+
+#list .categories .category a:hover,
+#list .categories .category a:active {
+  /* background-color: #B5B9C1; */
+}
+
+/* searchAndWrite */
+#list .searchAndWrite {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 0.9em;
+}
+
+#list .searchAndWrite > div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#list .searchAndWrite form {
+  width: 440px;
+  height: 40px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#list .searchAndWrite .search {
+  flex: 1;
+  display: flex;
+}
+
+#list .searchAndWrite .search select {
+  height: 40px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0 20px;
+  color: #000;
+  background-color: #fff;
+  border: 1.5px solid #ccc;
+  border-radius: 0;
+  font-size: 1em;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+#list .searchAndWrite .search input {
+  flex: 1;
+  height: 40px;
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  margin: 0 8px;
+  padding: 0 16px;
+  font-size: 1em;
+  border: 1.5px solid #ccc;
+  border-radius: 2px;
+}
+
+#list .searchAndWrite .search button {
+  height: 40px;
+  box-sizing: border-box;
+  color: #fff;
+  background-color: #00B0F0;
+  border: 0;
+  margin: 0;
+  padding: 0 20px;
+  font-size: 1em;
+  border-radius: 2px;
+}
+
+#list .searchAndWrite .write {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#list .searchAndWrite .write a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  color: #fff;
+  background-color: #00B0F0;
+  padding: 0 20px;
+  height: 40px;
+  border-radius: 2px;
+}
+
+@media (min-width: 1281px) {
+  #list .categories {
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 1280px) {
+  #list .listWrap {
+    padding: 20px 0;
+    border-radius: 0;
+  }
+
+  #list h1 {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+  }
+
+  #list .categories {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 10px;
+    margin: 0;
+    border-top: 1.5px solid #DADADA;
+  }
+
+  /* searchAndWrite */
+  #list .searchAndWrite {
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #list .searchAndWrite div {
+    width: 100%;
+  }
+
+  #list .searchAndWrite form {
+    width: 100%;
+    font-size: 0.8em;
+  }
+
+  #list .searchAndWrite .search select {
+    /* padding: 0 14px; */
+  }
+
+  #list .searchAndWrite .search input {
+    width: 100%;
+  }
+
+  #list .searchAndWrite .search button {
+    /* padding: 0 14px; */
+  }
+
+  #list .searchAndWrite .write {
+    justify-content: center;
+    margin-top: 14px;
+  }
+}

@@ -1,0 +1,66 @@
+article .galleryGridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+article .galleryGridItem {
+  margin-bottom: 20px;
+}
+
+article .galleryGridItem .image {
+  width: 100%;
+}
+
+article .galleryGridItem .image img {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+article .galleryGridItem .title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+article .galleryGridItem .info {
+  display: flex;
+  justify-content: space-between;
+  color: #bbb;
+  font-size: 0.9em;
+}
+
+article .galleryGridItem .info .author {
+  display: flex;
+  align-items: center;
+}
+
+article .galleryGridItem .info .author img {
+  width: 12px;
+  margin-right: 5px;
+}
+
+article .galleryGridItem .count {
+  display: flex;
+  justify-content: space-between;
+  color: #bbb;
+  font-size: 0.9em;
+}
+
+article .searchAndWrite {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+article .searchAndWrite .search {
+  display: flex;
+}
+
+article .searchAndWrite .write a {
+  color: #fff;
+  background-color: #bbb;
+  padding: 10px 20px;
+}

@@ -1,0 +1,21 @@
+article {
+}
+
+article .permission {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+article .comment {
+  margin-bottom: 30px;
+}
+
+article .button a {
+  display: flex;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+}

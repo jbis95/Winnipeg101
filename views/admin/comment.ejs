@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <h2><%= __('admin_comment') %></h2>
+          <table>
+            <thead>
+              <tr>
+                <th><%= __('admin_number') %></th>
+                <th><%= __('admin_datetime') %></th>
+                <th><%= __('admin_user') %></th>
+                <th><%= __('admin_comment') %></th>
+                <th><%= __('admin_edit') %></th>
+                <th><%= __('admin_delete') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% comments.forEach(c => { %>
+              <form name="frm" action="/admin/comment/edit/<%= c.id %><% if (page) { %>?page=<%= page %><% } %>" method="POST">
+                <tr>
+                  <td><%= c.id %></td>
+                  <td><input type="datetime" name="datetime" value="<%= c.datetime %>"></td>
+                  <td>
+                    <div><input type="text" name="uId" value="<%= c.uId %>"></div>
+                    <div class="nickName"><%= c.nickName %></div>
+                  </td>
+                  <td><textarea name="content"><%= c.content %></textarea></td>
+                  <td><button name="submit" value="edit"><%= __('admin_edit') %></button></td>
+                  <td><button name="submit" value="delete"><%= __('admin_delete') %></button></td>
+                </tr>
+              </form>
+              <% }) %>
+            </tbody>
+          </table>
+          <%- include('../pagination.ejs') %>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

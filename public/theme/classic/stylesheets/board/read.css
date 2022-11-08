@@ -1,0 +1,97 @@
+article .top h2 {
+  font-weight: normal;
+  margin-bottom: 30px;
+}
+
+article .author {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+article .permissionImage img {
+  width: 20px;
+  margin-right: 2px;
+}
+
+article .top .sub {
+  margin-bottom: 30px;
+}
+
+article .line {
+  width: 100%;
+  border: 1px solid #eee;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+article .top .info {
+  display: flex;
+  align-items: center;
+}
+
+article .top .info > div {
+  margin-right: 30px;
+}
+
+article .like {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 0.9em;
+}
+
+article .like button {
+  background-color: #eee;
+  padding: 10px 20px;
+  border: 1px solid #bbb;
+  display: flex;
+  justify-content: center;
+}
+
+article .list__and__edit {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+article .list__and__edit button {
+  background-color: #eee;
+  padding: 10px 20px;
+  border: 1px solid #bbb;
+  font-size: 0.9em;
+}
+
+article .list__and__edit .article_buttons form {
+  display: flex;
+}
+
+article .list__and__edit .article_buttons .edit {
+  margin-right: 10px;
+}
+
+@media (max-width: 1130px) {
+  article .sub {
+    margin-left: 10px;
+  }
+
+  article h1 {
+    margin-bottom: 20px;
+  }
+  
+  article .top .info {
+    display: flex;
+    font-size: 0.9em;
+    margin: 0 10px;
+  }
+  
+  article .top .info > div {
+    margin-right: 20px;
+  }
+
+  article .list__and__edit {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

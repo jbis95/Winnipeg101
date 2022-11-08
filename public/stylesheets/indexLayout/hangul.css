@@ -1,0 +1,174 @@
+article .list {
+  margin-bottom: 30px;
+}
+
+article .gridContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+article .gridItem {
+  width: 100%;
+}
+
+article .titleSpaceBetween {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+article .contentSpaceBetween {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+article .contentSpaceBetween a:hover,
+article .contentSpaceBetween a:active {
+  text-decoration: underline;
+}
+
+article .contentSpaceBetween .title {
+  width: 100px;
+  flex: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+article .contentSpaceBetween .datetime {
+  width: 50px;
+  display: flex;
+  justify-content: flex-end;
+  color: #bbb;
+  font-size: 0.9em;
+  margin-left: 20px;
+}
+
+.commentCount {
+  color: #bbb;
+  margin-left: 10px;
+}
+
+@media (max-width: 1130px) {
+  article .gridContainer {
+    width: 100%;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  article .more {
+    margin-right: 10px;
+  }
+
+  article .contentSpaceBetween {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  article {
+    font-size: 0.9em;
+  }
+
+  article .contentSpaceBetween .title {
+    /* max-width: 280px; */
+    width: 230px;
+    flex: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+.guide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.koreanDomain {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.koreanDomain a {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #538BF8;
+  font-weight: bold;
+  border: 3px solid #bbb;
+  background-color: #eee;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: #538BF8;
+}
+
+.guide h2 {
+  display: flex;
+  justify-content: center;
+}
+
+.domainSubmit {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+table {
+  width: 100%;
+}
+
+table td {
+  border: 1px solid #bbb;
+  padding: 10px;
+  vertical-align: middle;
+}
+
+table .title {
+  font-weight: bold;
+}
+
+.comment {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #bbb;
+  text-align: center;
+  padding: 10px;
+}
+
+.purchase {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 1130px) {
+  .koreanDomain {
+    width: 95%;
+  }
+
+  .domainSubmit {
+    width: 95%;
+  }
+
+  .purchase {
+    width: 95%;
+  }
+}

@@ -1,0 +1,84 @@
+<style>
+  article .gridItem .image img {
+    background-size: <%= board.thumbnailSize %>;
+  }
+  .site .verify {
+    color: <%= locals.setting.pointColor %>;
+  }
+
+  .site .buttons .direct {
+    background-color: <%= locals.setting.pointColor %>;
+  }
+</style>
+<article>
+  <% if (locals.setting.adsenseTop) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseTop %>
+  </div>
+  <% } %>
+  <div class="banner__box">
+    <% locals.banners.forEach(b => { %>
+    <% if (b.position === 'articleTop' && b.status === 1) { %>
+      <div class="banner"><a href="<%= b.link %>"<% if (b.newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% } %>
+    <% }) %>
+  </div>
+  <h1><%= boardName %></h1>
+  <div class="list">
+    <div class="sites">
+      <% articles.forEach(a => { %>
+        <div class="site">
+          <div class="title"><%= a.title %></div>
+          <div class="image"><a href="/<%= boardSlug %>/<%= a.id %>"><img src="<%= s3Host %>/article/<%= a.image %>"></a></div>
+          <div class="verify__and__code">
+            <div class="verify">먹검판 인증업체</div>
+            <% if (a.customField01) { %>
+            <div class="code">가입코드 : <%= a.customField01 %></div>
+            <% } else { %>
+            <div class="code">가입코드 : 없음</div>
+            <% } %>
+          </div>
+          <div class="buttons">
+            <a href="<%= a.customField02 %>" href="_blank" class="direct">바로가기</a>
+            <a href="/<%= a.id %>" class="info">사이트 정보</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+    <%- include('../../../pagination.ejs') %>
+    <div class="searchAndWrite">
+      <form action="/<%= boardSlug %>">
+        <div class="search">
+          <div>
+            <select name="type">
+              <option value="title"><%= __('board_title') %></option>
+              <option value="titleAndContent"><%= __('board_titleAndContent') %></option>
+              <option value="name"><%= __('board_user') %></option>
+            </select>
+          </div>
+          <div>
+            <input type="text" name="keyword">
+          </div>
+          <div>
+            <button><%= __('board_search') %></button>
+          </div>
+        </div>
+      </form>
+      <% if (writePermission) { %>
+      <div class="write"><a href="/<%= boardSlug %>/new"><%= __('board_write') %></a></div>
+      <% } %>
+    </div>
+  </div>
+  <% if (locals.setting.adsenseBottom) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseBottom %>
+  </div>
+  <% } %>
+  <div class="banner__box">
+    <% locals.banners.forEach(b => { %>
+    <% if (b.position === 'articleBottom' && b.status === 1) { %>
+      <div class="banner"><a href="<%= b.link %>"<% if (b.newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% } %>
+    <% }) %>
+  </div>
+</article>

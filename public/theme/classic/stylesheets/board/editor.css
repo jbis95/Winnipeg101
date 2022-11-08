@@ -1,0 +1,69 @@
+article .wrap {
+  display: flex;
+  justify-content: center;
+  width: 95%;
+}
+
+article input[type="text"] {
+  width: 100%;
+  height: 50px;
+  font-size: 1em;
+  padding: 10px;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+article select {
+  font-size: 1em;
+  padding: 10px;
+  border: 1px solid #bbb;
+  margin-bottom: 20px;
+}
+
+article button {
+  font-size: 1em;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #eee;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+}
+
+article .notice {
+  display: flex;
+}
+
+#editorjs {
+  background-color: #fff;
+  border: 1px solid #bbb;
+  padding-top: 30px;
+}
+
+#editorjs .ce-header {
+  margin: 0;
+  padding: 0;
+  line-height: 1.6em;
+}
+
+#editorjs .ce-paragraph {
+  margin: 0;
+  padding: 0;
+  line-height: 1.6em;
+}
+
+#editorjs li {
+  margin: 0;
+  padding: 0;
+  list-style-type: disc;
+}
+
+@media (max-width: 1130px) {
+  article input[type="text"] {
+    width: 100%;
+  }
+
+  #editorjs {
+    width: 100%;
+  }
+}

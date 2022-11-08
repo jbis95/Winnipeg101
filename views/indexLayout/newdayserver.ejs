@@ -1,0 +1,176 @@
+<style>
+  article .banner__box__indexTop {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsIndexTop %>, 1fr);
+  }
+
+  article .banner__box__indexBottom {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsIndexBottom %>, 1fr);
+  }
+
+  article .banner__box__custom {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsCustom %>, 1fr);
+  }
+</style>
+<article>
+  <% if (locals.setting.adsenseTop) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseTop %>
+  </div>
+  <% } %>
+  <div class="banner__box__indexTop">
+    <% locals.banners.forEach(b => { %>
+    <% if (b.position === 'indexTop' && b.status === 1) { %>
+      <div class="banner"><a href="<%= b.link %>"<% if (b.newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% } %>
+    <% }) %>
+  </div>
+  <div class="space__between">
+    <h2><%= range.start %> - <%= range.end %></h2>
+    <form action="/">
+      <div class="buttons">
+        <!-- <input type="hidden" name="originMoveDate" value="<%= moveDate %>"> -->
+        <div><button name="moveDate" value="<%= -14 + moveDate %>"><</button></div>
+        <div><button name="moveDate" value="today">오늘</button></div>
+        <div><button name="moveDate" value="<%= +14 + moveDate %>">></button></div>
+      </div>
+    </form>
+  </div>
+  <div class="schedule__gridContainer">
+    <% for (let i = 0; i <= 6; i ++) { %>
+      <% if (days[i].datetime === today) { %>
+      <div class="schedule__gridItem" style="background-color: yellow;">
+        <div class="day" style="font-weight: bold; background-color: yellow;"><%= days[i].day %></div>
+        <div class="week" style="font-weight: bold; background-color: yellow;"><%= days[i].week %></div>
+      <% } else { %>
+      <div class="schedule__gridItem">
+        <div class="day"><%= days[i].day %></div>
+        <div class="week"><%= days[i].week %></div>
+      <% } %>
+      </div>
+    <% } %>
+    <div class="banner__box__custom">
+      <div class="banner">
+        <% const customBanner = locals.banners.filter(b => b.position === 'custom') %>
+        <% if (customBanner[0]) { %>
+        <a href="<%= customBanner[0].link %>"<% if (customBanner[0].newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= customBanner[0].image %>" alt="<%= customBanner[0].image %>"></a>
+        <% } %>
+      </div>
+    </div>
+    <% for (let i = 0; i <= 6; i ++) { %>
+      <div class="schedule__gridItem">
+      <% serverSchedule.forEach(s => { %>
+        <% s.forEach(d => { %>
+          <% if (days[i].datetime === d.datetime) { %>
+            <a href="http://<%= d.link %>" target="_blank">
+              <div class="servereSchedule score<%= d.score %>">
+                <div class="type">
+                  <% if (d.type === 'new') { %>
+                    <div class="new">신</div>
+                  <% } else if (d.type === 'old') { %>
+                    <div class="old">구</div>
+                  <% } else if (d.type === 'renewal') { %>
+                    <div class="renewal">리</div>
+                  <% } %>
+                </div>
+                <div class="serverName"><%= d.serverName %></div>
+                <div class="comment"><%= d.comment %></div>
+              </div>
+            </a>
+          <% } %>
+        <% }) %>
+      <% }) %>
+      </div>
+    <% } %>
+  </div>
+  <div class="schedule__gridContainer">
+    <% for (let i = 7; i <= 13; i ++) { %>
+      <% if (days[i].datetime === today) { %>
+      <div class="schedule__gridItem" style="background-color: yellow;">
+        <div class="day" style="font-weight: bold; background-color: yellow;"><%= days[i].day %></div>
+        <div class="week" style="font-weight: bold; background-color: yellow;"><%= days[i].week %></div>
+      <% } else { %>
+      <div class="schedule__gridItem">
+        <div class="day"><%= days[i].day %></div>
+        <div class="week"><%= days[i].week %></div>
+      <% } %>
+      </div>
+    <% } %>
+    <div class="banner__box__custom">
+      <div class="banner">
+        <% if (customBanner[1]) { %>
+          <a href="<%= customBanner[1].link %>"<% if (customBanner[1].newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= customBanner[1].image %>" alt="<%= customBanner[1].image %>"></a>
+        <% } %>
+      </div>
+    </div>
+    <% for (let i = 7; i <= 13; i ++) { %>
+      <div class="schedule__gridItem">
+      <% serverSchedule.forEach(s => { %>
+        <% s.forEach(d => { %>
+          <% if (days[i].datetime === d.datetime) { %>
+            <a href="http://<%= d.link %>" target="_blank">
+              <div class="servereSchedule score<%= d.score %>">
+                <div class="type">
+                  <% if (d.type === 'new') { %>
+                    <div class="new">신</div>
+                  <% } else if (d.type === 'old') { %>
+                    <div class="old">구</div>
+                  <% } else if (d.type === 'renewal') { %>
+                    <div class="renewal">리</div>
+                  <% } %>
+                </div>
+                <div class="serverName"><%= d.serverName %></div>
+                <div class="comment"><%= d.comment %></div>
+              </div>
+            </a>
+          <% } %>
+        <% }) %>
+      <% }) %>
+      </div>
+    <% } %>
+  </div>
+  <div class="indexBoard__list">
+    <div class="gridContainer">
+      <% boards.forEach(b => { %>
+        <% if (b.id === 0) { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><%= b.title %></a></h2>
+              <!-- <div class="more"><a href="/<%= b.slug %>"><%= __('board_more') %></a></div> -->
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title"><a href="/<%= a.boardSlug %>/<%= a.id %>"><%= a.title %></a><% if (a.commentCount) { %><span class="commentCount"> <%= a.commentCount %></span><% } %></div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><a href="/<%= b.slug %>"><%= b.title %></a></h2>
+              <div class="more"><a href="/<%= b.slug %>"><%= __('board_more') %></a></div>
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title"><a href="/<%= b.slug %>/<%= a.id %>"><%= a.title %></a><% if (a.commentCount) { %><span class="commentCount"> <%= a.commentCount %></span><% } %></div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+      <% }) %>
+    </div>
+  </div>
+  <% if (locals.setting.adsenseBottom) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseBottom %>
+  </div>
+  <% } %>
+  <div class="banner__box__indexBottom">
+    <% locals.banners.forEach(b => { %>
+    <% if (b.position === 'indexBottom' && b.status === 1) { %>
+      <div class="banner"><a href="<%= b.link %>"<% if (b.newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% } %>
+    <% }) %>
+  </div>
+</article>

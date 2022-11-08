@@ -1,0 +1,59 @@
+{
+  "name": "cms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "PORT=3000 NODE_ENV=development nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dancinlife/cms.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dancinlife/cms/issues"
+  },
+  "homepage": "https://github.com/dancinlife/cms#readme",
+  "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^31.0.0",
+    "@ckeditor/ckeditor5-source-editing": "^31.0.0",
+    "@visao/ckeditor5-video": "^28.0.1",
+    "app-root-path": "^3.0.0",
+    "aws-sdk": "^2.1015.0",
+    "axios": "^0.24.0",
+    "bcrypt": "^5.0.1",
+    "cheerio": "^1.0.0-rc.10",
+    "colors": "^1.4.0",
+    "cookie-parser": "^1.4.5",
+    "crypto-js": "^4.1.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-mysql-session": "^2.1.7",
+    "express-session": "^1.17.2",
+    "https-proxy-agent": "^5.0.0",
+    "i18n": "^0.13.3",
+    "image-size": "^1.0.0",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "multer-s3": "^2.10.0",
+    "mysql2": "^2.3.2",
+    "node": "^17.0.1",
+    "nodemailer": "^6.7.0",
+    "png-to-ico": "^2.1.2",
+    "request": "^2.88.2",
+    "rimraf": "^3.0.2",
+    "sharp": "^0.29.2",
+    "socket.io": "^4.3.1",
+    "socket.io-client": "^2.4.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.62.1",
+    "webpack-cli": "^4.9.1"
+  }
+}

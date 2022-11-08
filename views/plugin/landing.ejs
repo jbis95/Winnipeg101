@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('../admin/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('../admin/header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <h2>랜딩페이지 설정</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>메인 폭</th>
+                <th>서브 타이틀</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/landing" method="POST">
+                <tr>
+                  <td><input type="text" name="mainWidth" value="<%= landing.mainWidth %>" placeholder="메인 폭"></td>
+                  <td><input type="text" name="subTitle" value="<%= landing.subTitle %>" placeholder="서브 타이틀"></td>
+                  <td><button name="submit" value="main">설정</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <th>로고 이미지</th>
+                <th>로고 사이즈</th>
+                <th>배경 영상</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/landing" method="POST" enctype="multipart/form-data">
+                <tr>
+                  <td>
+                    <div><img src="<%= locals.s3Host %>/landing/<%= landing.logoImage %>"></div>
+                    <div><input type="file" name="logoImage"></div>
+                  </td>
+                  <td><input type="text" name="logoSize" value="<%= landing.logoSize %>" placeholder="로고 사이즈"></td>
+                  <td>
+                    <div><video autoplay muted loop id="myVideo"><source src="<%= locals.s3Host %>/landing/<%= landing.backgroundVideo %>" type="video/mp4"></video></div>
+                    <div><input type="file" name="backgroundVideo"></div>
+                  </td>
+                  <td><button name="submit" value="image">설정</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <th>컨텐츠</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/landing" method="POST">
+                <tr>
+                  <td><textarea name="content" style="height: 200px;" placeholder="컨텐츠"><%= landing.content %></textarea></td>
+                  <td><button name="submit" value="content">설정</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <th>태그</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/landing" method="POST">
+                <tr>
+                  <td><input type="text" name="tags" value="<%= landing.tags %>" placeholder="태그"></td>
+                  <td><button name="submit" value="tags">설정</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <th>도착 URL</th>
+                <th>트위터 URL</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/landing" method="POST">
+                <tr>
+                  <td><input type="text" name="targetUrl" value="<%= landing.targetUrl %>" placeholder="도착 URL"></td>
+                  <td><input type="text" name="twitterUrl" value="<%= landing.twitterUrl %>" placeholder="트위터 URL"></td>
+                  <td><button name="submit" value="url">설정</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+          <h2>배너 목록</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>배너 이미지</th>
+                <th>연결 주소</th>
+                <th>표시 순서</th>
+                <th>수정</th>
+                <th>삭제</th>
+                <th>숨기기</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% landingBanners.forEach(b => { %>
+                <form action="/admin/landing/banner/edit/<%= b.id %>" method="POST">
+                  <tr>
+                    <td><img src="<%= s3Host %>/landingBanner/<%= b.image %>"></td>
+                    <td><input type="text" name="targetUrl" value="<%= b.targetUrl %>" placeholder="연결 주소"></td>
+                    <td><input type="text" name="viewOrder" value="<%= b.viewOrder %>" placeholder="표시 순서"></td>
+                    <td><button name="submit" value="edit">수정</button></td>
+                    <td><button name="submit" value="delete">삭제</button></td>
+                    <td>
+                      <% if (b.status) { %>
+                        <button name="submit" value="hide">숨기기</button>
+                      <% } else { %>
+                        <button name="submit" value="hide">숨기기 해제</button>
+                      <% } %>
+                    </td>
+                  </tr>
+                </form>
+              <% }) %>
+            </tbody>
+          </table>
+          <h2>배너 신규 등록</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>배너 이미지</th>
+                <th>연결 주소</th>
+                <th>표시 순서</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/landing/banner/new" method="POST" enctype="multipart/form-data">
+                <tr>
+                  <td><input type="file" name="image" placeholder="배너 이미지"></td>
+                  <td><input type="text" name="targetUrl" placeholder="연결 주소"></td>
+                  <td><input type="text" name="viewOrder" value="100" placeholder="표시 순서"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+    <style>
+      .viewBotLog {
+        height: 100px;
+      }
+    </style>
+  </body>
+</html>

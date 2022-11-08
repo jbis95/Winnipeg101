@@ -1,0 +1,39 @@
+footer {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer .license {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bbb;
+}
+
+footer .license a {
+  color: #bbb;
+}
+
+footer .copyright {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bbb;
+  text-align: center;
+}
+
+b,
+footer .bold {
+  display: inline-block;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+@media (max-width: 1130) {
+  
+}

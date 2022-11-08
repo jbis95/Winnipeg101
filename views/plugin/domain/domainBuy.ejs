@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('../admin/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <div class="wrap">
+        <%- include('../admin/header.ejs') %>
+        <h2>삽니다 목록</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>신청일</th>
+              <th>타입</th>
+              <th>도메인</th>
+              <th>신청자명</th>
+              <th>휴대폰번호</th>
+              <th>이메일</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% domainBuyList.forEach(d => { %>
+            <tr>
+              <td><%= d.datetime %></td>
+              <td>
+                <% if (d.type === 'premium') { %>
+                프리미엄
+                <% } else if (d.type === 'paid') { %>
+                유료
+                <% } else if (d.type === 'free') { %>
+                무료
+                <% } %>
+              </td>
+              <td><%= d.domainName %></td>
+              <td><%= d.buyerName %></td>
+              <td><%= d.buyerPhone %></td>
+              <td><%= d.buyerEmail %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <%- include('../pagination.ejs') %>
+      </div>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

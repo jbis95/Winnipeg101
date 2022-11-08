@@ -1,0 +1,54 @@
+<article>
+  <div class="wrap">
+    <%- include('../../flash.ejs') %>
+    <h1><%= __('user_join') %></h1>
+    <form name="frm" action="/join" method="POST" onsubmit="return onSubmit()">
+      <div id="uId">
+        <input type="text" name="uId" placeholder="<%= __('user_idOrEmailComment') %>">
+        <div class="guide"></div>
+      </div>
+      <div>
+        <input type="password" name="password" placeholder="<%= __('user_passwordComment') %>">
+        <div class="guide"></div>
+      </div>
+      <div>
+        <input type="password" name="passwordCheck" placeholder="<%= __('user_passwordCheck') %>">
+        <div class="guide"></div>
+      </div>
+      <div id="nickName">
+        <input type="text" name="nickName" placeholder="<%= __('user_nickName') %>">
+        <div class="guide"></div>
+      </div>
+      <div>
+        <input type="text" name="email" placeholder="<%= __('user_email') %>">
+        <div class="guide"></div>
+      </div>
+      <% if (locals.setting.invitePoint) { %>
+      <div>
+        <input type="text" name="inviteId" class="inviteId" placeholder="<%= __('user_inviteId') %>">
+        <div class="guide"></div>
+      </div>
+      <% } %>
+      <div><button id="joinBtn"><%= __('user_join') %></button></div>
+      <% if (locals.setting.termsAndPrivacy) { %>
+      <div class="agreement">
+        <label for="agreement">
+          <div><input type="checkbox" name="agreement" id="agreement"></div>
+          <div class="agreement__text"><%= __('user_agree') %></div>
+        </label>
+      </div>
+      <% } %>
+      <div class="etc"><%= __('user_aleadyMember') %> <a href="/login"><%= __('user_login') %></a></div>
+    </form>
+  </div>
+</article>
+<style>
+  button {
+    background-color: #00B0F0;
+  }
+
+  button:hover,
+  button:active {
+    background-color: #00B0F0;
+  }
+</style>

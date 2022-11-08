@@ -1,0 +1,88 @@
+<style>
+  article .banner__box__articleTop {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleTop %>, 1fr);
+  }
+
+  article .banner__box__articleBottom {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleBottom %>, 1fr);
+  }
+</style>
+<article>
+  <% if (locals.setting.adsenseTop) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseTop %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'articleTop' && b.status === 1).length) { %>
+    <%- include('../banner', { position: 'articleTop' }); %>
+  <% } %>
+  <h1><%= boardName %></h1>
+  <% if (categories.length) { %>
+  <div class="categories">
+    <div class="category"><a href="?category=">전체</a></div>
+    <% categories.forEach(c => { %>
+      <div class="category"><a href="?category=<%= c.id %>" style="color: <%= c.color %>;<% if (c.color) { %>background-color: #fff;<% } %>"><%= c.title %></a></div>
+    <% }) %>
+  </div>
+  <% } %>
+  <div class="articleList">
+    <% articles.forEach(a => { %>
+      <a class="item" href="/<%= boardSlug %>/<%= a.id %>">
+        <div class="image">
+          <% if (a.image) { %>
+          <img src="/assets/empty.png" alt="<%= a.image %>" style="background-image: url('<%= locals.s3Host %>/thumb/<%= a.image %>');">
+          <% } else if (a.youtube) { %>
+            <img src="/assets/empty.png" alt="<%= a.youtube %>" style="background-image: url('<%= a.youtube %>');">
+          <% } else { %>
+            <img src="/assets/empty.png" alt="none" style="background-image: url('/assets/none.png');">
+          <% } %>
+        </div>
+        <div class="info">
+          <div class="titleContainer">
+            <span class="title"><%= a.title %></span>
+            <% if (a.commentCount) { %>
+            <span class="commentCount"><img src="/assets/empty.png"><%= a.commentCount %></span>
+            <% } %>
+          </div>
+          <div class="etc">
+            <span class="nickName"><%= a.nickName %></span>
+            <span class="dot"></span>
+            <span class="permissionName"><%= a.permissionName %></span>
+            <span class="dot"></span>
+            <span class="datetime"><%= a.datetime %></span>
+          </div>
+        </div>
+      </a>
+    <% }) %>
+  </div>
+  <%- include('../pagination.ejs') %>
+  <div class="searchAndWrite">
+    <div></div>
+    <div>
+      <form action="/<%= boardSlug %>">
+        <div class="search">
+          <select name="searchType">
+            <option value="title"><%= __('board_title') %></option>
+            <option value="titleAndContent"><%= __('board_titleAndContent') %></option>
+            <option value="name"><%= __('board_user') %></option>
+          </select>
+          <input type="text" name="keyword">
+          <button><%= __('board_search') %></button>
+        </div>
+      </form>
+    </div>
+    <div class="write">
+      <% if (writePermission) { %>
+        <a href="/<%= boardSlug %>/new"><%= __('board_write') %></a>
+      <% } %>
+    </div>
+  </div>
+  <% if (locals.setting.adsenseBottom) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseBottom %>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'articleBottom' && b.status === 1).length) { %>
+    <%- include('../banner', { position: 'articleBottom' }); %>
+  <% } %>
+</article>

@@ -1,0 +1,70 @@
+<script src="/javascripts/layout/basic.js" defer></script>
+<style>
+  header {
+    color: <%= locals.setting.headerFontColor %>;
+    background-color: <%= locals.setting.headerBackgroundColor %>;
+  }
+  header .logo img {
+    max-width: <%= locals.setting.logoImageSize %>px;
+  }
+  @media (min-width: 1131px) {
+    header .navbarMenu > li > a {
+      color: <%= locals.setting.headerFontColor %>;
+    }
+    header .navbarUser > li > a {
+      color: <%= locals.setting.headerFontColor %>;
+    }
+  }
+</style>
+<header>
+  <div class="wrap">
+    <div class="logoWrap">
+      <a href="#" class="toggleBtn"><img src="/svg/menu.svg" alt="메뉴"></a>
+      <div class="logo">
+        <% if (locals.setting.logoType === 'text') { %>
+        <a href="/" style="color: <%= locals.setting.headerFontColor %>;"><%= locals.setting.siteName %></a>
+        <% } else if (locals.setting.logoType === 'image') { %>
+        <a href="/"><img src="/logo/<%= locals.setting.logoImage %>" alt="<%= locals.setting.siteName %>"></a>
+        <% } %>
+      </div>
+    </div>
+    <nav class="navbar">
+      <ul class="navbarMenu">
+        <% locals.topMenus.forEach(m => { %>
+          <% if (!m.parentId) { %>
+            <li>
+              <a href="/<%= m.target %>" class="mainMenu" menuId="<%= m.id %>"><%= m.title %></a>
+              <% const subMenu = topMenus.filter(s => m.id === s.parentId) %>
+              <% if (subMenu.length) { %>
+              <ul class="sub">
+                <div class="blank"></div>
+                <div class="liContainer">
+                  <% for (let i = 0; i < subMenu.length; i ++) { %>
+                  <li><a href="/<%= subMenu[i].target %>"><%= subMenu[i].title %></a></li>
+                  <% if (i !== subMenu.length - 1) { %>
+                  <li class="line"></li>
+                  <% } %>
+                  <% } %>
+                </div>
+              </ul>
+              <% } %>
+          <% } else { %>
+            </li>
+          <% } %>
+        <% }) %>
+      </ul>
+      <ul class="navbarUser">
+      <% if (locals.user && locals.user.permission >= 10) { %>
+        <li><a href="/admin"><%= __('user_admin') %></a></li>
+      <% } %>
+      <% if (locals.user) { %>
+        <li><a href="/mypage"><%= __('user_mypage') %></a></li>
+        <li><a href="/logout"><%= __('user_logout') %></a></li>
+      <% } else { %>
+        <li><a href="/join"><%= __('user_join') %></a></li>
+        <li><a href="/login"><%= __('user_login') %></a></li>
+      <% } %>
+      </ul>
+    </nav>
+  </div>
+</header>

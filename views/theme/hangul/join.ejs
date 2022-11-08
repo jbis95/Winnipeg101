@@ -1,0 +1,176 @@
+<style>
+  article .wrap {
+    width: 100%;
+  }
+  
+  .domainGuide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .koreanDomain {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .koreanDomain a {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #538BF8;
+    font-weight: bold;
+    border: 3px solid #bbb;
+    background-color: #eee;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    color: #538BF8;
+  }
+
+  .domainGuide h2 {
+    display: flex;
+    justify-content: center;
+  }
+
+  .domainSubmit {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  table td {
+    border: 1px solid #bbb;
+    padding: 10px;
+    vertical-align: middle;
+  }
+
+  table .title {
+    font-weight: bold;
+  }
+
+  .comment {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #bbb;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .purchase {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 1130px) {
+    .koreanDomain {
+      width: 95%;
+    }
+
+    .domainSubmit {
+      width: 95%;
+    }
+
+    .purchase {
+      width: 95%;
+    }
+  }
+</style>
+<article>
+  <div class="wrap">
+    <h1><%= __('user_join') %></h1>
+    <form name="frm" action="/join" method="POST" onsubmit="return onSubmit()">
+      <div id="uId">
+        <input type="text" name="uId" placeholder="<%= __('user_idOrEmailComment') %>">
+        <div class="guide"></div>
+      </div>
+      <div>
+        <input type="password" name="password" placeholder="<%= __('user_passwordComment') %>">
+        <div class="guide"></div>
+      </div>
+      <div>
+        <input type="password" name="passwordCheck" placeholder="<%= __('user_passwordCheck') %>">
+        <div class="guide"></div>
+      </div>
+      <div id="nickName">
+        <input type="text" name="nickName" placeholder="<%= __('user_nickName') %>">
+        <div class="guide"></div>
+      </div>
+      <div>
+        <input type="text" name="email" placeholder="<%= __('user_email') %>">
+        <div class="guide"></div>
+      </div>
+      <div><button id="joinBtn"><%= __('user_join') %></button></div>
+      <% if (locals.setting.useTermsAndPrivacy) { %>
+      <div class="agreement">
+        <label for="agreement">
+          <div><input type="checkbox" name="agreement" id="agreement"></div>
+          <div class="agreement__text"><%= __('user_agree') %></div>
+        </label>
+      </div>
+      <% } %>
+      <div class="etc"><%= __('user_aleadyMember') %> <a href="/login"><%= __('user_login') %></a></div>
+      <% if (locals.setting.useTermsAndPrivacy) { %>
+        <div class="terms">
+          <h3><%= __('user_term') %></h3>
+          <div>
+            <div class="domainGuide">
+              <div class="domainSubmit">
+                <h2>도메인 구매정책 및 절차 이용동의</h2>
+                <div style="text-align: center;">도메인 소유권이전 이후 환불불가</div>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td rowspan="2" class="title">유료등록</td>
+                      <td>1만원 - 6개월까지 이용</td>
+                      <td>도메인 5개 내</td>
+                    </tr>
+                    <tr>
+                      <td>1.5천원 - 12개월</td>
+                      <td>도메인 5개 내</td>
+                    </tr>
+                    <tr>
+                      <td class="title">무료등록</td>
+                      <td colspan="2">매매 금액의 20% 판매자 수수료 부과</td>
+                    </tr>
+                    <tr>
+                      <td colspan="3" class="comment">* 유료등록은 기간 경과 후 재연장 없는 경우 무료등록으로 변경됨</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="purchase">
+                <h2>구매절차 안내</h2>
+                <div>도메인 구매신청, 입금-도메인 소유권 이전 확인 -한글.kr 에서 판매자에게 송금-구매완료</div>
+                <div>
+                  <div>무료등록: 거래금액의 20%를 판매자 수수료 부담</div>
+                  <div class="comment">* 도메인 소유자변경은 등록기관에 따라서  수일이 걸릴 수 있습니다</div>
+                </div>
+              </div>
+            </div>
+            <%- include(`../../theme/hangul/terms.ejs`) %>
+          </div>
+        </div>
+        <div class="privacy">
+          <h3><%= __('user_privacy') %></h3>
+          <div><%- include(`../../theme/hangul/privacy.ejs`) %></div>
+        </div>
+      <% } %>
+    </form>
+  </div>
+</article>

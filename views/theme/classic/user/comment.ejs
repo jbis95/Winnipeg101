@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <link rel="stylesheet" href="/stylesheets/user.css">
+    <script src="/javascripts/user.js" defer></script>
+    <style>
+      h1, h2 {
+        color: <%= locals.setting.pointColor %>;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <div class="wrap">
+        <article id="myArticleAndComment">
+          <h1>내가 쓴 댓글</h1>
+          <form action="/mypage/comment<% if (page) { %>?page=<%= page %><% } %>" method="POST">
+            <div class="space__between">
+              <input type="checkbox" name="all" class="all">
+              <button>삭제 <img class="icon" src="/theme/cheestalk/assets/trash.svg"></button>
+            </div>
+            <div class=items>
+              <% comments.forEach(c => { %>
+                <div class="item">
+                  <div class="left">
+                    <div><input type="checkbox" name="comments" class="checkbox" value="<%= c.id %>"></div>
+                    <div class="title_and_info">
+                      <div class="title"><a href="/<%= c.boardSlug %>/<%= c.aId %>"><%= c.content %></a></div>
+                      <div class="etc_info"><%= c.datetime %> | <% if (c.parent) { %><%= c.parent %> ><% } %> <%= c.boardName %></div>
+                      <div class="parent"><%= c.articleTitle %></div>
+                    </div>
+                  </div>
+                  <div class="right">
+                    <div><img class="icon" src="/theme/cheestalk/assets/comment.svg"> <%= c.replyCount %></div>
+                    <div><img class="icon" src="/theme/cheestalk/assets/unlike.svg"> <%= c.likeCount %></div>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          </form>
+        </article>
+      </div>
+      <%- include('../pagination.ejs') %>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <h2><%= board.title %> 상세설정</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>쓰기 포인트 +</th>
+                <th>댓글쓰기 포인트 +</th>
+                <th>읽기 포인트 -</th>
+                <th>링크 사용</th>
+                <th>자료실 사용</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/board/detail/<%= board.id %>" method="POST">
+                <tr>
+                  <td><input type="text" name="writePoint" value="<%= board.writePoint %>" placeholder="쓰기 포인트 +"></td>
+                  <td><input type="text" name="commentPoint" value="<%= board.commentPoint %>" placeholder="댓글쓰기 포인트 +"></td>
+                  <td><input type="text" name="readPoint" value="<%= board.readPoint %>" placeholder="읽기 포인트 -"></td>
+                  <td>
+                    <select name="useLink">
+                      <option value="1"<% if (board.useLink) { %> selected<% } %>>사용</option>
+                      <option value="0"<% if (!board.useLink) { %> selected<% } %>>미사용</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="useFileUpload">
+                      <option value="1"<% if (board.useFileUpload) { %> selected<% } %>>사용</option>
+                      <option value="0"<% if (!board.useFileUpload) { %> selected<% } %>>미사용</option>
+                    </select>
+                  </td>
+                  <td><button>설정</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+          <h2>카테고리</h2>
+          <table>
+            <thead>
+              <tr>
+                <th><%= __('admin_number') %></th>
+                <th><%= __('admin_categoryName') %></th>
+                <th><%= __('admin_displayOrder') %></th>
+                <th><%= __('admin_color') %></th>
+                <th><%= __('admin_image') %></th>
+                <th><%= __('admin_edit') %></th>
+                <th><%= __('admin_delete') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% categories.forEach(c => { %>
+                <form action="/admin/category/edit/<%= c.id %>" method="POST" enctype="multipart/form-data">
+                <form>
+                  <tr>
+                    <input type="hidden" name="board" value="<%= board.id %>">
+                    <td><%= c.id %></td>
+                    <td><input type="text" name="title" value="<%= c.title %>" placeholder="<%= __('admin_categoryName') %>"></td>
+                    <td><input type="text" name="viewOrder" value="<%= c.viewOrder %>" placeholder="<%= __('admin_displayOrder') %>"></td>
+                    <td><input type="text" name="color" value="<%= c.color %>" placeholder="<%= __('admin_color') %>"></td>
+                    <td>
+                      <div><img src="<%= locals.s3Host %>/category/<%= c.image %>" alt="<%= c.image %>"></div>
+                      <div><input type="file" name="file"></div>
+                    </td>
+                    <td><button name="submit" value="edit"><%= __('admin_edit') %></button></td>
+                    <td><button name="submit" value="delete"><%= __('admin_delete') %></button></td>
+                  </tr>
+                </form>
+              <% }) %>
+            </tbody>
+          </table>
+          <h2><%= __('admin_new') %></h2>
+          <table>
+            <thead>
+              <tr>
+                <th><%= __('admin_categoryName') %></th>
+                <th><%= __('admin_submit') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/category/new" method="POST">
+                <tr>
+                  <input type="hidden" name="board" value="<%= board.id %>">
+                  <td><input type="text" name="title" placeholder="<%= __('admin_categoryName') %>"></td>
+                  <td><button name="submit" value="new"><%= __('admin_submit') %></button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

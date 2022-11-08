@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../../head.ejs') %>
+    <%- include('../../admin/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('../../admin/header.ejs') %>
+          <%- include('../../flash.ejs') %>
+          <h2>방송 LIVE</h2>
+          <table>
+            <thead>
+              <tr>
+                <td>방송 LIVE 상태</td>
+                <td>바로가기</td>
+                <td>VideoID</td>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/broadcast" method="POST">
+                <tr>
+                  <td>
+                    <% if (youtubeLive) { %>
+                      LIVE <span class="red">●</span>
+                    <% } else { %>
+                      중단
+                    <% } %>
+                  </td>
+                  <td><a href="https://www.youtube.com/watch?v=<%= videoId %>" target="_blank"><button type="button">바로가기</button></a></td>
+                  <td><input type="text" value="<%= videoId %>" disabled></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+          <h2>방송 설정</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>채널ID</th>
+                <th>API KEY</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/broadcast/edit" method="POST">
+                <tr>
+                  <td><input type="text" name="channelId" value="<%= youtubeInfo.channelId %>" placeholder="채널ID"></td>
+                  <td><input type="text" name="apiKey" value="<%= youtubeInfo.apiKey %>" placeholder="API KEY"></td>
+                  <td><button>설정</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+          <h2>뷰봇 설정</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>상태</th>
+                <th>시작</th>
+                <th>정지</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/bot/status" method="POST">
+                <tr>
+                  <td>
+                    <% if (youtubeBotStatus) { %>
+                      진행중
+                    <% } else { %>
+                      정지
+                    <% } %>
+                  </td>
+                  <td><button name="submit" value="start">시작</button></td>
+                  <td><button name="submit" value="stop">정지</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+          <h2>뷰봇 로그</h2>
+          <table>
+            <thead>
+              <tr>
+                <td>로그</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><textarea name="viewBotLog" class="viewBotLog" disabled></textarea></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </main>
+    <%- include('../../footer.ejs') %>
+    <style>
+      .viewBotLog {
+        height: 100px;
+      }
+    </style>
+  </body>
+</html>

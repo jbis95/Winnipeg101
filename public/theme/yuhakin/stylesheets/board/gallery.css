@@ -1,0 +1,88 @@
+/* List */
+.articleList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+.item {
+  border-radius: 8px;
+  background-color: #fff;
+  border: 1.5px solid #eee;
+}
+
+.item .category,
+.item .notice {
+  color: #697183;
+  background-color: #f5f6f9;
+  border-radius: 6px;
+  padding: 4px 6px;
+  margin-right: 8px;
+  font-size: 0.9em;
+  word-break: keep-all;
+  box-sizing: border-box;
+}
+
+.image {
+  background-color: #fff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.image img {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.articleList .info {
+  padding: 20px;
+  background-color: #fff;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.info .titleContainer {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  margin-bottom: 10px;
+}
+
+.info .titleContainer .commentCount {
+  /* font-size: 0.9em; */
+  color: #9da5b6;
+}
+
+.info .titleContainer .commentCount img {
+  width: 14px;
+  height: 14px;
+  margin-left: 4px;
+  margin-right: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('/assets/comment-dots-regular.svg');
+}
+
+.info .etc {
+  font-size: 0.9em;
+  color: #9da5b6;
+}
+
+@media (max-width: 1280px) {
+  .articleList {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

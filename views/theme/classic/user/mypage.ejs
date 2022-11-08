@@ -1,0 +1,21 @@
+<article id="mypage">
+  <h1><%= __('user_mypage') %></h1>
+  <div class="center">
+    <div class="member_image">
+    </div>
+    <form action="/mypage" method="POST">
+      <div><input type="text" name="id" value="<%= user.id %>" hidden></div>
+      <div class="permission"><%= __('user_memberGrade') %> : <%= user.permission %> / 포인트 : <%= Number(user.point).toLocaleString() %></div>
+      <div class="nickName">
+        <div><input type="text" name="nickName" value="<%= user.nickName %>" placeholder="<%= __('user_nickName') %>"></div>
+      </div>
+      <div class="password">
+        <div><input type="password" name="oldPassword" placeholder="<%= __('user_oldPassword') %>"></div>
+        <div><input type="password" name="password" placeholder="<%= __('user_password') %>"></div>
+        <div><input type="password" name="passwordCheck" placeholder="<%= __('user_passwordCheck') %>"></div>
+      </div>
+      <div><button><%= __('user_editAccount') %></button></div>
+      <div><a href="/mypage/pointWithdraw"><button type="button"><%= __('user_pointWithdraw') %></button></a></div>
+    </form>
+  </div>
+</article>

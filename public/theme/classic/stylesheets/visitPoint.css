@@ -1,0 +1,9 @@
+.mode {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  padding: 20px;
+  margin-bottom: 30px;
+  border: 2px solid #bbb;
+  background-color: #eee;
+}

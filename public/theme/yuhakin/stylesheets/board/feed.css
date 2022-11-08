@@ -1,0 +1,95 @@
+.articleList {
+  display: flex;
+  flex-direction: column;
+  border-top: 1.5px solid #DADADA;
+  padding-top: 20px;
+  /* margin-top: 20px; */
+}
+
+.articleList .item {
+  display: flex;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1.5px solid #DADADA;
+}
+
+.articleList .item div {
+  /* border: 1px solid red; */
+}
+
+.articleList .item .image {
+  padding-right: 20px;
+}
+
+.articleList .item .image img {
+  border-radius: 12px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  back
+}
+
+.articleList .item .info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.articleList .item .info .titleContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.articleList .item .info .titleContainer .title {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.articleList .item .info .titleContainer .datetime {
+  color: #bbb;
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  height: 74px;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+}
+
+@media (max-width: 1280px) {
+  .articleList .item {
+    flex-direction: column;
+  }
+
+  .articleList .item .image {
+    padding-right: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .articleList .item .image img {
+    width: 100%;
+  }
+
+  .articleList .item .info {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .articleList .item .info .title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .articleList .item .info .datetime {
+    word-break: keep-all;
+  }
+}

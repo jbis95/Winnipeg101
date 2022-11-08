@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../theme/classic/head.ejs') %>
+    <style>
+      :root {
+        --gap: <%= locals.setting.bannerGapDesktop %>px;
+        --mobile-gap: <%= locals.setting.bannerGapMobile %>px;
+      }
+
+      body {
+        color: <%= locals.setting.bodyFontColor %>;
+        background-color: <%= locals.setting.bodyBackgroundColor %>;
+      }
+      .list .gridItem {
+        border-top: 2px solid <%= locals.setting.pointColor %>;
+      }
+    </style>
+    <!-- Meta Start -->
+    <% if (type === 'list' || type === 'gallery' || type === 'bookmark') { %>
+      <meta name="description" content="<%= locals.setting.siteDescription %>">
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="<%= locals.setting.siteName %>">
+      <meta property="og:description" content="<%= locals.setting.siteDescription %>">
+      <meta property="og:image" content="<%= locals.setting.siteDomain %>/favicon/original.png">
+      <meta property="og:image:width" content="200">
+      <meta property="og:image:height" content="200">
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/<%= boardSlug %>">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/<%= boardSlug %>">
+    <% } else if (type === 'read') { %>
+      <meta name="description" content="<%= article.ogContent %>">
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="<%= article.title %>">
+      <meta property="og:description" content="<%= article.ogContent %>">
+      <meta property="og:image" content="<%= article.ogImage %>">
+      <meta property="og:image:width" content="200">
+      <meta property="og:image:height" content="200">
+      <meta property="og:url" content="<%= article.url %>">
+      <link rel="canonical" href="<%= article.url %>">
+    <% } else { %>
+      <meta name="description" content="<%= locals.setting.siteDescription %>">
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="<%= locals.setting.siteName %>">
+      <meta property="og:description" content="<%= locals.setting.siteDescription %>">
+      <meta property="og:image" content="<%= locals.setting.siteDomain %>/favicon/original.png">
+      <meta property="og:image:width" content="200">
+      <meta property="og:image:height" content="200">
+    <% } %>
+    <!-- Meta End -->
+    <!-- Meta Keyword Start -->
+    <% if (type === 'read') { %>
+      <% if (locals.setting.metaTagKeyword) { %>
+        <meta name="keywords" content="<%= locals.setting.metaTagKeyword %>">
+      <% } else { %>
+        <meta name="keywords" content="<%= locals.setting.metaTagKeyword %>">
+      <% } %>
+    <% } else { %>
+      <% if (locals.setting.metaTagKeyword) { %>
+        <meta name="keywords" content="<%= locals.setting.metaTagKeyword %>">
+      <% } %>
+    <% } %>
+    <!-- Meta Keyword End -->
+    <% if (type === 'index') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/aside.css">
+      <link rel="stylesheet" href="/stylesheets/indexLayout/<%= locals.setting.indexLayout %>.css">
+    <% } else if (type === 'list') { %>
+      <link rel="stylesheet" href="/theme/classic/stylesheets/aside.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/board/list.css">
+    <% } else if (type === 'gallery') { %>
+      <link rel="stylesheet" href="/theme/classic/stylesheets/aside.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/board/gallery.css">
+    <% } else if (type === 'bookmark') { %>
+      <link rel="stylesheet" href="/theme/classic/stylesheets/aside.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/board/bookmark.css">
+    <% } else if (type === 'read') { %>
+      <script src="/theme/classic/javascripts/read.js" defer></script>
+      <link rel="stylesheet" href="/theme/classic/stylesheets/aside.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/board/read.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/comments.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/content.css">
+      <style>
+        .content a {
+          color: <%= locals.setting.pointColor %>;
+        }
+      </style>
+    <% } else if (type === 'new') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/<%= board.slug %>/new">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/<%= board.slug %>/new">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/aside.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/board/editor.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/content.css">
+      <%- include('../theme/classic/editorHeader.ejs') %>
+    <% } else if (type === 'edit') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/<%= board.slug %>/edit">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/<%= board.slug %>/edit">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/aside.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/board/editor.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/content.css">
+      <%- include('../theme/classic/editorHeader.ejs') %>
+    <% } else if (type === 'page') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/<%= page.slug %>">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/<%= page.slug %>">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/aside.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/content.css">
+      <style>
+        .content a {
+          color: <%= locals.setting.pointColor %>;
+        }
+      </style>
+      <style>
+        <%- page.css %>
+      </style>
+      <script>
+        <%- page.js %>
+      </script>
+    <% } else if (type === 'login') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/login">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/login">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/login-and-join.css">
+    <% } else if (type === 'join') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/join">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/join">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/login-and-join.css">
+      <script src="/theme/classic/javascripts/login-and-join.js" defer></script>
+    <% } else if (type === 'mypage') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/mypage">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/mypage">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/aside.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/user.css">
+    <% } else if (type === 'pointWithdraw') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/mypage/pointWithdraw">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/mypage/pointWithdraw">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/aside.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/user.css">
+    <% } else if (type === 'findId' || type === 'findId-email' || type === 'findId-sms' || type === 'findId-sms-verify' || type === 'findId-sms-complete' || type === 'findPassword' || type === 'findPassword-email' || type === 'findPassword-sms' || type === 'findPassword-sms-verify' || type === 'newPassword') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/<%= url %>">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/<%= url %>">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/aside.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/certification.css">
+    <% } else if (type === 'visitPoint') { %>
+      <meta property="og:url" content="<%= locals.setting.siteDomain %>/visitPoint">
+      <link rel="canonical" href="<%= locals.setting.siteDomain %>/visitPoint">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/aside.css">
+      <link rel="stylesheet" href="/theme/classic/stylesheets/visitPoint.css">
+    <% } else if (type === 'permission') { %>
+      <link rel="stylesheet" href="/theme/classic/stylesheets/aside.css">
+    <% } %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <div class="wrap">
+        <% if (type !== 'login' && type !== 'join') { %>
+          <%- include('../theme/classic/aside.ejs') %>
+        <% } %>
+        <% if (type === 'index') { %>
+          <%- include('../index.ejs') %>
+        <% } else if (type === 'list') { %>
+          <%- include('../theme/classic/board/list.ejs') %>
+        <% } else if (type === 'gallery') { %>
+          <%- include('../theme/classic/board/gallery.ejs') %>
+        <% } else if (type === 'bookmark') { %>
+          <%- include('../theme/classic/board/bookmark.ejs') %>
+        <% } else if (type === 'read') { %>
+          <%- include('../theme/classic/board/read.ejs') %>
+        <% } else if (type === 'new') { %>
+          <%- include('../theme/classic/board/new.ejs') %>
+        <% } else if (type === 'edit') { %>
+          <%- include('../theme/classic/board/edit.ejs') %>
+        <% } else if (type === 'page') { %>
+          <%- include('../theme/classic/page.ejs') %>
+        <% } else if (type === 'login') { %>
+          <%- include('../theme/classic/login.ejs') %>
+        <% } else if (type === 'join') { %>
+          <%- include('../theme/classic/join.ejs') %>
+        <% } else if (type === 'mypage') { %>
+          <%- include('../theme/classic/user/mypage.ejs') %>
+        <% } else if (type === 'pointWithdraw') { %>
+          <%- include('../theme/classic/user/pointWithdraw.ejs') %>
+          <% } else if (type === 'findId') { %>
+          <%- include('../theme/classic/findId.ejs') %>
+        <% } else if (type === 'findId-email') { %>
+          <%- include('../theme/classic/findId-email.ejs') %>
+        <% } else if (type === 'findId-sms') { %>
+          <%- include('../theme/classic/findId-sms.ejs') %>
+        <% } else if (type === 'findId-sms-verify') { %>
+          <%- include('../theme/classic/findId-sms-verify.ejs') %>
+        <% } else if (type === 'findId-sms-complete') { %>
+          <%- include('../theme/classic/findId-sms-complete.ejs') %>
+        <% } else if (type === 'findPassword') { %>
+          <%- include('../theme/classic/findPassword.ejs') %>
+        <% } else if (type === 'findPassword-email') { %>
+          <%- include('../theme/classic/findPassword-email.ejs') %>
+        <% } else if (type === 'findPassword-sms') { %>
+          <%- include('../theme/classic/findPassword-sms.ejs') %>
+        <% } else if (type === 'findPassword-sms-verify') { %>
+          <%- include('../theme/classic/findPassword-sms-verify.ejs') %>
+        <% } else if (type === 'newPassword') { %>
+          <%- include('../theme/classic/newPassword.ejs') %>
+        <% } else if (type === 'visitPoint') { %>
+          <%- include('../theme/classic/visitPoint.ejs') %>
+        <% } else if (type === 'permission') { %>
+          <%- include('../theme/classic/permission.ejs') %>
+        <% } else if (type === '404') { %>
+          <%- include('../theme/classic/404.ejs') %> 
+        <% } %>
+      </div>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

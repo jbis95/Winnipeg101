@@ -1,0 +1,250 @@
+article .sub .back {
+  display: flex;
+  margin-bottom: var(--gap);
+}
+
+article .sub .back a {
+  font-weight: bold;
+  color: white;
+    background-color: #37475A;
+  border-radius: 12px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 30px 0 rgba(0,0,0,0.06);
+}
+
+article .item {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  margin-bottom: var(--gap);
+  box-shadow: 0 2px 30px 0 rgba(0,0,0,0.06);
+}
+
+article .item > .info {
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+article .info .etc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+article .info .etc .right {
+  position: relative;
+}
+
+article .info .etc .right .buttons img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('/assets/ellipsis-v-solid.svg');
+  cursor: pointer;
+}
+
+article .info .etc .right .popUp {
+  display: none;
+  top: 30px;
+  right: 0;
+  position: absolute;
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1),0 0 2px 0 rgba(0,0,0,0.05);
+  word-break: keep-all;
+  z-index: 1;
+}
+
+article .info .etc .right .popUp.active {
+  display: flex;
+}
+
+article .info .etc .right .popUp button {
+  font-size: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 0;
+  border-radius: 8px;
+  color: #525662;
+}
+
+article .info .etc .right .popUp li {
+  display: flex;
+  align-items: center;
+}
+
+article .info .etc .right .popUp button:hover,
+article .info .etc .right .popUp button:active {
+  background-color: #F7F8F9;
+}
+
+article .info .etc .right .popUp img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+article .info .etc .right .popUp .edit img {
+  background-image: url('/assets/edit-regular.svg');
+}
+
+article .info .etc .right .popUp .delete img {
+  background-image: url('/assets/trash-alt-regular.svg');
+}
+
+article .info .titleContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+article .info .category {
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: #687182;
+  background-color: #f5f6f9;
+  margin-right: 10px;
+  word-break: keep-all;
+}
+
+article .info h1 {
+  display: inline;
+}
+
+article .info .etc {
+  color: #9da5b6;
+  padding: 5px 0;
+}
+
+article .info .etc img {
+  width: 10px;
+  margin-right: 6px;
+}
+
+article .info .etc img {
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+article .info .etc .viewCount img {
+  background-image: url('/assets/eye.svg');
+}
+
+article .info .etc .likeCount {
+  color: #EF5350;
+}
+
+article .info .etc .likeCount img {
+  background-image: url('/theme/autoworld/assets/thumbs-up-regular.svg');
+}
+
+article .link,
+article .file {
+  padding: 0 10px;
+  margin-bottom: 20px;
+}
+
+article .link a,
+article .file a {
+  color: blue;
+  text-decoration: underline;
+}
+
+article .content .image {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+article .content .media {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+article .likeContainer {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+article .listAndEdit {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--gap);
+}
+
+article .listAndEdit .list {
+  z-index: 2;
+}
+
+article .likeContainer button,
+article .listAndEdit button {
+  font-size: 1em;
+  color: #fff;
+  background-color: #37475A;
+  border-radius: 6px;
+  padding: 10px 20px;
+  border: 0;
+  word-break: keep-all;
+}
+
+article .likeContainer button:hover,
+article .likeContainer button:active,
+article .listAndEdit button:hover,
+article .listAndEdit button:active {
+  /* background-color: #EEF0F4; */
+}
+
+article .listAndEdit .articleButton form {
+  display: flex;
+}
+
+article .listAndEdit .articleButton .edit {
+  margin-right: 10px;
+}
+
+@media (max-width: 1130px) {
+  article .info h1 {
+    font-size: 1.3em;
+  }
+
+  article .info .category {
+    font-size: 0.8em;
+  }
+
+  article .sub {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  article .item {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  article .listAndEdit {
+    font-size: 0.8em;
+  }
+
+  article .info .etc .right .popUp button {
+    font-size: 0.8em;
+  }
+}

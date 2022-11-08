@@ -1,0 +1,76 @@
+.content {
+  width: 100%;
+  word-break: break-word;
+  margin-bottom: 30px;
+}
+
+.tags {
+  color: #bbb;
+  margin-bottom: 30px;
+}
+
+.content h1,
+.content h2 {
+  padding: 0;
+  margin: 0;
+}
+
+.content strong {
+  font-weight: bold;
+}
+
+.content i {
+  font-style: italic;
+}
+
+.content ul {
+  list-style: inside;
+  padding-left: 30px;
+}
+
+.content ol {
+  list-style: decimal;
+  padding-left: 50px;
+}
+
+.content img {
+  max-width: 100%;
+}
+
+.content blockquote {
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  margin-left: 0;
+  margin-right: 0;
+  font-style: italic;
+  border-left: 5px solid #ccc;
+}
+
+.content th,
+.content td {
+  padding: 10px;
+  border: 1px solid #B6B6B6;
+}
+
+.content .youtube {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  margin-bottom: 30px;
+}
+
+.content .youtube iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 1130px) {
+  .content p {
+    padding: 0 10px;
+  }
+}

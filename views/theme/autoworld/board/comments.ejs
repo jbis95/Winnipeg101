@@ -1,0 +1,76 @@
+<div class="commentsTitle">
+  <span><%= __('comment_comments') %></span>
+  <span class="commentDot"></span>
+  <span class="commentCount"><%= comments.length %></span>
+</div>
+<div class="comments" id="comments">
+  <% comments.forEach(c => { %>
+    <% if (c.status) { %>
+      <div class="comment" aid="<%= article.id %>" cid="<%= c.id %>" pid="<%= c.comment_parent_id %>" gid="<%= c.comment_group_id %>">
+        <% if (c.comment_parent_id) { %>
+        <div class="isReply"></div>
+        <% } %>
+        <div class="main">
+          <div class="info">
+            <div class="left">
+              <span class="permissionImage"><img src="<%= c.permissionImage %>" style="width: 20px; height: 20px;"></span><span class="nickName"><%= c.nickName %></span><span class="dear">님</span>
+            </div>
+            <div class="right">
+              <span class="datetime"><%= c.datetime %></span>
+            </div>
+          </div>
+          <% if (c.likeCount) { %>
+          <div class="likeCount"><div class="likeWrap"><span><img src="/assets/empty.png"></span><span class="text"><%= c.likeCount %></span></div></div>
+          <% } %>
+          <div class="commentContent" id="commentContent"><% if (c.comment_parent_id && c.comment_parent_id !== c.comment_group_id) { %>@<span class="bold"><%= c.parent.nickName %></span>님 <% } %><%- c.content %></div>
+          <div class="buttons">
+            <div class="left">
+              
+            </div>
+            <div class="right">
+              <div class="likeBtn">
+                <div class="commentReply"><button id="commentReply">대댓글</button></div>
+                <% if (c.userLike) { %>
+                <div class="commentLike"><button id="commentLike">공감취소</button></div>
+                <% } else { %>
+                <div class="commentLike"><button id="commentLike">공감</button></div>
+                <% } %>
+              </div>
+              <!-- <div>|</div> -->
+              <% if (locals.user && locals.user.id === c.userId || locals.user && locals.user.permission === 10) { %>
+              <div class="editBtn">
+                <div class="commentEdit"><button id="commentEdit"><%= __('comment_edit') %></button></div>
+                <div class="commentDelete"><button id="commentDelete"><%= __('comment_delete') %></button></div>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <div class="commentEtc" id="commentEtc"></div>
+        </div>
+      </div>
+    <% } else if (!c.status) { %>
+      <div class="comment" aid="<%= article.id %>" cid="<%= c.id %>" pid="<%= c.comment_parent_id %>" gid="<%= c.comment_group_id %>">
+        <% if (c.comment_parent_id) { %>
+          <div class="isReply"></div>
+          <% } %>
+          <div class="main">
+            <div class="info">
+              <span class="deleteComment">삭제된 댓글 입니다.</span>
+            </div>
+          </div>
+      </div>
+    <% } %>
+  <% }) %>
+</div>
+<div class="newComment" id="newComment">
+  <% if (locals.user) { %>
+    <div class="newCommentContent"><textarea name="content" placeholder="댓글을 작성해주세요"></textarea></div>
+    <div class="button"><button>댓글 쓰기</button></div>
+  <% } else if (commentPermission) { %>
+    <div class="newCommentContent"><textarea name="content" placeholder="<%= __('comment_needPermission') %>" disabled></textarea></div>
+    <div class="button"><button disabled>댓글 쓰기</button></div>
+  <% } else { %>
+    <div class="newCommentContent"><textarea name="content" placeholder="<%= __('comment_needLogin') %>" disabled></textarea></div>
+    <div class="button"><button disabled>댓글 쓰기</button></div>
+  <% } %>
+</div>

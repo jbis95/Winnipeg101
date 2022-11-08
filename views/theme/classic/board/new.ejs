@@ -1,0 +1,100 @@
+<style>
+  .content a {
+    color: <%= locals.setting.pointColor %>;
+  }
+</style>
+<script src="/javascripts/editor.js" defer></script>
+<article>
+  <h1><%= board.title %></h1>
+  <form name="frm" action="/<%= board.slug %>/new" method="POST" onsubmit="return onSubmit()">
+    <div>
+      <% if (categories.length) { %>
+      <select name="category" id="category">
+        <% categories.forEach(c => { %>
+        <option value="<%= c.id %>"><%= c.title %></option>
+        <% }) %>
+      </select>
+      <% } else { %>
+      <input type="hidden" id="category" value="0">
+      <% } %>
+    </div>
+    <div class="checkBox">
+      <% if (locals.user.permission === 10) { %>
+      <div class="notice">
+        <label for="notice"><%= __('board_notice') %></label>
+        <input type="checkbox" name="notice" id="notice" value="1">
+      </div>
+      <% } %>
+    </div>
+    <div>
+      <input type="text" name="title" id="title" placeholder="<%= __('board_title') %>">
+    </div>
+    <div class="content">
+      <textarea name="content" id="editor"></textarea>
+    </div>
+    <div class="tags">
+      <input type="text" name="tags" placeholder="<%= __('board_tags') %>">
+    </div>
+    <% if (board.customFieldUse01) { %>
+    <div>
+      <label for="customField01"><%= board.customFieldTitle01 %></label>
+      <input type="text" name="customField01">
+    </div>
+    <% } %>
+    <% if (board.customFieldUse02) { %>
+    <div>
+      <label for="customField02"><%= board.customFieldTitle02 %></label>
+      <input type="text" name="customField02">
+    </div>
+    <% } %>
+    <% if (board.customFieldUse03) { %>
+    <div>
+      <label for="customField03"><%= board.customFieldTitle03 %></label>
+      <input type="text" name="customField03">
+    </div>
+    <% } %>
+    <% if (board.customFieldUse04) { %>
+    <div>
+      <label for="customField04"><%= board.customFieldTitle04 %></label>
+      <input type="text" name="customField04">
+    </div>
+    <% } %>
+    <% if (board.customFieldUse05) { %>
+    <div>
+      <label for="customField05"><%= board.customFieldTitle05 %></label>
+      <input type="text" name="customField05">
+    </div>
+    <% } %>
+    <% if (board.customFieldUse06) { %>
+    <div>
+      <label for="customField06"><%= board.customFieldTitle06 %></label>
+      <input type="text" name="customField06">
+    </div>
+    <% } %>
+    <% if (board.customFieldUse07) { %>
+    <div>
+      <label for="customField07"><%= board.customFieldTitle07 %></label>
+      <input type="text" name="customField07">
+    </div>
+    <% } %>
+    <% if (board.customFieldUse08) { %>
+    <div>
+      <label for="customField08"><%= board.customFieldTitle08 %></label>
+      <input type="text" name="customField08">
+    </div>
+    <% } %>
+    <% if (board.customFieldUse09) { %>
+    <div>
+      <label for="customField09"><%= board.customFieldTitle09 %></label>
+      <input type="text" name="customField09">
+    </div>
+    <% } %>
+    <% if (board.customFieldUse10) { %>
+    <div>
+      <label for="customField10"><%= board.customFieldTitle10 %></label>
+      <input type="text" name="customField10">
+    </div>
+    <% } %>
+    <button id="submit"><%= __('board_submitArticle') %></button>
+  </form>
+</article>

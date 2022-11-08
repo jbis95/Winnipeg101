@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <div class="wrap">
+        <%- include('./header.ejs') %>
+        <div class="list">
+          <h2><%= __('plugins') %></h2>
+          <table>
+            <thead>
+              <tr>
+                <th><%= __('plugin') %></th>
+                <th><%= __('setting') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% plugins.forEach(p => { %>
+              <form action="/admin/plugin/edit/<%= p.id %>" method="POST">
+                <tr>
+                  <td><%= p.slug %></td>
+                  <td><button name="submit" value="delete"><%= __('delete') %></button></td>
+                </tr>
+              </form>
+              <% }) %>
+            </tbody>
+          </table>
+          <h2><%= __('addPlugin') %></h2>
+          <table>
+            <thead>
+              <tr>
+                <th><%= __('plugin') %></th>
+                <th><%= __('add') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/plugin/new" method="POST">
+                <tr>
+                  <td><input type="text" name="slug"></td>
+                  <td><button><%= __('add') %></button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

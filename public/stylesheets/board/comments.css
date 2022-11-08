@@ -1,0 +1,199 @@
+/* New Comment */
+.commentsTitle {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.newComment {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: #f8f9fc;
+}
+
+.newComment .newCommentContent {
+  flex: 1;
+  padding: 20px;
+}
+
+.newComment textarea {
+  font-size: 1em;
+  width: 100%;
+  height: 60px;
+  flex: 1;
+  border: 0;
+  background-color: transparent;
+}
+
+.newComment .button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  padding-top: 0;
+}
+
+.newComment button {
+  font-size: 1em;
+  color: #fff;
+  background-color: #cacfd8;
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 15px;
+}
+
+.newComment button:hover,
+.newComment button:active {
+  background-color: #B5B9C1;
+}
+
+.etcCommentContainer button:hover,
+.etcCommentContainer button:active {
+  background-color: #B5B9C1;
+}
+
+/* Comments */
+.comment {
+  display: flex;
+  margin-top: var(--gap);
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--list-line);
+}
+
+.comment:last-child {
+  border-bottom: 0;
+}
+
+.comment .dot {
+  margin: 0 8px;
+}
+
+.comment .isReply {
+  margin-left: 40px;
+}
+
+.comment .userImage {
+  width: 30px;
+  height: 30px;
+  background-color: #f8f9fc;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.comment .main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment .main .info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.comment .main .nickName {
+  font-weight: bold;
+}
+
+.comment .main .permissionName,
+.comment .main .datetime,
+.comment .main .likeCount {
+  color: #9da5b6;
+}
+
+.comment .main img {
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.comment .main .likeCount img {
+  background-image: url('/assets/thumbs-up-regular.svg');
+}
+
+article .main .commentContent {
+  margin-bottom: 15px;
+}
+
+article .main .buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+article .main .buttons .right {
+  display: flex;
+}
+
+article .main .buttons .right div {
+  display: flex;
+}
+
+article .main .buttons button {
+  font-size: 0.8em;
+  color: #697183;
+  background-color: #F5F6F9;
+  border-radius: 6px;
+  padding: 10px 20px;
+  border: 0;
+  word-break: keep-all;
+}
+
+article .main .buttons .commentReply,
+article .main .buttons .commentLike,
+article .main .buttons .commentEdit {
+  margin-right: 10px;
+}
+
+article .main .buttons button:hover,
+article .main .buttons button:active {
+  background-color: #EEF0F4;
+}
+
+/* Rewrite Comment */
+.commentEtc .etcCommentContainer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: #f8f9fc;
+  margin-bottom: 15px;
+}
+
+.commentEtc .etcCommentContent {
+  flex: 1;
+  padding: 20px;
+}
+
+.commentEtc textarea {
+  font-size: 1em;
+  width: 100%;
+  height: 60px;
+  flex: 1;
+  border: 0;
+  background-color: transparent;
+}
+
+.commentEtc .button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  padding-top: 0;
+}
+
+.commentEtc button {
+  font-size: 1em;
+  color: #fff;
+  background-color: #cacfd8;
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 15px;
+}
+
+@media (max-width: 1130px) {
+  .newComment button {
+    font-size: 0.8em;
+  }
+}

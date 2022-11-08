@@ -1,0 +1,138 @@
+<style>
+  article .banner__box__articleTop {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleTop %>, 1fr);
+  }
+
+  article .banner__box__articleBottom {
+    grid-template-columns: repeat(<%= locals.setting.bannerRowsArticleBottom %>, 1fr);
+  }
+  
+  .comment {
+    background-color: <%= locals.setting.pointBackgroundColor %>;
+    border: 2px solid <%= locals.setting.pointColor %>;
+  }
+  
+  .comment .line {
+    background-color: <%= locals.setting.pointColor %>;
+  }
+
+  .comment h2 {
+    color: <%= locals.setting.pointColor %>;
+  }
+
+  .guide .pointColor {
+    color: <%= locals.setting.pointColor %>;
+  }
+
+  .site .verify {
+    color: <%= locals.setting.pointColor %>;
+  }
+
+  .site .buttons .direct {
+    background-color: <%= locals.setting.pointColor %>;
+  }
+  
+  article .gridItem {
+    border-top: 2px solid <%= locals.setting.pointColor %>;
+  }
+</style>
+<article>
+  <% if (locals.setting.adsenseTop) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseTop %>
+  </div>
+  <% } %>
+  <div class="comment">
+    <h2>토토사이트 먹튀검증 커뮤니티</h2>
+    <div class="line_container">
+      <div class="line"></div>
+    </div>
+    <div>
+      사설 토토사이트 먹튀검증 커뮤니티 먹튀사이트의 검증커뮤니티 먹튀검증판 입니다.<br>
+      토토사이트 검증은 여러분의 제보와 저희의 철저한 검증기준을 통해 이루어집니다.<br>
+      먹튀사이트 등록은 정확한 자료를 증빙하셔야 등록할 수 있습니다.<br>
+      먹튀제보 및 검증 요청은 먹튀검증요청 게시판을 이용해주시기 바랍니다.
+    </div>
+  </div>
+  <div class="guide">
+    <p>먹튀검증판에서 <span class="yellow">보증하는 인증업체</span>는 <span class="pointColor">사고시 당첨금포함 전액보상</span> 약속드립니다.</p>
+  </div>
+  <div class="sites">
+    <% if (boards && boards[0]) { %>
+      <% boards[0].articles.forEach(a => { %>
+        <div class="site">
+          <div class="title"><%= a.title %></div>
+          <div class="image"><a href="/<%= boards[0].slug %>/<%= a.id %>"><img src="<%= s3Host %>/article/<%= a.image %>"></a></div>
+          <div class="verify__and__code">
+            <div class="verify">먹검판 인증업체</div>
+            <% if (a.customField01) { %>
+            <div class="code">가입코드 : <%= a.customField01 %></div>
+            <% } else { %>
+            <div class="code">가입코드 : 없음</div>
+            <% } %>
+          </div>
+          <div class="buttons">
+            <a href="<%= a.customField02 %>" href="_blank" class="direct">바로가기</a>
+            <a href="/<%= boards[0].slug %>/<%= a.id %>" class="info">사이트 정보</a>
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+  <div class="banner__box__articleTop">
+    <% locals.banners.forEach(b => { %>
+    <% if (b.position === 'indexTop' && b.status === 1) { %>
+      <div class="banner"><a href="<%= b.link %>"<% if (b.newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% } %>
+    <% }) %>
+  </div>
+  <div class="indexBoard__list">
+    <div class="gridContainer">
+      <% if (boards) { %>
+      <% boards.forEach(b => { %>
+        <% if (b.id === 0) { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><%= b.title %></a></h2>
+              <!-- <div class="more"><a href="/<%= b.slug %>"><%= __('board_more') %></a></div> -->
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title"><a href="/<%= a.boardSlug %>/<%= a.id %>"><%= a.title %></a><% if (a.commentCount) { %><span class="commentCount"> <%= a.commentCount %></span><% } %></div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <% if (boards[0].id !== b.id) { %>
+          <div class="gridItem">
+            <div class="titleSpaceBetween">
+              <h2><a href="/<%= b.slug %>"><%= b.title %></a></h2>
+              <div class="more"><a href="/<%= b.slug %>"><%= __('board_more') %></a></div>
+            </div>
+            <% b.articles.forEach(a => { %>
+              <div class="contentSpaceBetween">
+                <div class="title"><a href="/<%= b.slug %>/<%= a.id %>"><%= a.title %></a><% if (a.commentCount) { %><span class="commentCount"> <%= a.commentCount %></span><% } %></div>
+                <div class="datetime"><%= a.datetime %></div>
+              </div>
+            <% }) %>
+          </div>
+          <% } %>
+        <% } %>
+      <% }) %>
+      <% } %>
+    </div>
+  </div>
+  <% if (locals.setting.adsenseBottom) { %>
+  <div class="adsense">
+    <%- locals.setting.adsenseBottom %>
+  </div>
+  <% } %>
+  <div class="banner__box__articleBottom">
+    <% locals.banners.forEach(b => { %>
+    <% if (b.position === 'indexBottom' && b.status === 1) { %>
+      <div class="banner"><a href="<%= b.link %>"<% if (b.newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% } %>
+    <% }) %>
+  </div>
+</article>

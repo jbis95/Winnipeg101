@@ -1,0 +1,79 @@
+<div class="comments__title"><%= __('comment_comments') %></div>
+<div class="new__comment" id="new__comment">
+  <% if (locals.user) { %>
+    <textarea name="content"></textarea>
+    <button><%= __('comment_submit') %></button>
+  <% } else if (commentPermission) { %>
+    <textarea name="content" placeholder="<%= __('comment_needPermission') %>" disabled></textarea>
+    <button disabled><%= __('comment_submit') %></button>
+  <% } else { %>
+    <textarea name="content" placeholder="<%= __('comment_needLogin') %>" disabled></textarea>
+    <button disabled><%= __('comment_submit') %></button>
+  <% } %>
+</div>
+<div class="comments" id="comments">
+  <% comments.forEach(c => { %>
+    <% if (c.status) { %>
+      <div class="comment" board="<%= boardSlug %>" aid="<%= article.id %>" cid="<%= c.id %>" pid="<%= c.comment_parent_id %>" gid="<%= c.comment_group_id %>">
+        <% if (c.comment_parent_id) { %>
+          <div class="isReply"></div>
+        <% } %>
+        <div class="comment__body">
+          <div class="info">
+            <div class="left">
+              <div class="user">
+                <% if (locals.setting.usePermissionImage) { %>
+                <div class="permissionImage"><img src="/permission/<%= c.permission %>.svg"></div>
+                <% } %>
+                <div><%= c.nickName %></div>
+              </div>
+              <% if (c.likeCount) { %>
+              <div class="datetime"><%= c.datetime %> / <%= __('comment_like') %> <%= c.likeCount %></div>
+              <% } else { %>
+              <div class="datetime"><%= c.datetime %></div>
+              <% } %>
+            </div>
+            <div class="buttons">
+              <div class="likeBtn">
+                <% if (c.userLike) { %>
+                <div class="comment_like"><button id="comment_like"><%= __('comment_unlike') %></button></div>
+                <% } else { %>
+                <div class="comment_like"><button id="comment_like"><%= __('comment_like') %></button></div>
+                <% } %>
+                <div class="comment_reply"><button id="comment_reply"><%= __('comment_reply') %></button></div>
+              </div>
+              <% if (locals.user && locals.user.id === c.userId || locals.user && locals.user.permission === 10) { %>
+              <div class="editBtn">
+                <div class="comment_edit"><button id="comment_edit"><%= __('comment_edit') %></button></div>
+                <div class="comment_delete"><button id="comment_delete"><%= __('comment_delete') %></button></div>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <% if (c.comment_parent_id && c.comment_parent_id !== c.comment_group_id) { %>
+          <div>@<%= c.parent.nickName %></div>
+          <% } %>
+          <div class="content" id="comment_content"><%- c.content %></div>
+          <div class="reply" id="reply_content"></div>
+          <div class="comment_etc" id="comment_etc"></div>
+        </div>
+      </div>
+    <% } else if (!c.status && c.replyCount) { %>
+      <div class="comment" board="<%= boardSlug %>" aid="<%= article.id %>" cid="<%= c.id %>" pid="<%= c.comment_parent_id %>" gid="<%= c.comment_group_id %>">
+        <% if (c.comment_parent_id) { %>
+          <div class="isReply"></div>
+        <% } %>
+        <div class="comment__body">
+          <div class="info">
+            <div class="left">
+              <div class="user"><%= c.nickName %></div>
+              <div class="datetime"><%= c.datetime %></div>
+            </div>
+          </div>
+          <div class="content" id="comment_content"><%= __('comment_deletedComment') %></div>
+          <div class="reply" id="reply_content"></div>
+        </div>
+      </div>
+    <% } %>
+  <% }) %>
+</div>

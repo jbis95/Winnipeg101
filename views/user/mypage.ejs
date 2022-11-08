@@ -1,0 +1,66 @@
+<style>
+  article .userImage {
+    <% if (locals.user.image) { %>
+    background-image: url('<%= s3Host %>/userImage/<%= locals.user.image %>');
+    <% } else { %>
+    background-image: url('/assets/userImage.svg');
+    <% } %>
+  }
+</style>
+<article id="mypage">
+  <h1><%= __('user_mypage') %></h1>
+  <div class="center">
+    <div class="userImage">
+      <label for="imageUpload"></label>
+      <input type="file" name="userImage" id="imageUpload">
+    </div>
+    <div>
+      <form action="/mypage" method="POST">
+        <div><input type="text" name="id" value="<%= user.id %>" hidden></div>
+        <div class="permission"><%= __('user_memberGrade') %> : <%= user.permission %> / 포인트 : <%= Number(user.point).toLocaleString() %></div>
+        <div class="nickName">
+          <div><input type="text" name="nickName" value="<%= user.nickName %>" placeholder="<%= __('user_nickName') %>"></div>
+        </div>
+        <div class="password">
+          <div><input type="password" name="oldPassword" placeholder="<%= __('user_oldPassword') %>"></div>
+          <div><input type="password" name="password" placeholder="<%= __('user_password') %>"></div>
+          <div><input type="password" name="passwordCheck" placeholder="<%= __('user_passwordCheck') %>"></div>
+        </div>
+        <div><button><%= __('user_editAccount') %></button></div>
+        <% if (locals.setting.usePointWithdraw) { %>
+        <div class="pointWithdraw"><a href="/mypage/pointWithdraw"><button type="button"><%= __('user_pointWithdraw') %></button></a></div>
+        <% } %>
+      </form>
+    </div>
+  </div>
+</article>
+<script>
+  const userImage = document.querySelectorAll('.userImage');
+  const imageUpload = document.querySelector('#imageUpload');
+  imageUpload.addEventListener('change', async () => {
+    const key = await setUserImage(imageUpload.files[0]);
+    if (key) {
+      userImage.forEach(i => {
+        i.style.backgroundImage = `url('<%= s3Host %>/userImage/${key}')`;
+      });
+    }
+  });
+
+  const setUserImage = (userImage) => {
+    return new Promise((resolve, reject) => {
+      const data = new FormData();
+      data.append('userImage', userImage);
+      const xhr = new XMLHttpRequest();
+      xhr.onload = () => {
+        if (xhr.status === 200 || xhr.status === 201) {
+          const result = JSON.parse(xhr.responseText);
+          resolve(result.key);
+        } else {
+          console.error(xhr.responseText);
+        }
+      };
+      xhr.open('POST', '/api/userImage');
+      xhr.send(data);
+    });
+  };
+</script>

@@ -1,0 +1,22 @@
+<article>
+  <div class="mode">자동 출석 모드 사용중입니다.</div>
+  <h2>출석부</h2>
+  <div class="table">
+    <div class="thead">
+      <div class="tr">
+        <div class="th">순위</div>
+        <div class="th">시간</div>
+        <div class="th">닉네임</div>
+      </div>
+    </div>
+    <div class="tbody">
+      <% visitList.forEach(l => { %>
+        <div class="tr<% if (locals.user && locals.user.id === l.point_user_ID) { %> yellow-background<% } %>">
+          <div class="td"><%= l.rank %> 위</div>
+          <div class="td"><%= l.datetime %></div>
+          <div class="td"><%= l.nickName %></div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</article>

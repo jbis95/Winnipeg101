@@ -1,0 +1,23 @@
+<style>
+  article .banner img {
+    <% if (locals.setting.bannerBorderRounding) { %>
+      border-radius: 12px;
+    <% } else { %>
+      border-radius: 0;
+    <% } %>
+  }
+</style>
+<div class="banner__box__<%= position %>">
+  <% locals.banners.forEach(b => { %>
+  <% if (b.position === position && b.status === 1) { %>
+    <div class="banner" id="banner<%= b.id %>"><a href="<%= b.link %>"<% if (b.newPage) { %> target="_blank"<% } %>><img src="<%= locals.s3Host %>/banner/<%= b.image %>" alt="<%= b.image %>"></a></div>
+    <% if (b.mobileHide) { %>
+      <style>
+        #banner<%= b.id %> {
+          display: none;
+        }
+      </style>
+    <% } %>
+  <% } %>
+  <% }) %>
+</div>

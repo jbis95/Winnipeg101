@@ -1,0 +1,164 @@
+/* Comments */
+article .comments__title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+article .comments {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+article .new__comment {
+  display: flex;
+  height: 80px;
+  margin-bottom: 30px;
+}
+
+article .new__comment textarea {
+  flex: 1;
+  font-size: 1em;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+article .new__comment button {
+  width: 100px;
+  font-size: 1em;
+  background-color: #eee;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+article .comment {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #bbb;
+  padding: 20px 0;
+}
+
+article .comment__body {
+  width: 100%;
+}
+
+article .comment .info {
+  display: flex;
+  justify-content: space-between;
+}
+
+article .comment .left {
+  display: flex;
+}
+
+article .comment .left .user {
+  margin-right: 30px;
+  display: flex;
+}
+
+article .comment .left .datetime {
+  color: #bbb;
+}
+
+article .comment .content {
+  margin: 10px 0;
+}
+
+article .comment .comment_editor {
+  display: flex;
+  height: 80px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+article .comment .comment_editor textarea {
+  flex: 1;
+  font-size: 1em;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+article .comment .comment_editor button {
+  width: 100px;
+  font-size: 1em;
+  background-color: #eee;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+article .comment .isReply {
+  margin-left: 30px;
+}
+
+article .comment .comment_etc {
+  display: flex;
+}
+
+article .comment .comment_etc textarea {
+  flex: 1;
+  height: 80px;
+  font-size: 0.9em;
+  padding: 10px;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+}
+
+article .comment .comment_etc button {
+  width: 100px;
+  height: 80px;
+  font-size: 0.9em;
+  margin-left: 10px;
+  border: 1px solid #bbb;
+  background-color: #eee;
+  box-sizing: border-box;
+}
+
+article .buttons button {
+  padding: 10px 20px;
+  background-color: #eee;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+}
+
+article .comment .buttons {
+  display: flex;
+}
+
+article .comment .buttons .likeBtn,
+article .comment .buttons .editBtn {
+  display: flex;
+}
+
+article .comment .buttons .likeBtn div:first-child {
+  margin-left: 0;
+}
+
+
+
+@media (max-width: 1130px) {
+  article .comments__title,
+  article .new__comment,
+  article .comment__body {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  article .comment__body {
+    position: relative;
+    padding-bottom: 50px;
+  }
+
+  article .comment__body .buttons {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+  }
+}

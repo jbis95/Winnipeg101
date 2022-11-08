@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <div class="list">
+            <h2><%= __('admin_memberPermission') %></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>권한</th>
+                  <th>타이틀</th>
+                  <th>자동등업 포인트 기준</th>
+                  <th>관리자</th>
+                  <th>이미지</th>
+                  <th>설정</th>
+                  <th>이미지 초기화</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% permissions.forEach(p => { %>
+                <form action="/admin/permission/edit/<%= p.id %>" method="POST" enctype="multipart/form-data">
+                  <tr>
+                    <td><%= p.permission %></td>
+                    <td><input type="text" name="title" value="<%= p.title %>" placeholder="타이틀"></td>
+                    <td><input type="text" name="pointBaseline" value="<%= p.pointBaseline %>" placeholder="등업 포인트"></td>
+                    <td><input type="checkbox" name="isAdmin" value="1"<% if (p.isAdmin) { %> checked<% } %>></td>
+                    <td>
+                      <% if (p.image) { %>
+                      <div><img src="<%= locals.s3Host %>/permission/<%= p.image %>"></div>
+                      <% } %>
+                      <div><input type="file" name="image"></div>
+                    </td>
+                    <td><button name="submit" value="edit">설정</button></td>
+                    <td><button name="submit" value="resetImage">초기화</button></td>
+                  </tr>
+                </form>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <link rel="stylesheet" href="/stylesheets/login-and-join.css">
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <div class="wrap">
+        <h1>회원탈퇴</h1>
+        <form action="/mypage/withdraw" method="POST">
+          <div>정말로 탈퇴하시겠습니까?</div>
+          <div><button value="withdraw">탈퇴</button></div>
+        </form>
+      </div>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>

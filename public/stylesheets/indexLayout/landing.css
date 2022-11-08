@@ -1,0 +1,155 @@
+body {
+  font-family: 'Do Hyeon', sans-serif;
+  background-color: #000;
+}
+
+#myVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+article {
+  height: 100%;
+  overflow-y: auto;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  background-image: url('/theme/landing/assets/bg.png');
+}
+
+.main {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 5px solid #fff;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.subTitle {
+  color: #fff;
+  font-size: 1.2em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  margin-bottom: 10px;
+}
+
+.logo img {
+  max-width: 100%;
+}
+
+.content {
+  color: #fff;
+  font-size: 1.2em;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.twitterComment {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.8em;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.tags {
+  color: yellow;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.url {
+  width: 100%;
+}
+
+.targetUrl,
+.twitterUrl {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  font-weight: bold;
+  font-size: 1.4em;
+  text-align: center;
+}
+
+.targetUrl {
+  color: red;
+  border: 2px solid red;
+  margin-bottom: 10px;
+}
+
+.targetUrl:hover,
+.targetUrl:active {
+  background-color: #330000;
+  /* background-color: rgba(255, 0, 0, 0.3); */
+}
+
+.twitterUrl {
+  color: #1EA1F1;
+  border: 2px solid #1EA1F1;
+  
+}
+
+.twitterUrl:hover,
+.twitterUrl:active {
+  background-color: #062030;
+  /* background-color: rgba(30, 161, 241, 0.3); */
+}
+
+.banners {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.banner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.banner a {
+  width: 100%;
+  display: flex;
+}
+
+.banner img {
+  width: 100%;
+}
+
+@media (max-width: 670px) {
+  article {
+    width: 100%;
+  }
+  
+  .main {
+    margin: 10px;
+  }
+
+  .tags {
+    margin-bottom: 40px;
+  }
+}

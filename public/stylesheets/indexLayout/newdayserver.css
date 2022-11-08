@@ -1,0 +1,119 @@
+.space__between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.space__between .buttons {
+  display: flex;
+}
+
+.schedule__gridContainer {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border: 1px solid #bbb;
+  margin-bottom: 30px;
+}
+
+.schedule__gridItem {
+  border-right: 1px solid #bbb;
+}
+
+.schedule__gridItem:nth-child(7),
+.schedule__gridItem:last-child {
+  border-right: 0;
+}
+
+.schedule__gridContainer .banner__box__custom {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+.schedule__gridContainer .banner {
+  /* grid-column: 1 / -1; */
+  width: 100%;
+}
+
+.today {
+  background-color: yellow;
+}
+
+.schedule__gridItem .day,
+.schedule__gridItem .week {
+  display: flex;
+  justify-content: center;
+  background-color: #eee;
+}
+
+.schedule__gridItem .week {
+  padding-bottom: 5px;
+  /* margin-bottom: 5px; */
+  border-bottom: 2px solid #bbb;
+}
+
+.schedule__gridItem .day {
+  padding-top: 5px;
+}
+
+.servereSchedule {
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.score5 {
+  color: yellow;
+  background-color: red;
+}
+
+.score4 {
+  color: #fff;
+  background-color: blue;
+}
+
+.score3 {
+  color: #fff;
+  background-color: green;
+}
+
+.score2 {
+  background-color: #bbb;
+}
+
+.score1 {
+  background-color: #eee;
+}
+
+.type .new {
+  color: white;
+}
+
+.type .old {
+  color: white;
+}
+
+.type .renewal {
+  color: white;
+}
+
+.servereSchedule .serverName {
+  display: flex;
+  justify-content: center;
+}
+
+.servereSchedule .comment {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 1130px) {
+  .servereSchedule {
+    font-size: 0.7em;
+  }
+}
+
+@media (max-width: 414px) {
+  .servereSchedule {
+    font-size: 0.5em;
+  }
+}

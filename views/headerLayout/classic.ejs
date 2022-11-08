@@ -1,0 +1,72 @@
+<script src="/javascripts/layout/classic.js" defer></script>
+<style>
+  header {
+    color: <%= locals.setting.headerFontColor %>;
+    background-color: <%= locals.setting.headerBackgroundColor %>;
+  }
+  header .navbar .navbar__menu > li > .sub li a:hover,
+  header .navbar .navbar__menu > li > .sub li a:active {
+    color: <%= locals.setting.pointColor %>;
+    background-color: <%= locals.setting.pointBackgroundColor %>;
+  }
+  body {
+    color: <%= locals.setting.bodyFontColor %>;
+    background-color: <%= locals.setting.bodyBackgroundColor %>;
+  }
+  header .logo img {
+    max-width: <%= locals.setting.logoImageSize %>px;
+  }
+  @media (min-width: 1131px) {
+    header .navbar__menu > li > a {
+      color: <%= locals.setting.headerFontColor %>;
+    }
+    header .navbar__user > li > a {
+      color: <%= locals.setting.headerFontColor %>;
+    }
+  }
+</style>
+<header>
+  <div class="wrap">
+    <a href="#" class="toggleBtn"><img src="/svg/menu.svg" alt="메뉴"></a>
+    <div class="logo">
+      <% if (locals.setting.logoType === 'text') { %>
+      <a href="/" style="color: <%= locals.setting.headerFontColor %>;"><%= locals.setting.siteName %></a>
+      <% } else if (locals.setting.logoType === 'image') { %>
+      <a href="/"><img src="/logo/<%= locals.setting.logoImage %>" alt="<%= locals.setting.siteName %>"></a>
+      <% } %>
+    </div>
+    <nav class="navbar">
+      <ul class="navbar__menu">
+        <% locals.topMenus.forEach(m => { %>
+          <% if (!m.parentId) { %>
+            <li>
+              <a href="/<%= m.target %>" class="mainMenu" menuId="<%= m.id %>"><%= m.title %></a>
+              <% const subMenu = topMenus.filter(s => m.id === s.parentId) %>
+              <% if (subMenu.length) { %>
+              <ul class="sub">
+                <% subMenu.forEach(s => { %>
+                <li><a href="/<%= s.target %>"><%= s.title %></a></li>
+                <% }) %>
+              </ul>
+              <% } %>
+          <% } else { %>
+            </li>
+          <% } %>
+        <% }) %>
+      </ul>
+      <ul class="navbar__user">
+      <% if (locals.user && locals.user.permission >= 10) { %>
+        <li><a href="/admin"><%= __('user_admin') %></a></li>
+      <% } %>
+      <% if (locals.user) { %>
+        <li><a href="/mypage"><%= __('user_mypage') %></a></li>
+        <li><a href="/logout"><%= __('user_logout') %></a></li>
+      <% } else { %>
+        <li><a href="/join"><%= __('user_join') %></a></li>
+        <li><a href="/login"><%= __('user_login') %></a></li>
+      <% } %>
+      </ul>
+    </nav>
+  </div>
+</header>
+<%- include('../flash.ejs') %>

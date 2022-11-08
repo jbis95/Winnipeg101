@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head.ejs') %>
+    <%- include('./head.ejs') %>
+  </head>
+  <body>
+    <%- include('../header.ejs') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header.ejs') %>
+          <%- include('../flash.ejs') %>
+          <h2><%= __('admin_chat') %></h2>
+          <table>
+            <thead>
+              <tr>
+                <th><%= __('admin_datetime') %></th>
+                <th><%= __('admin_user') %></th>
+                <th><%= __('admin_message') %></th>
+                <th><%= __('admin_fixed') %></th>
+                <th><%= __('admin_edit') %></th>
+                <th><%= __('admin_delete') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% chats.forEach(c => { %>
+              <form action="/admin/chat/edit/<%= c.id %>" method="POST">
+              <tr>
+                <td><%= c.datetime %></td>
+                <td><%= c.nickName %></td>
+                <td><input type="text" name="message" value="<%= c.message %>"></td>
+                <td><input type="checkbox" name="fixed" value="1"<% if (c.fixed === 1) { %> checked<% } %>></td>
+                <td><button name="submit" value="edit"><%= __('admin_edit') %></button></td>
+                <td><button name="submit" value="delete"><%= __('admin_delete') %></button></td>
+              </tr>
+              </form>
+              <% }) %>
+            </tbody>
+          </table>
+          <h2><%= __('admin_deleteAll') %></h2>
+          <form action="/admin/chat/delete" method="POST">
+          <div><button><%= __('admin_deleteAll') %></button></div>
+          </form>
+          <%- include('../pagination.ejs') %>
+        </div>
+      </article>
+    </main>
+    <%- include('../footer.ejs') %>
+  </body>
+</html>
