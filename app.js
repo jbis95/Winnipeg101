@@ -68,25 +68,6 @@ app.io.on('connection', (socket) => {
   });
 });
 
-// Cast
-(async () => {
-  if (!app.locals.plugin) {
-    const conn = await pool.getConnection();
-    try {
-      const [plugins, ] = await conn.query(`SELECT * FROM plugin ORDER BY id ASC`);
-      app.locals.plugin = plugins;
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  if (app.locals.plugin && app.locals.plugin.find(p => p.slug === 'cast' && p.status === 1)) {
-    const powerballGame = require('./middleware/powerballgame');
-    powerballGame.connect();
-    await youtube.getLive();
-    await youtube.getLiveParse();
-  }
-})();
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -162,14 +143,12 @@ app.use('*', async (req, res, next) => {
     const [banners, ] = await conn.query(`SELECT * FROM banner ORDER BY viewOrder ASC`);
     const [permission, ] = await conn.query(`SELECT * FROM permission ORDER BY id ASC`);
     const [setting, ] = await conn.query(`SELECT * FROM setting ORDER BY id DESC LIMIT 1`);
-    const [plugins, ] = await conn.query(`SELECT * FROM plugin ORDER BY id ASC`);
     const sideBoards = await returnBoards(res, 'side');
     res.locals.topMenus = menuArrayAlign(menusOrigin);
     res.locals.banners = banners;
     res.locals.s3Host = s3Host;
     res.locals.permission = permission;
     res.locals.setting = setting[0];
-    res.locals.plugin = plugins;
     res.locals.sideBoards = sideBoards;
     res.locals.lang = lang;
 
@@ -289,55 +268,6 @@ app.use('*', async (req, res, next) => {
   }
   next();
 });
-
-// Plugin
-app.use('*', async (req, res, next) => {
-  // Domain
-  if (res.locals.plugin && res.locals.plugin.find(p => p.slug === 'domain' && p.status === 1)) {
-    const conn = await pool.getConnection();
-    try {
-      // 입금대기 해제
-      const query = `SELECT *
-      FROM plugin_domainBuy
-      WHERE createdAt < DATE_SUB(NOW(), INTERVAL 2 DAY)`;
-      const [domainList, ] = await conn.query(query);
-      if (domainList.length) {
-        domainList.forEach(async d => {
-          conn.beginTransaction();
-          await conn.query(`UPDATE plugin_domainSell SET status=1 WHERE id=? AND status=2`, [d.domainBuy_domainSell_ID]);
-          await conn.query(`DELETE FROM plugin_domainBuy WHERE id=?`, [d.id]);
-          await conn.commit();
-        });
-      }
-
-      // 6개월, 12개월 도메인 삭제
-      const sixMonthDomainQuery = `SELECT *
-      FROM plugin_domainSell
-      WHERE saleTerm=6 AND createdAt < DATE_SUB(NOW(), INTERVAL 6 MONTH)`;
-      const [sixMonthDomain, ] = await conn.query(sixMonthDomainQuery);
-      if (sixMonthDomain.length) {
-        sixMonthDomain.forEach(async d => {
-          await conn.query(`DELETE FROM plugin_domainSell WHERE id=?`, [d.id]);
-        });
-      }
-      const twelveMonthDomainQuery = `SELECT *
-      FROM plugin_domainSell
-      WHERE saleTerm=12 AND createdAt < DATE_SUB(NOW(), INTERVAL 12 MONTH)`;
-      const [twelveMonthDomain, ] = await conn.query(twelveMonthDomainQuery);
-      if (twelveMonthDomain.length) {
-        twelveMonthDomain.forEach(async d => {
-          await conn.query(`DELETE FROM plugin_domainSell WHERE id=?`, [d.id]);
-        });
-      }
-    } finally {
-      conn.release();
-    }
-  }
-  next();
-});
-
-// Plugin
-require('./middleware/plugin')(app);
 
 // Flash Message
 require('./middleware/flash').init(app);
