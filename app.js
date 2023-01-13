@@ -8,6 +8,8 @@ const { sessionSecret } = require('./config');
 const MySQLStore = require('express-mysql-session')(session);
 const pool = require('./middleware/database');
 const logger = require('morgan');
+const timeout = require('connect-timeout');
+const rateLimit = require('express-rate-limit');
 
 // Moment
 const { timezone } = require('./config');
@@ -85,6 +87,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   app.use(logger('dev'));
 }
+app.use(timeout('10s'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -105,8 +108,17 @@ i18n.configure({
 });
 app.use(i18n.init);
 
-// Loop
-// const loop = require('./middleware/loop');
+const limiter = rateLimit({
+  windowMs: 1000 * 10,
+  max: 50,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: async (req, res) => {
+    console.error(`잦은 요청 : ${getIp(req)} - ${req.method} - ${req.originalUrl}`.red);
+    return '너무 많은 요청을 하였습니다. 잠시 후 다시 시도해주세요';
+  },
+});
+app.use(limiter);
 
 // User
 app.use('*', async (req, res, next) => {
