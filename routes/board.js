@@ -41,13 +41,14 @@ const fileUpload = multer({
 });
 
 /* GET home page. */
-router.get('/:page', controller.page);
-router.get('/:boardSlug', controller.list);
 router.get('/:boardSlug/new', controller.new);
 router.post('/:boardSlug/new', fileUpload.single('file'), controller.new);
 
-router.get('/:boardSlug/:id', controller.read);
 router.post('/:boardSlug/:id/edit', controller.edit);
 router.post('/:boardSlug/:id/update', fileUpload.single('file'), controller.update);
+router.get('/:boardSlug/:id', controller.read);
+router.get('/:boardSlug', controller.list);
+
+router.get('/:page', controller.page);
 
 module.exports = router;
